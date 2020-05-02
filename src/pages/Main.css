@@ -1,0 +1,8 @@
+div {
+  height: 900px;
+
+  background-image: url('./assets/Photo\ by\ Jesse\ Roberts\ on\ Unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
