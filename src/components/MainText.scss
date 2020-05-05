@@ -1,0 +1,38 @@
+@import '../index.scss';
+
+#MainText {
+  grid-row: 4;
+  grid-column: 4 / 9;
+
+  width: 6 * $grid-column-width + 7 * $grid-column-gutter;
+  position: relative;
+  right: $grid-column-gutter;
+
+  text-align: center;
+
+  h3 {
+    font-family: 'Ubuntu Mono', serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 70px;
+    color: $color-layout-neutral-light;
+    
+    height: 70px;
+
+    margin: auto;
+  }
+
+  p {
+    font-family: $font-main;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: $color-layout-neutral-light;
+
+    height: 22px;
+
+    margin: auto;
+  }
+}

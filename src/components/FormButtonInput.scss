@@ -1,0 +1,41 @@
+@import '../index.scss';
+
+.FormButtonInput {
+
+  border: none;
+
+  width: 100%;
+  height: 45px;
+
+  background: $color-layout-neutral-light;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+
+  margin: 8px 0;
+
+  input {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+
+    font-family: $font-main;
+    font-style: normal;
+    font-weight: normal;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    text-align: center;
+
+    background: $color-interactive-0;
+    color: $color-layout-neutral-light;
+
+    padding: 0;
+
+    cursor: pointer;
+  }
+}

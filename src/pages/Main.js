@@ -1,10 +1,18 @@
 import React from 'react'
-import MainMenu from '../components/MainMenu'
+import NavBar from '../components/NavBar'
+import MainText from '../components/MainText'
+import MainSearch from '../components/MainSearch'
+import LogIn from '../components/LogIn'
+import './Main.scss'
 
 function Main () {
   return (
-    <div>
-      <MainMenu />
+    <div id="Main">
+      <NavBar />
+      <MainText />
+      <MainSearch />
+      <LogIn />
+      <div id="Temp"></div>
     </div>
   )
 }

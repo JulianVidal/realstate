@@ -1,0 +1,40 @@
+@import '../index.scss';
+
+li {
+  color: $color-layout-neutral-light;
+}
+
+.Rentify {
+  font-family: 'Spectral SC', serif;
+  font-size: 50px;
+  text-align: center;
+  text-transform: capitalize;
+
+  grid-column: 1 / 4;
+}
+
+.Sign, .Log {
+  font-family: $font-main;
+  font-size: 16px;
+  text-align: center;
+  line-height: 37px;
+
+  width: $grid-column-width + $grid-column-gutter;
+  height: 37px;
+  
+  position: relative;
+  right: $grid-column-gutter;
+}
+
+.Sign {
+  grid-column-start: 11;
+  grid-column-end: 12;
+
+  border-radius: 8px;
+  background-color: $color-interactive-0;
+}
+
+.Log {
+  grid-column-start: 12;
+  grid-column-end: 13;
+}
