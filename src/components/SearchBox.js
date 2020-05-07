@@ -16,7 +16,7 @@ class SearchBox extends Component {
       autoplay: false,
       animationData: iconSearchData,
       renderSettings: {
-        preserveAspectRation: 'xMidYMid slice'
+        preserveAspectRatio: 'xMidYMid slice'
       }
     }
   
@@ -32,6 +32,10 @@ class SearchBox extends Component {
                     {
                       eventName: 'complete',
                       callback: () => this.setState({isStopped: true})
+                    },
+                    {
+                      eventName: 'segmentStart',
+                      callback: () => console.log('hey')
                     }
                   ]} />
         </button>

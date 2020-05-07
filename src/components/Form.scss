@@ -1,8 +1,7 @@
 @import '../index.scss';
 
-#Form {
+.Form {
   width: $grid-column-width * 2.5 + 3 * $grid-column-gutter;
-  height: 195.35px;
   
   display: flex;
   flex-direction: column;
@@ -10,11 +9,9 @@
 
   margin: auto;
 
-  .CreateAcc {
+  .Question {
     width: 176px;
     height: 24px;
-
-    margin-top: 5px;
 
     display: flex;
 
