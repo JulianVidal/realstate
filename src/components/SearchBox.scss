@@ -26,12 +26,21 @@
     height: 40px;
     border-radius: 8px 0px 0px 8px;
     padding: 0;
-    border:none;
+    border: none;
     outline: none;
 
     cursor: pointer;
 
     background-color: $color-interactive-0;
+
+    div[role='button'] {
+      display: none;
+
+      &:first-child {
+        display: block;
+      }
+    }
+
   }
 
   input {

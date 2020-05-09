@@ -4,7 +4,7 @@ li {
   color: $color-layout-neutral-light;
 }
 
-.Rentify {
+#NavRentify {
   font-family: 'Spectral SC', serif;
   font-size: 50px;
   text-align: center;
@@ -13,7 +13,7 @@ li {
   grid-column: 1 / 4;
 }
 
-.Sign, .Log {
+#NavSignUp, #NavLogIn {
   font-family: $font-main;
   font-size: 16px;
   text-align: center;
@@ -28,7 +28,7 @@ li {
   cursor: pointer;
 }
 
-.Sign {
+#NavSignUp {
   grid-column-start: 11;
   grid-column-end: 12;
 
@@ -36,7 +36,32 @@ li {
   background-color: $color-interactive-0;
 }
 
-.Log {
+#NavLogIn {
   grid-column-start: 12;
   grid-column-end: 13;
+}
+
+#NavMyAccount {
+  display: none;
+  opacity: 0;
+
+  grid-column-start: 11;
+  grid-column-end: 13;
+
+  font-family: $font-main;
+  font-size: 16px;
+  line-height: 37px;
+  height: 37px;
+
+  text-align: right;
+  
+  cursor: pointer;
+
+  // display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  svg {
+    padding-left: 5px;
+  }
 }

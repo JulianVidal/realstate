@@ -1,20 +1,23 @@
 import React from 'react'
+import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import { TimelineLite, Power3 } from 'gsap'
 import './NavItem.scss'
 
-function NavItem ({text}) {
-  const className = text.split(' ')[0]
+function NavItem ({text, id}) {
+  let icon
 
   const handleClick = () => {
-    if (className === 'Log') {
+    if (id === 'NavLogIn') {
       formDisplay('LogIn')
-    } else if (className === 'Sign') {
+    } else if (id === 'NavSignUp') {
       formDisplay('SignUp')
     }
   }
 
+  if (id === 'NavMyAccount') icon = <ArrowIcon height='18px' width='18px'/>
+
   return (
-    <li className={className} onClick={handleClick}> {text} </li>
+    <li id={id} onClick={handleClick} > {text} { icon } </li>
   )
 }
 

@@ -61,6 +61,10 @@ function Submit ({ target }, component) {
   iconCheckMark.style.display = 'block'
   iconAlert.style.display = 'block'
 
+  // const NavLogIn = document.getElementById('NavLogIn')
+  // const NavSignUp = document.getElementById('NavSignUp')
+  // const NavMyAccount = document.getElementById('NavMyAccount')
+  
 
   const tl = new TimelineLite()
 
@@ -74,7 +78,11 @@ function Submit ({ target }, component) {
     // .to(target, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
     .to(iconCheckMark, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {component.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; component.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
     .to(target, 0.23, {backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
-    .to({}, 0.7, {onComplete: () => removeForm(formId)}) // Waits one second
+    .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
+    .set('#NavMyAccount', {display: 'flex'})
+    .set('#NavLogIn, #NavSignUp', {display: 'none'})
+    .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
+    .to({}, 0.7, {onComplete: () => removeForm(formId)}) // Waits 0.7 seconds
 }
 
 function IconData (dataName) {

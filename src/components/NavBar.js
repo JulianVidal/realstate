@@ -6,11 +6,13 @@ function NavBar () {
   return(
     <nav>
       <ul>
-          <NavItem text="Rentify" />
+          <NavItem text="Rentify" id="NavRentify"/>
 
-          <NavItem text="Sign Up" />
+          <NavItem text="Sign Up" id="NavSignUp"/>
 
-          <NavItem text="Log In" />
+          <NavItem text="Log In" id="NavLogIn" />
+
+          <NavItem text="My Account" id="NavMyAccount" />
       </ul>
     </nav>
   )
