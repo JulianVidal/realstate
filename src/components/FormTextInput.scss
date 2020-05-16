@@ -16,7 +16,7 @@
 
 
 
-  input[type='text'], input[type='password'], input[type='email'] {
+  input {
     height: 100%;
     flex-grow: 1;
     border: none;
@@ -33,7 +33,7 @@
   }
 
   svg {
-    margin: 0 14px;
+    margin: 0 16px;
   }
 
   #forgot {

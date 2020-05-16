@@ -1,18 +1,11 @@
 import React from 'react'
 import './NavBar.scss'
-import NavItem from './NavItem'
 
-function NavBar () {
+function NavBar ({ children }) {
   return(
     <nav>
       <ul>
-          <NavItem text="Rentify" id="NavRentify"/>
-
-          <NavItem text="Sign Up" id="NavSignUp"/>
-
-          <NavItem text="Log In" id="NavLogIn" />
-
-          <NavItem text="My Account" id="NavMyAccount" />
+          { children }
       </ul>
     </nav>
   )

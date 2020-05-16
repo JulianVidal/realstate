@@ -16,15 +16,15 @@
   grid-template-rows: 18px 70px 1fr 106px 41px 111px 2fr;
   column-gap: 30px;
   justify-content: center;
-}
 
-#Overlay {
-  display: none;
-  opacity: 0;
-  position: absolute;
-  top: -2px;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background: rgba(33, 33, 33, 0.5);
+  #Overlay {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(33, 33, 33, 0.5);
+  }
 }

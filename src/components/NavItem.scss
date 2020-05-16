@@ -4,16 +4,7 @@ li {
   color: $color-layout-neutral-light;
 }
 
-#NavRentify {
-  font-family: 'Spectral SC', serif;
-  font-size: 50px;
-  text-align: center;
-  text-transform: capitalize;
-
-  grid-column: 1 / 4;
-}
-
-#NavSignUp, #NavLogIn {
+.NavItem {
   font-family: $font-main;
   font-size: 16px;
   text-align: center;
@@ -22,46 +13,66 @@ li {
   width: $grid-column-width + $grid-column-gutter;
   height: 37px;
   
-  position: relative;
-  right: $grid-column-gutter;
+  transform: translateY(50%);
+
+  float: right;
 
   cursor: pointer;
-}
 
-#NavSignUp {
-  grid-column-start: 11;
-  grid-column-end: 12;
+  &.fill {
+    border-radius: 8px;
+    background-color: $color-interactive-0;
+  }
 
-  border-radius: 8px;
-  background-color: $color-interactive-0;
-}
-
-#NavLogIn {
-  grid-column-start: 12;
-  grid-column-end: 13;
-}
-
-#NavMyAccount {
-  display: none;
-  opacity: 0;
-
-  grid-column-start: 11;
-  grid-column-end: 13;
-
-  font-family: $font-main;
-  font-size: 16px;
-  line-height: 37px;
-  height: 37px;
-
-  text-align: right;
+  &.logo {
+    display: block;
+    opacity: 1;
   
-  cursor: pointer;
+    font-family: 'Spectral SC', serif;
+    font-size: 50px;
+    text-align: center;
+    text-transform: capitalize;
+  
+    float: left;
+  }
 
-  // display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  &.NavDropDown {
+    flex-wrap: wrap;
 
-  svg {
-    padding-left: 5px;
+    width: 1.34 * $grid-column-width + $grid-column-gutter;
+
+    font-family: $font-main;
+    font-size: 16px;
+    line-height: 37px;
+    height: 37px;
+
+    text-align: left;
+    
+    cursor: pointer;
+
+    align-items: center;
+    justify-content: flex-end;
+    float: right;
+
+    svg {
+      padding-left: 5px;
+      float: right;
+      margin-top: 9px;
+    }
+
+    &:hover {
+      .DropDown {
+        height: 100%;
+
+        .DropDownItem {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &.hidden {
+    display: none;
+    opacity: 0;
   }
 }

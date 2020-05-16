@@ -35,6 +35,8 @@
       height: 4.5px;
       bottom: 0;
       background-color: $color-interactive-0;
+
+      pointer-events: none;
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Lottie from 'react-lottie'
+import Lottie from 'react-lottie-wrapper'
 import iconSearchStartData from '../assets/icons/searchStart.json'
 import iconSearchLoadingData from '../assets/icons/searchLoading.json'
 import iconSearchEndData from '../assets/icons/searchEnd.json'
@@ -26,8 +26,10 @@ class SearchBox extends Component {
     }
   
     return (
-      <div id='SearchBox'>
-        <button onClick={() => {    
+      <form id='SearchBox' onSubmit={this.handleSubmit}>
+        <button type='submit' 
+                ref= {button => {this.submitButton = button}}  
+                onClick={() => {    
               if (this.state.isSearchEndStopped === false) return
               if (this.state.isSearchLoadingStopped === false) return
               this.setState({isSearchStartStopped: false})
@@ -70,8 +72,13 @@ class SearchBox extends Component {
                   ]}/>
         </button>
         <input type='text' placeholder='Search...'></input>
-      </div>
+      </form>
     )
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.submitButton.click()
   }
 
   searching = component => {

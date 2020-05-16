@@ -33,8 +33,9 @@
 
     background-color: $color-interactive-0;
 
-    div[role='button'] {
+    div {
       display: none;
+      margin: auto;
 
       &:first-child {
         display: block;
