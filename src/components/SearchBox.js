@@ -13,18 +13,22 @@ class SearchBox extends Component {
     isSearchEndStopped: true
   }
 
+  routeToProperties () {
+    this.props.history.push('properties') 
+  }
+
   render (){
     const defaultOptions = (data, loop = false) => {
       return {
-        loop,
-        autoplay: false,
-        animationData: data,
-        rendererSettings: {
+          loop,
+          autoplay: false,
+          animationData: data,
+          rendererSettings: {
           preserveAspectRatio: 'xMidYMid slice'
         }
       }
     }
-  
+
     return (
       <form id='SearchBox' onSubmit={this.handleSubmit}>
         <button type='submit' 
@@ -35,6 +39,7 @@ class SearchBox extends Component {
               this.setState({isSearchStartStopped: false})
             }
           }>
+
           <Lottie options={defaultOptions(iconSearchStartData)}
                   height ={20}
                   width  ={20}
@@ -93,7 +98,6 @@ class SearchBox extends Component {
   }
 
   isDoneSearching = component => {
-    if (Math.random() < 0.7) return
     const button = document.getElementById('SearchBox').childNodes[0]
     const iconSearchLoading = button.childNodes[1]
     const iconSearchEnd = button.childNodes[2]
@@ -112,7 +116,9 @@ class SearchBox extends Component {
     iconSearchEnd.style.display = 'none'
     iconSearchStart.style.display = 'block'
 
-    component.setState({isSearchEndStopped: true})    
+    component.setState({isSearchEndStopped: true})  
+    
+    this.routeToProperties()
   }
 }
 

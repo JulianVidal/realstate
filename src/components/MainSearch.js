@@ -3,11 +3,11 @@ import SearchOptions from './SearchOptions'
 import SearchBox from './SearchBox'
 import './MainSearch.scss'
 
-function MainSearch () {
+function MainSearch (props) {
   return (
     <div id='MainSearch'>
       <SearchOptions />
-      <SearchBox />
+      <SearchBox history={props.history} />
     </div>
   )
 }

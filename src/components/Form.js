@@ -69,7 +69,7 @@ export function removeForm (formId, otherFormId) {
     .to(Overlay, 0.5, { opacity: 0, ease: Power3.easeOut, onComplete: finishtl }, 0)
   
   if (otherFormId) {
-    tl.to({}, 0, {onComplete: () => formDisplay(otherFormId)})
+    tl.set({}, {onComplete: () => formDisplay(otherFormId)})
   }
 }
 

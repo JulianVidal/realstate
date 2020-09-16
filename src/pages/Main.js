@@ -1,7 +1,7 @@
 import React from 'react'
 import { removeForm } from '../components/Form'
-import NavBar from '../components/NavBar'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
+import NavBar from '../components/NavBar'
 import NavItem from '../components/NavItem'
 import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
@@ -10,8 +10,10 @@ import MainSearch from '../components/MainSearch'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
 import './Main.scss'
+//<div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div> bath
+//<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> area
 
-function Main () {
+function Main (props) {
 
   const handleClick = () => {
     const LogIn = document.getElementById('LogIn')
@@ -39,7 +41,7 @@ function Main () {
         <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} type="hidden" icon={<ArrowIcon/>}/>
       </NavBar>
       <MainText />
-      <MainSearch />
+      <MainSearch history={props.history}/>
       <LogIn />
       <SignUp />
       <div id="Overlay" onClick={handleClick}></div>

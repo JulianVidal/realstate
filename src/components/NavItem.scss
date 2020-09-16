@@ -28,9 +28,10 @@ li {
     display: block;
     opacity: 1;
   
+    width: $grid-column-width * 3 + $grid-column-gutter * 2;
     font-family: 'Spectral SC', serif;
     font-size: 50px;
-    text-align: center;
+    text-align: left;
     text-transform: capitalize;
   
     float: left;
