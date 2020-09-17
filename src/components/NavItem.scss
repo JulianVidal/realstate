@@ -2,6 +2,16 @@
 
 li {
   color: $color-layout-neutral-light;
+
+  &.dark {
+    color: $color-layout-neutral-dark;
+    
+    svg {
+      #icon {
+        fill: $color-layout-neutral-dark;
+      }
+    }
+  }
 }
 
 .NavItem {

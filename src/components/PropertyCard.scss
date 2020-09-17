@@ -1,0 +1,95 @@
+@import '../index.scss';
+
+.PropertyCard {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: Roboto Mono;
+  font-style: normal;
+  font-weight: normal;
+  color: $color-layout-neutral-dark;
+
+    .image {
+      // zoom: 1.1416823411;
+      height: 142px;
+      border-radius: inherit;
+    }
+
+    .valuation {
+      margin: 8px 0 8px 0;
+      
+      .price {
+        margin: 0;
+        font-size: 20px;
+        line-height: 26px;
+        width: 235px;
+        height: 26px;  
+      }
+    }
+
+    .details {
+      display: flex;
+      height: 11px;
+      margin-bottom: 8px;
+
+      .font {
+        font-family: Roboto Mono;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 13px;
+      }
+
+      .bed {
+        width: 54px;
+        margin: 0;
+
+      }
+
+      .bath {
+        width: 69px;
+        margin: 0;
+
+      }
+
+      .sqft {
+        width: 138px;
+        margin: 0;
+
+      }
+    }
+
+    .place {
+      display: flex;
+      height: 35px;
+
+      .address {
+        font-family: Roboto Mono;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        width: 180px;
+        margin: 0;
+      }
+
+      .courtesy {
+        font-family: Roboto Mono;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 9px;
+        line-height: 12px;
+        width: 81px;
+        margin: 0;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center
+      }
+    }
+}

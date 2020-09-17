@@ -1,0 +1,16 @@
+@import '../index.scss';
+
+#PropertyCards {
+  grid-column: 1/13;
+  grid-row: 4;
+
+  display: grid;
+  grid-template-columns: repeat(4, $grid-column-width * 3 + 2 * $grid-column-gutter);
+  grid-auto-rows: 238px;
+  grid-gap: 30px;
+
+  .PropertCards {
+    grid-row: 1 / last-line;
+  }
+
+}

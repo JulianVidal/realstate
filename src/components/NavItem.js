@@ -2,8 +2,8 @@ import React from 'react'
 import { formDisplay } from './Form'
 import './NavItem.scss'
 
-function NavItem ({text, id, type = '', DropDown, icon}) {
-  const className = 'NavItem ' + type + (DropDown ? ' NavDropDown' : '')
+function NavItem ({text, id, type = '', color, DropDown, icon}) {
+  const className = 'NavItem ' + type + (DropDown ? ' NavDropDown' : '') + ( color === 'dark' ? ' dark' : '')
 
   const handleClick = () => {
     if (id === 'NavLogIn') {
