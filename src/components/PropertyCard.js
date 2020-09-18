@@ -1,15 +1,31 @@
 import React from 'react'
 import imagePlaceholder from '../assets/Photo by Jesse Roberts on Unsplash.jpg'
+import Lottie from 'react-lottie-wrapper'
+import iconHeartData from '../assets/icons/heart.json'
 import './PropertyCard.scss'
 
 function PropertyCard () {
+  const defaultOptions = (data, loop = false) => {
+    return {
+        loop,
+        autoplay: false,
+        animationData: data,
+        rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
+  }
+
   return (
     <div className="PropertyCard">
       <img src={imagePlaceholder}  alt="Property" className='image'/>
       
       <div className="valuation">
         <p className="price">$1,329,000</p>
-        {/* <p className="like">$1,329,000</p> */}
+        <Lottie  options={defaultOptions(iconHeartData)}
+                  height ={26}
+                  width  ={26}
+                  />
       </div>
 
       <div className='details font'>
