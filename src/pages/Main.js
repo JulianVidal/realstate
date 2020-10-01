@@ -6,7 +6,8 @@ import NavItem from '../components/NavItem'
 import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import MainText from '../components/MainText'
-import MainSearch from '../components/MainSearch'
+import SearchOptions from '../components/SearchOptions'
+import SearchBox from '../components/SearchBox'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
 import './Main.scss'
@@ -40,8 +41,17 @@ function Main (props) {
         <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
         <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} type="hidden" icon={<ArrowIcon/>}/>
       </NavBar>
-      <MainText />
-      <MainSearch history={props.history}/>
+
+      <div id="MainText">
+        <h3>Your Dream Home is a <u>Click Away</u>.</h3>
+        <p>Using data from the most popular realstate websites</p>
+      </div>
+
+      <div id='MainSearch'>
+        <SearchOptions />
+        <SearchBox history={props.history} />
+      </div>  
+          
       <LogIn />
       <SignUp />
       <div id="Overlay" onClick={handleClick}></div>

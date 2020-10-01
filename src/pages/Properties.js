@@ -3,6 +3,8 @@ import NavBar from '../components/NavBar'
 import NavItem from '../components/NavItem'
 import PropertyCards from '../components/PropertyCards'
 import { removeForm } from '../components/Form'
+// import SearchOptions from '../components/SearchOptions'
+import SearchBox from '../components/SearchBox'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
 import DropDown from '../components/DropDown'
@@ -34,6 +36,7 @@ function Properties() {
         <NavItem text="Log In" id="NavLogIn" color="dark" />
         <NavItem text="Sign Up" id="NavSignUp" type="fill" />
         <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>}/>
+        <NavItem id="NavSearch"><SearchBox/></NavItem>
       </NavBar>
       <PropertyCards />
       <LogIn />

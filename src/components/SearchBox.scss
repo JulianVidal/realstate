@@ -1,7 +1,6 @@
 @import '../index.scss';
 
 #SearchBox {
-  margin: auto;
   width: $grid-column-width * 6 + $grid-column-gutter * 5;
   height: 40px;
 
@@ -10,12 +9,6 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 40px;
-
-  border: 0;
-  padding: 0;
-
-  position: absolute;
-  bottom: 0;
 
   border-radius: 8px;
 
@@ -57,12 +50,12 @@
   
     border: 0;
     padding: 0;
-    outline: none;
-
-    position: absolute;
-    bottom: 0;
-  
+    outline: none; 
+    
     border-radius: 8px;
+
+    position: relative;
+    top: -5px;
   
     background-color: $color-layout-neutral-light;
     padding-left: 17px;

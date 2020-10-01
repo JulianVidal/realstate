@@ -2,7 +2,7 @@ import React from 'react'
 import { formDisplay } from './Form'
 import './NavItem.scss'
 
-function NavItem ({text, id, type = '', color, DropDown, icon}) {
+function NavItem ({text, id, type = '', color, DropDown, icon, children}) {
   const className = 'NavItem ' + type + (DropDown ? ' NavDropDown' : '') + ( color === 'dark' ? ' dark' : '')
 
   const handleClick = () => {
@@ -14,7 +14,7 @@ function NavItem ({text, id, type = '', color, DropDown, icon}) {
   }
 
   return (
-      <li id={id} className={className} onClick={handleClick} > {text} { icon } { DropDown } </li>
+  <li id={id} className={className} onClick={handleClick} > {text} { icon } { DropDown }  {children}</li>
   )
 }
 
