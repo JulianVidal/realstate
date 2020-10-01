@@ -1,7 +1,7 @@
 @import '../index.scss';
 
 #SearchBox {
-  width: $grid-column-width * 6 + $grid-column-gutter * 5;
+  width: 100%;
   height: 40px;
 
   font-family: $font-main;
@@ -15,7 +15,7 @@
   background-color: $color-layout-neutral-light;
 
   button {
-    width: $grid-column-width;
+    width: 67px;
     height: 40px;
     border-radius: 8px 0px 0px 8px;
     padding: 0;
@@ -39,7 +39,7 @@
 
   input {
     transition: 200ms ease-out;
-    width: $grid-column-width * 6 + $grid-column-gutter * 5 - $grid-column-width - 17;
+    width: calc(100% - 84px);
     height: 40px;
   
     font-family: Roboto Mono;

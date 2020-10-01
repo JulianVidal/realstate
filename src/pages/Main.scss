@@ -40,6 +40,10 @@
 
   text-align: center;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   h3 {
     font-family: 'Ubuntu Mono', serif;
     font-style: normal;
