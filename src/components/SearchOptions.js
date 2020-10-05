@@ -2,12 +2,14 @@ import React from 'react'
 import { TimelineLite, Power3 } from 'gsap'
 import './SearchOptions.scss'
 
-function SearchOptions (){
+function SearchOptions ({type}){
+  const dark = type === 'dark' ? ' dark' : ''
+  const className = 'SearchOption' + dark
   return (
     <div className='SearchOptions'>
-      <p className="SearchOption" onClick={changeActive}>Buy  <span className="underline active" style={{width: '61px'}}> </span> </p>
-      <p className="SearchOption" onClick={changeActive}>Rent <span className="underline"> </span></p>
-      <p className="SearchOption" onClick={changeActive}>Sold <span className="underline"> </span></p>
+      <p className={className} onClick={changeActive}>Buy  <span className="underline active" style={{width: '61px'}}> </span> </p>
+      <p className={className} onClick={changeActive}>Rent <span className="underline"> </span></p>
+      <p className={className} onClick={changeActive}>Sold <span className="underline"> </span></p>
     </div>
   )
 }

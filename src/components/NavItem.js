@@ -2,7 +2,7 @@ import React from 'react'
 import { formDisplay } from './Form'
 import './NavItem.scss'
 
-function NavItem ({text, id, type = '', color, DropDown, icon, children}) {
+function NavItem ({text, id, type = '', color, DropDown, icon, children, history}) {
   const className = 'NavItem ' + type + (DropDown ? ' NavDropDown' : '') + ( color === 'dark' ? ' dark' : '')
 
   const handleClick = () => {
@@ -10,6 +10,8 @@ function NavItem ({text, id, type = '', color, DropDown, icon, children}) {
       formDisplay('LogIn')
     } else if (id === 'NavSignUp') {
       formDisplay('SignUp')
+    } else if (id === 'NavRentify' && history) {
+      history.replace('/')
     }
   }
 

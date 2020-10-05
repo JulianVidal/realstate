@@ -13,7 +13,7 @@ import './Main.scss'
 //<div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div> bath
 //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> area
 
-function Main (props) {
+function Main ({history}) {
 
   const handleClick = () => {
     const LogIn = document.getElementById('LogIn')
@@ -48,7 +48,7 @@ function Main (props) {
 
       <div id='MainSearch'>
         <SearchOptions />
-        <SearchBox history={props.history} />
+        <SearchBox history={history} />
       </div>  
           
       <LogIn />

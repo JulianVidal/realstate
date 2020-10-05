@@ -87,8 +87,12 @@ li {
     opacity: 0;
   }
 
-  &#NavSearch {
+  &#NavSearchBox {
     width: 291px;
+    float: left;
+  }
+
+  &#NavSearchOptions {
     float: left;
   }
 }

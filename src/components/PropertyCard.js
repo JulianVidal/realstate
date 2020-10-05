@@ -5,6 +5,12 @@ import iconHeartStartData from '../assets/icons/heart.json'
 import './PropertyCard.scss'
 
 class PropertyCard extends Component {
+
+  handleLike = () => {
+    this.setState({isHeartStartStopped: false})
+    this.setState({isHeartStartPaused: false})
+  }
+
   state = {
     isHeartStartStopped: true,
     isHeartStartPaused: false,
@@ -35,10 +41,7 @@ class PropertyCard extends Component {
                     height ={26}
                     width  ={26}
                     isClickToPauseDisabled = {true}
-                    onClick = {() => {
-                      this.setState({isHeartStartStopped: false})
-                      this.setState({isHeartStartPaused: false})
-                    }}
+                    onClick = {this.handleLike}
                     eventListeners={[
                       {
                         eventName: 'enterFrame',

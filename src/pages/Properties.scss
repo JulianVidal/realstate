@@ -5,7 +5,7 @@
 
   display: grid;
   grid-template-columns: repeat(12, $grid-column-width);
-  grid-template-rows: 18px 70px 19px auto;
+  grid-template-rows: 18px 70px 40px auto;
   column-gap: 30px;
   justify-content: center;
   grid-auto-flow: column;

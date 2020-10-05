@@ -11,6 +11,10 @@
     position: relative;
     width: 119px;
     height: 45px;
+
+    &.dark {
+      color: $color-layout-neutral-dark;
+    }
   
     color: $color-layout-neutral-light;
     text-align: center;

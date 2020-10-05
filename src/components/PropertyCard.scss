@@ -27,10 +27,11 @@
     
     left: -15px;
     top: -15px;
-
     height: 268px;
     width: 291px;
     border-radius: 4px;
+
+    pointer-events: none;
   }
 
     .image {
