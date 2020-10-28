@@ -48,7 +48,7 @@ function Main ({history}) {
 
       <div id='MainSearch'>
         <SearchOptions />
-        <SearchBox history={history} />
+        <SearchBox />
       </div>  
           
       <LogIn />

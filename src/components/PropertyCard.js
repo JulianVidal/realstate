@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import imagePlaceholder from '../assets/Photo by Jesse Roberts on Unsplash.jpg'
 import Lottie from 'react-lottie-wrapper'
 import iconHeartStartData from '../assets/icons/heart.json'
 import './PropertyCard.scss'
@@ -29,12 +28,14 @@ class PropertyCard extends Component {
       }
     }
 
+    const {adress, baths, beds, image, link, price, sqft} = this.props.data
+
     return (
-      <div className="PropertyCard">
-        <img src={imagePlaceholder}  alt="Property" className='image'/>
+      <div className="PropertyCard" onClick={() => {window.location.href = link}} >
+        <img src={image}  alt="Property" className='image'/>
         
         <div className="valuation">
-          <p className="price">$1,329,000</p>
+          <p className="price">{price}</p>
           <Lottie   options={defaultOptions(iconHeartStartData)}
                     isStopped={this.state.isHeartStartStopped}
                     isPaused={this.state.isHeartStartPaused}
@@ -59,13 +60,13 @@ class PropertyCard extends Component {
         </div>
   
         <div className='details font'>
-          <p className="bed font">3 beds</p>
-          <p className="bath font">2 baths</p>
-          <p className="sqft font">5,341 sqft</p>
+          <p className="bed font">{beds}</p>
+          <p className="bath font">{baths}</p>
+          <p className="sqft font">{sqft}</p>
         </div>
   
         <div className="place">
-          <p className="address">4751 W Ruffner St, Seattle, WA 98199</p>
+          <p className="address">{adress}</p>
           <p className="courtesy">Courtesy of: Zillow</p>
         </div>
   

@@ -13,7 +13,7 @@ import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import './Properties.scss'
 import SearchOptions from '../components/SearchOptions'
 
-function Properties({history}) {
+function Properties({history, location}) {
   const handleClick = () => {
     const LogIn = document.getElementById('LogIn')
     const SignUp = document.getElementById('SignUp')
@@ -33,11 +33,11 @@ function Properties({history}) {
   return (
     <div id="Properties">
       <NavBar>
-        <NavItem text="Rentify" id="NavRentify" type="logo" color="dark" history={history}/>
+        <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/>
         <NavItem text="Log In" id="NavLogIn" color="dark" />
         <NavItem text="Sign Up" id="NavSignUp" type="fill" />
         <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>}/>
-        <NavItem id="NavSearchBox"><SearchBox history={history}/></NavItem>
+        <NavItem id="NavSearchBox"><SearchBox /></NavItem>
         <NavItem id="NavSearchOptions"><SearchOptions type='dark' /></NavItem>
       </NavBar>
       <PropertyCards />

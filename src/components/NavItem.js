@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { formDisplay } from './Form'
 import './NavItem.scss'
 
@@ -20,4 +21,4 @@ function NavItem ({text, id, type = '', color, DropDown, icon, children, history
   )
 }
 
-export default NavItem
+export default withRouter(NavItem)
