@@ -1,7 +1,7 @@
 @import '../index.scss';
 
 #Properties {
-  height: 100vh;
+  height: 100%;
 
   display: grid;
   grid-template-columns: repeat(12, $grid-column-width);

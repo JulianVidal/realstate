@@ -3,18 +3,28 @@ import QueryString from 'query-string'
 import './PropertyCards.scss'
 import PropertyCard from './PropertyCard'
 import { withRouter } from 'react-router-dom'
+import data from '../assets/data.json'
 
 class PropertyCards extends Component {
 
   state = {
     data: null,
-    search: null
+    search: null,
+    page: 0
   }
 
   componentDidMount () {
+    window.addEventListener('scroll', this.handleScroll.bind(this))
     const search = QueryString.parse(this.props.location.search).location
     this.setState({search})
     this.loadData(search)
+  }
+
+  handleScroll () {
+    if (document.body.scrollHeight - window.innerHeight === window.scrollY) {
+      console.log('load more')
+      this.loadData(this.state.search, this.state.page + 1)
+    }
   }
 
   componentDidUpdate () {
@@ -25,17 +35,18 @@ class PropertyCards extends Component {
     }
   }
 
-  async loadData (search) {
-    const data = await fetch('/api?location=' + search).then(res => res.json())
+  async loadData (search, page) {
+    // const data = await fetch('/api?location=' + search).then(res => res.json())
+    this.setState({page: this.state.page + 1})
     this.setState({data: null})
-    this.setState({data: data})
+    this.setState({data: data[search]})
   }
 
   render () {
     if (!this.state.data) return <div />
 
     const properties = []
-    for (let i = 0; i < this.state.data.length; i++) {
+    for (let i = 0; i < (12 * this.state.page < this.state.data.length ? 12 * this.state.page : this.state.data.length); i++) {
       properties.push(<PropertyCard data={this.state.data[i]} />)
     }
     return (
