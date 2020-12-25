@@ -39,8 +39,8 @@ class PropertyCard extends Component {
           <Lottie   options={defaultOptions(iconHeartStartData)}
                     isStopped={this.state.isHeartStartStopped}
                     isPaused={this.state.isHeartStartPaused}
-                    height ={26}
-                    width  ={26}
+                    height ={36}
+                    width  ={36}
                     isClickToPauseDisabled = {true}
                     onClick = {this.handleLike}
                     eventListeners={[

@@ -5,8 +5,8 @@
   grid-row: 4;
 
   display: grid;
-  grid-template-columns: repeat(4, $grid-column-width * 3 + 2 * $grid-column-gutter);
-  grid-auto-rows: 238px;
+  grid-template-columns: repeat(3, $grid-column-width * 4 + 3 * $grid-column-gutter);
+  grid-auto-rows: 326.5px;
   grid-gap: 30px;
 
   .PropertCards {
