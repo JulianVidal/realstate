@@ -21,7 +21,7 @@ class PropertyCards extends Component {
   }
 
   handleScroll () {
-    if (document.body.scrollHeight - window.innerHeight === window.scrollY) {
+    if (document.body.scrollHeight - window.innerHeight <= window.scrollY) {
       console.log('load more')
       this.loadData(this.state.search, this.state.page + 1)
     }
@@ -46,7 +46,7 @@ class PropertyCards extends Component {
     if (!this.state.data) return <div />
 
     const properties = []
-    for (let i = 0; i < (12 * this.state.page < this.state.data.length ? 12 * this.state.page : this.state.data.length); i++) {
+    for (let i = 0; i < (16 * this.state.page < this.state.data.length ? 16 * this.state.page : this.state.data.length); i++) {
       properties.push(<PropertyCard data={this.state.data[i]} />)
     }
     return (
