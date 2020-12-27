@@ -81,7 +81,7 @@ class FormButtonInput extends Component {
       .to(iconCheckMark, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
       .to(this.submitButton, 0.23, {backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
       .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
-      .set('#NavMyAccount', {display: 'block'})
+      .set('#NavMyAccount', {display: 'flex'})
       .set('#NavLogIn, #NavSignUp', {display: 'none'})
       .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
       .to({}, 0.7, {onComplete: () => removeForm(formId)}) // Waits 0.7 seconds

@@ -21,7 +21,7 @@ function LogOut () {
   const tl = new TimelineLite()
 
   tl.to('#NavMyAccount', 0.23, {opacity: 0, ease: Power3.easeOut})
-  .set('#NavLogIn, #NavSignUp', {display: 'block'})
+  .set('#NavLogIn, #NavSignUp', {display: 'flex'})
   .set('#NavMyAccount', {display: 'none'})
   .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 1, ease: Power3.easeOut})
 }

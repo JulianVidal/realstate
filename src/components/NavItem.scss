@@ -20,10 +20,10 @@ li {
   font-size: calc(min(2.8vw, 16px));
   text-align: center;
 
+
   display: flex;
   justify-content: center;
-  align-content: center;
-  flex-direction: column;
+  align-items: center;
 
   width: 13vw;
   max-width: 97px;
@@ -60,34 +60,44 @@ li {
   }
 
   &.NavDropDown {
-    flex-wrap: wrap;
-
-    width: 1.34 * $grid-column-width + $grid-column-gutter;
+    width: calc(19vw + calc(min(3vw, 18px)) + 5px);
+    max-width: 120px;
 
     font-family: $font-main;
-    font-size: 16px;
-    line-height: 37px;
-    height: 37px;
-
-    text-align: left;
-    
+    font-size: calc(min(3vw, 16px));
     cursor: pointer;
-
-    align-items: center;
-    justify-content: flex-end;
     float: right;
 
     svg {
       padding-left: 5px;
       float: right;
-      margin-top: 9px;
+      width: calc(min(3vw, 18px));
+      height: calc(min(3vw, 18px));
+      margin-top: 3px;
+    }
+
+    .DropDownItem {
+      font-size: calc(min(2.5vw, 16px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 35px;
+    }
+
+    .DropDown {
+      max-height: 35px;
+      position: absolute;
+      top: 37px;
+      width: calc(19vw + calc(min(3vw, 18px)) + 5px);
+      max-width: 120px;
     }
 
     &:hover {
       .DropDown {
-        height: 100%;
+        height: 5vw;
 
         .DropDownItem {
+          height: 5vw;
           opacity: 1;
         }
       }

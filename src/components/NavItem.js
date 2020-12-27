@@ -17,7 +17,7 @@ function NavItem ({text, id, type = '', color, DropDown, icon, children, history
   }
 
   return (
-  <li id={id} className={className} onClick={handleClick} > {text} { icon } { DropDown }  {children}</li>
+  <li id={id} className={className} onClick={handleClick} > <span>{text} { icon }</span> { DropDown }  {children}</li>
   )
 }
 
