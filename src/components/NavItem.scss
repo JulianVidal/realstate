@@ -16,13 +16,22 @@ li {
 
 .NavItem {
   font-family: $font-main;
-  font-size: 16px;
+  // font-size: 16px;
+  font-size: calc(min(2.8vw, 16px));
   text-align: center;
-  line-height: 37px;
 
-  width: $grid-column-width + $grid-column-gutter;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  width: 13vw;
+  max-width: 97px;
   height: 37px;
-  
+
+  padding-right: 7px;
+  padding-left: 7px;
+
   transform: translateY(50%);
 
   float: right;
@@ -37,13 +46,16 @@ li {
   &.logo {
     display: block;
     opacity: 1;
-  
-    width: $grid-column-width * 3 + $grid-column-gutter * 2;
+    width: auto;
+    max-width: none;
     font-family: 'Spectral SC', serif;
-    font-size: 50px;
+    // font-size: 50px;
+    font-size: calc(min(9vw, 50px));
     text-align: left;
     text-transform: capitalize;
-  
+    margin: 0;
+    padding: 0;
+    line-height: 37px;
     float: left;
   }
 

@@ -4,13 +4,15 @@
   display: flex;
   margin-right: auto;
   margin-left: auto;
-  height: 45px;
-  width: 358px;
+  // height: 45px;
+  // width: 358px;
 
   .SearchOption {
     position: relative;
-    width: 119px;
-    height: 45px;
+    // width: 119px;
+    width: 20vw;
+    max-width: 119px;
+    // height: 45px;
 
     &.dark {
       color: $color-layout-neutral-dark;

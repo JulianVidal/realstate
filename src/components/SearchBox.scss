@@ -1,8 +1,13 @@
 @import '../index.scss';
 
 #SearchBox {
-  width: 100%;
+  width: 50%;
+  max-width: 550px;
+  min-width: 300px;
   height: 40px;
+  
+  margin-left: auto;
+  margin-right: auto;
 
   font-family: $font-main;
   font-style: normal;
