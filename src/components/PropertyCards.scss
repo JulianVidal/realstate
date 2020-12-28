@@ -5,9 +5,11 @@
   grid-row: 4;
 
   display: grid;
-  grid-template-columns: repeat(4, $grid-column-width * 3 + 2 * $grid-column-gutter);
+  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 238px;
-  grid-gap: 30px;
+  // column-gap: calc(25vw / 11);
+
+  overflow: hidden;
 
   .PropertCards {
     grid-row: 1 / last-line;

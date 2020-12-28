@@ -29,10 +29,10 @@ li {
   max-width: 97px;
   height: 37px;
 
-  padding-right: 7px;
-  padding-left: 7px;
+  margin-right: 7px;
+  margin-left: 7px;
 
-  transform: translateY(50%);
+  justify-self: flex-end;
 
   float: right;
 
@@ -56,7 +56,8 @@ li {
     margin: 0;
     padding: 0;
     line-height: 37px;
-    float: left;
+    margin-right: auto;
+    margin-left: 7px;
   }
 
   &.NavDropDown {
@@ -77,6 +78,7 @@ li {
     }
 
     .DropDownItem {
+      // height: 5vw;
       font-size: calc(min(2.5vw, 16px));
       display: flex;
       align-items: center;
@@ -85,11 +87,12 @@ li {
     }
 
     .DropDown {
+      // height: 5vw;
       max-height: 35px;
-      position: absolute;
-      top: 37px;
       width: calc(19vw + calc(min(3vw, 18px)) + 5px);
       max-width: 120px;
+      position: absolute;
+      top: 75px;
     }
 
     &:hover {
@@ -111,10 +114,13 @@ li {
 
   &#NavSearchBox {
     width: 291px;
-    float: left;
+    max-width: none;
   }
 
   &#NavSearchOptions {
-    float: left;
+    max-width: none;
+
+    width: 20vw;
+    max-width: 358px;
   }
 }
