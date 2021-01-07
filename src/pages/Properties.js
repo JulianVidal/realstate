@@ -37,9 +37,9 @@ class Properties extends Component {
         <NavBar>
           <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/>
           <NavItem id="NavSearchBox"><SearchBox /></NavItem>
-          <NavItem id="NavSearchOptions"><SearchOptions type='dark' /></NavItem>
+          {/* <NavItem id="NavSearchOptions"><SearchOptions type='dark' /></NavItem> */}
           <NavItem text="Log In" id="NavLogIn" color="dark" />
-          <NavItem text="Sign Up" id="NavSignUp" type="fill" className="margin-left: auto;"/>
+          <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
           <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>} className="margin-left: auto;"/>
         </NavBar>
         <PropertyCards />

@@ -47,7 +47,7 @@ function Main ({history}) {
       </div>
 
       <div id='MainSearch'>
-        <SearchOptions />
+        {/* <SearchOptions /> */}
         <SearchBox />
       </div>  
           

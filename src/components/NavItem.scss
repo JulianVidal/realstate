@@ -41,6 +41,11 @@ li {
   &.fill {
     border-radius: 8px;
     background-color: $color-interactive-0;
+
+    width: 16vw;
+    max-width: 97px;
+    max-height: 37px;
+    height: 7vw;
   }
 
   &.logo {
@@ -50,7 +55,7 @@ li {
     max-width: none;
     font-family: 'Spectral SC', serif;
     // font-size: 50px;
-    font-size: calc(min(9vw, 50px));
+    font-size: calc(min(7vw, 50px));
     text-align: left;
     text-transform: capitalize;
     margin: 0;
@@ -113,14 +118,32 @@ li {
   }
 
   &#NavSearchBox {
-    width: 291px;
-    max-width: none;
+    min-width: 125px;
+    width: 25vw;
+    max-width: 500px;
+    margin-right: auto;
+    input {
+      font-size: calc(min(2.5vw, 14px));
+      padding-left: calc(min(1.1vw, 17px));
+    }
+
+    svg {
+      width: calc(min(3.5vw, 20px)) !important;
+      height: calc(min(3.5vw, 20px)) !important;
+    }
   }
 
   &#NavSearchOptions {
-    max-width: none;
-
+    margin-right: auto;
     width: 20vw;
     max-width: 358px;
+
+    .SearchOptions {
+        .SearchOption {
+          width: 7vw;
+          max-width: 119px;
+          font-size: calc(min(2.5vw, 18px));
+    }
+  }
   }
 }

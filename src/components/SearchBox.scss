@@ -1,9 +1,7 @@
 @import '../index.scss';
 
 #SearchBox {
-  width: 50%;
-  max-width: 550px;
-  min-width: 300px;
+  width: 100%;
   height: 40px;
   
   margin-left: auto;
@@ -12,15 +10,19 @@
   font-family: $font-main;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: calc(min(2vw, 12px));
   line-height: 40px;
 
   border-radius: 8px;
 
   background-color: $color-layout-neutral-light;
 
+  display: flex;
+  align-items: center;
+
   button {
-    width: 67px;
+    max-width: 67px;
+    width: 27%;
     height: 40px;
     border-radius: 8px 0px 0px 8px;
     padding: 0;
@@ -37,14 +39,17 @@
 
       &:first-child {
         display: block;
+        
       }
     }
 
   }
 
   input {
+    flex-grow: 1;
+    width: 75%;
     transition: 200ms ease-out;
-    width: calc(100% - 84px);
+    // width: auto;
     height: 40px;
   
     font-family: Roboto Mono;
@@ -58,9 +63,6 @@
     outline: none; 
     
     border-radius: 8px;
-
-    position: relative;
-    top: -5px;
   
     background-color: $color-layout-neutral-light;
     padding-left: 17px;

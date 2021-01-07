@@ -21,7 +21,7 @@
     color: $color-layout-neutral-light;
     text-align: center;
     font-family: $font-main;
-    font-size: 18px;
+    font-size: calc(min(4vw, 18px));
     font-style: normal;
     font-weight: normal;
     line-height: 45px;

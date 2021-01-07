@@ -7,7 +7,7 @@ function SearchOptions ({type}){
   const className = 'SearchOption' + dark
   return (
     <div className='SearchOptions'>
-      <p className={className} onClick={changeActive}>Buy  <span className="underline active" style={{width: '61px'}}> </span> </p>
+      <p className={className} onClick={changeActive}>Buy  <span className="underline active" style={{width: '60%'}}> </span> </p>
       <p className={className} onClick={changeActive}>Rent <span className="underline"> </span></p>
       <p className={className} onClick={changeActive}>Sold <span className="underline"> </span></p>
     </div>
@@ -27,6 +27,6 @@ function changeActive (event) {
 
   const tl = new TimelineLite()
   tl.to(active, 0.4, {width: 0, ease: Power3.easeOut})
-    .to(newActive, 0.4, {width: 61, ease: Power3.easeOut}, 0.1)
+    .to(newActive, 0.4, {width: '60%', ease: Power3.easeOut}, 0.1)
 
 }

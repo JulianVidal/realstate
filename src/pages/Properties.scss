@@ -4,17 +4,19 @@
   height: 100%;
 
   display: grid;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     grid-template-columns: repeat(12, calc(70vw / 12));
   }
-  @media screen and (min-width: 601px) {
+  @media screen and (min-width: 801px) {
     grid-template-columns: repeat(12, calc(50vw / 12));
   }
   grid-template-rows: 18px 70px 40px auto;
   column-gap: calc(25vw / 11);
   justify-content: center;
 
-
+  .fill {
+    height: 9vw;
+  }
 
   grid-auto-flow: column;
 
