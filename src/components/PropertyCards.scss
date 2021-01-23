@@ -8,9 +8,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
+
   @media screen and (max-width: 1000px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: calc(30vw / 11);
+    grid-gap: calc(35vw / 11);
+
+    @media screen and (max-width: 400px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: calc(35vw / 11);
+    }
   }
   @media screen and (min-width: 1500px) {
     grid-template-columns: repeat(4, 1fr);
@@ -18,10 +24,5 @@
   grid-auto-rows: 238px;
   grid-gap: calc(10vw / 11);
 
-  .PropertCards {
-    transition: 300ms;
-
-    grid-row: 1 / last-line;
-  }
-
+  // grid-row: 1 / last-line;
 }

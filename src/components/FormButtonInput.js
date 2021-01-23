@@ -18,7 +18,7 @@ class FormButtonInput extends Component {
 
   render () {
     return (
-      <div className="FormButtonInput" onClick={ event => this.handleSubmit(event, this)} >
+      <div className="FormButtonInput" onClick={ () => this.handleSubmit(this.props.submit)} >
         <input type='submit' value={this.props.text} ref={ button => this.submitButton = button}></input>
 
         <Lottie options={IconData('loading')}
@@ -46,7 +46,7 @@ class FormButtonInput extends Component {
     )
   }
 
-  handleSubmit = () => {
+  handleSubmit = submitFunc => {
     const formId = this.submitButton.parentNode.parentNode.parentNode.id
     const container = this.submitButton.parentNode
     const iconLoading = container.childNodes[1]
@@ -59,40 +59,49 @@ class FormButtonInput extends Component {
     iconLoading.style.display = 'block'  
     iconCheckMark.style.display = 'block'
     iconAlert.style.display = 'block'
-    
+
+    let error
     const tl = new TimelineLite()
-  
+    tl.resume()
     tl.to(container, 0.4, {width:'45px', ease:Power3.easeOut}) // Width of input to 45px
       .to(this.submitButton, 1, {borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
       .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
       .to(iconLoading, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => { this.setState({loadingIsStopped: false}) }}, 0.23) // Opacity 1 for Loading Icon
-      .to({}, 1, {}) // Waits one second
+      .call(() => {tl.pause(); error = submitFunc(); console.log(error); tl.resume()}) // Waits until function is done
       .to(iconLoading, 0.23, {opacity: 0, ease:Power3.easeOut}) // Opacity 0 for Loading Icon
-      
-      // .to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
-      // .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
-      // .to({}, 0.7, {}) // Waits one second
-      // .to(iconAlert, 0.23, {opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
-      // .to(this.submitButton, 0.23, {backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
-      // .to(container, 0.4, {width:'100%', ease:Power3.easeOut})
-      // .to(this.submitButton, 0.4, {borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
-      // .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
 
-      .to(iconCheckMark, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
-      .to(this.submitButton, 0.23, {backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
-      .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
-      .set('#NavMyAccount', {display: 'flex'})
-      .set('#NavLogIn, #NavSignUp', {display: 'none'})
-      .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
-      .to({}, 0.7, {onComplete: () => removeForm(formId)}) // Waits 0.7 seconds
-      .to({}, 0.7, {})
-      .set(iconCheckMark, {opacity: 0, onComplete: () => {this.setState({checkmarkIsStopped: true}); iconCheckMark.style.display = 'none';}})
-      .set(this.submitButton, {backgroundColor: '#00B8D4', ease:Power3.easeOut})
-      .set(container, {width:'100%', ease:Power3.easeOut})
-      .set(this.submitButton, {borderRadius: '8px', ease:Power3.easeOut})
-      .set(this.submitButton, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut})
 
-      .set({}, {onComplete: () => {
+      if (error) {
+        tl.call(() =>{console.log('1')})
+        tl.to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
+        .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
+        .to({}, 0.7, {}) // Waits one second
+        .to(iconAlert, 0.23, {opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
+        .to(this.submitButton, 0.23, {backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
+        .to(container, 0.4, {width:'100%', ease:Power3.easeOut})
+        .to(this.submitButton, 0.4, {borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
+        .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
+      } else {
+        tl.call(() =>{console.log('2')})
+        tl.to(iconCheckMark, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
+        .to(this.submitButton, 0.23, {backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
+        .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
+        .set('#NavMyAccount', {display: 'flex'})
+        .set('#NavLogIn, #NavSignUp', {display: 'none'})
+        .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
+        .to({}, 0.7, {onComplete: () => removeForm(formId)}) // Waits 0.7 seconds
+        .to({}, 0.7, {})
+        .set(iconCheckMark, {opacity: 0, onComplete: () => {this.setState({checkmarkIsStopped: true}); iconCheckMark.style.display = 'none';}})
+        .set(this.submitButton, {backgroundColor: '#00B8D4', ease:Power3.easeOut})
+        .set(container, {width:'100%', ease:Power3.easeOut})
+        .set(this.submitButton, {borderRadius: '8px', ease:Power3.easeOut})
+        .set(this.submitButton, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut})
+      }
+
+
+
+
+      tl.set({}, {onComplete: () => {
         iconLoading.style.display = 'none'  
         iconCheckMark.style.display = 'none'
         iconAlert.style.display = 'none'}})

@@ -38,6 +38,7 @@
       object-fit: cover;
       height: 60%;
       border-radius: inherit;
+      cursor: pointer;
     }
 
     .valuation {
@@ -46,7 +47,7 @@
       
       .price {
         margin: 0;
-        font-size: calc(min(4vw , 20px));
+        font-size: 20px;
         // line-height: 26px;
         // width: 235px;
         height: 26px;  
@@ -56,6 +57,7 @@
       div {
         align-self: flex-end;
         margin-left: auto;
+        cursor: pointer;
       }
 
       svg {

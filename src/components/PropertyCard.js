@@ -31,8 +31,8 @@ class PropertyCard extends Component {
     const {adress, baths, beds, image, link, price, sqft} = this.props.data
 
     return (
-      <div className="PropertyCard" onClick={() => {window.location.href = link}} >
-        <img src={image}  alt="Property" className='image'/>
+      <div className="PropertyCard">
+        <img src={image}  alt="Property" className='image' onClick={() => {window.location.href = link}} />
         
         <div className="valuation">
           <p className="price">{price}</p>

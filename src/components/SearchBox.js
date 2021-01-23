@@ -128,7 +128,7 @@ class SearchBox extends Component {
     const iconSearchStart = button.childNodes[0]
     const iconSearchLoading = button.childNodes[1]
 
-    iconSearchLoading.style.display = 'block'
+    iconSearchLoading.style.display = 'flex'
     iconSearchStart.style.display = 'none'
 
     component.setState({isSearchStartStopped: true, isSearchLoadingStopped: false})    
@@ -139,7 +139,7 @@ class SearchBox extends Component {
     const iconSearchLoading = button.childNodes[1]
     const iconSearchEnd = button.childNodes[2]
 
-    iconSearchEnd.style.display = 'block'
+    iconSearchEnd.style.display = 'flex'
     iconSearchLoading.style.display = 'none'
 
     component.setState({isSearchLoadingStopped: true, isSearchEndStopped: false})    
@@ -151,7 +151,7 @@ class SearchBox extends Component {
     const iconSearchEnd = button.childNodes[2]
 
     iconSearchEnd.style.display = 'none'
-    iconSearchStart.style.display = 'block'
+    iconSearchStart.style.display = 'flex'
 
     component.setState({isSearchEndStopped: true})  
     

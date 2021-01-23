@@ -11,7 +11,7 @@ import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import './Properties.scss'
-import SearchOptions from '../components/SearchOptions'
+// import SearchOptions from '../components/SearchOptions'
 
 class Properties extends Component {
 
@@ -35,12 +35,11 @@ class Properties extends Component {
     return (
       <div id="Properties">
         <NavBar>
-          <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/>
+          {/* <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/> */}
           <NavItem id="NavSearchBox"><SearchBox /></NavItem>
-          {/* <NavItem id="NavSearchOptions"><SearchOptions type='dark' /></NavItem> */}
           <NavItem text="Log In" id="NavLogIn" color="dark" />
           <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
-          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>} className="margin-left: auto;"/>
+          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>}/>
         </NavBar>
         <PropertyCards />
         <LogIn />
@@ -50,6 +49,7 @@ class Properties extends Component {
     )
   }
 }
+// {/* <NavItem id="NavSearchOptions"><SearchOptions type='dark' /></NavItem> */}
 
 // function Properties({history, location}) {
 //   const handleClick = () => {

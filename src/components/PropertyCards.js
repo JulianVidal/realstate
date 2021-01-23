@@ -3,7 +3,7 @@ import QueryString from 'query-string'
 import './PropertyCards.scss'
 import PropertyCard from './PropertyCard'
 import { withRouter } from 'react-router-dom'
-import data from '../assets/data.json'
+// import data from '../assets/data.json'
 
 class PropertyCards extends Component {
 
@@ -37,6 +37,7 @@ class PropertyCards extends Component {
 
   async loadData (search, page) {
     // const data = await fetch('/api?location=' + search).then(res => res.json())
+    const data = await fetch('/api').then(res => res.json())
     this.setState({page: this.state.page + 1})
     this.setState({data: null})
     this.setState({data: data[search]})
