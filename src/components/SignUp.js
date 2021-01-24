@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react'
-import * as fs from 'fs'
 import { ReactComponent as UserIcon } from '../assets/icons/user.svg'
 import { ReactComponent as EmailIcon } from '../assets/icons/mail.svg'
 import { ReactComponent as PasswordIcon } from '../assets/icons/lock.svg'
@@ -47,7 +46,7 @@ class SignUp extends Component {
     )
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     console.log('submit')
     console.log('Username: ' + this.state.Username)
     console.log('Email: ' + this.state.Email)
@@ -61,19 +60,21 @@ class SignUp extends Component {
       "confirm password": this.state["Confirm Password"],
     }
 
-    fetch('http://localhost:5000/post', {
+    return await fetch('http://localhost:5000/post', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
   })
+  .then( async res => {
+    if (!res.ok) throw await res.json()
+    return false
+  })
   .catch(error => {
-    console.error(error.body)
+    console.error(error.message)
     return true
   })
-
-    return false
   }
 
   handleChange = ({target}) => {

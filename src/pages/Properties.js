@@ -3,7 +3,6 @@ import NavBar from '../components/NavBar'
 import NavItem from '../components/NavItem'
 import PropertyCards from '../components/PropertyCards'
 import { removeForm } from '../components/Form'
-// import SearchOptions from '../components/SearchOptions'
 import SearchBox from '../components/SearchBox'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
@@ -11,7 +10,6 @@ import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import './Properties.scss'
-// import SearchOptions from '../components/SearchOptions'
 
 class Properties extends Component {
 
