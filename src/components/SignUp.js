@@ -47,7 +47,10 @@ class SignUp extends Component {
   }
 
   handleSubmit = async () => {
-    console.log('submit')
+
+    if (!this.state.Username || !this.state.Email || !this.state.Password || !this.state["Confirm Password"]) return 'empty'
+
+    console.log('submit Sign Up')
     console.log('Username: ' + this.state.Username)
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
@@ -60,7 +63,7 @@ class SignUp extends Component {
       "confirm password": this.state["Confirm Password"],
     }
 
-    return await fetch('http://localhost:5000/post', {
+    return await fetch('http://localhost:5000/signup', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
