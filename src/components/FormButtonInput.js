@@ -63,32 +63,6 @@ class FormButtonInput extends Component {
     let error
     const tl = new TimelineLite()
 
-    if (await submitFunc() === 'empty') {
-      console.error('empty field')
-      tl.to(container, 0.35, {width:'45px', ease:Power3.easeOut}) // Width of input to 45px
-      .to(this.submitButton, 0.15, {borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
-      .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
-      
-      .to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
-      .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
-      
-      .to([this.submitButton, iconAlert], 0.05, {x:'-=2'}, '-=0.06')
-      .to([this.submitButton, iconAlert], 0.05, {x:'+=4', yoyo:true, repeat: 5}, '-=0.06')
-      .to([this.submitButton, iconAlert], 0.05, {x:'+=2'}, '-=0.06')
-
-      .to({}, 0.7, {}) // Waits one second
-      .to(iconAlert, 0.23, {opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
-      .to(this.submitButton, 0.23, {backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
-      .to(container, 0.4, {width:'100%', ease:Power3.easeOut})
-      .to(this.submitButton, 0.4, {borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
-      .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
-      tl.set({}, {onComplete: () => {
-        iconLoading.style.display = 'none'  
-        iconCheckMark.style.display = 'none'
-        iconAlert.style.display = 'none'}})
-        return
-    }
-
     await tl.to(container, 0.4, {width:'45px', ease:Power3.easeOut}) // Width of input to 45px
       .to(this.submitButton, 1, {borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
       .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
@@ -96,14 +70,41 @@ class FormButtonInput extends Component {
       .call(async () => {tl.pause(); error = await submitFunc(); console.log(error); tl.resume()}) // Waits until function is done
       .to(iconLoading, 0.23, {opacity: 0, ease:Power3.easeOut}) // Opacity 0 for Loading Icon
 
+      if (error === 'empty') {
+        console.error('empty field')
+        tl.to(container, 0.35, {width:'45px', ease:Power3.easeOut}) // Width of input to 45px
+        .to(this.submitButton, 0.15, {borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
+        .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
+        
+        .to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
+        .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
+        
+        // .to([this.submitButton, iconAlert], 0.05, {x:'-=2'}, '-=0.06')
+        // .to([this.submitButton, iconAlert], 0.05, {x:'+=4', yoyo:true, repeat: 5}, '-=0.06')
+        // .to([this.submitButton, iconAlert], 0.05, {x:'+=2'}, '-=0.06')
+  
+        .to({}, 0.7, {}) // Waits one second
+        .to(iconAlert, 0.23, {opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
+        .to(this.submitButton, 0.23, {backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
+        .to(container, 0.4, {width:'100%', ease:Power3.easeOut})
+        .to(this.submitButton, 0.4, {borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
+        .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
+        tl.set({}, {onComplete: () => {
+          iconLoading.style.display = 'none'  
+          iconCheckMark.style.display = 'none'
+          iconAlert.style.display = 'none'}})
+          console.log('empty signup')
+          return
+      }
+
       if (error) {
         tl.call(() =>{console.log('1', error)})
         tl.to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
         .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
 
-        .to([this.submitButton, iconAlert], 0.05, {x:'-=2'})
-        .to([this.submitButton, iconAlert], 0.05, {x:'+=4', yoyo:true, repeat: 5})
-        .to([this.submitButton, iconAlert], 0.05, {x:'+=2'})
+        // .to([this.submitButton, iconAlert], 0.05, {x:'-=2'})
+        // .to([this.submitButton, iconAlert], 0.05, {x:'+=4', yoyo:true, repeat: 5})
+        // .to([this.submitButton, iconAlert], 0.05, {x:'+=2'})
 
         .to({}, 0.7, {}) // Waits one second
         .to(iconAlert, 0.23, {opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})

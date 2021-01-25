@@ -42,7 +42,7 @@ class LogIn extends Component {
   }
 
   handleSubmit = async () => {
-    // if (!this.state.Email || !this.state.Password) return 'empty'
+    if (!this.state.Email || !this.state.Password) return 'empty'
 
     console.log('submit Log In')
     console.log('Email: ' + this.state.Email)
