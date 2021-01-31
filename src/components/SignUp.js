@@ -52,20 +52,19 @@ class SignUp extends Component {
     // if (!this.state.Username || !this.state.Email || !this.state.Password || !this.state["Confirm Password"]) return 'empty'
 
 
-    console.log('submit Sign Up')
+    console.log('Submitting following sign up form for user:')
     console.log('Username: ' + this.state.Username)
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
-    console.log('Confirm Password: ' + this.state["Confirm Password"])
 
     const user = {
       username: this.state.Username,
       email: this.state.Email,
       password: this.state.Password,
-      "confirm password": this.state["Confirm Password"],
+      properties: []
     }
 
-console.log('fetch')
+console.log('Posting data')
     return await fetch('http://localhost:5000/signup', {
     method: 'POST',
     headers: {

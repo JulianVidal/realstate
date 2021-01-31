@@ -1,28 +1,41 @@
 import React, {Component} from 'react'
 import Lottie from 'react-lottie-wrapper'
+import { formDisplay } from './Form'
 import iconHeartStartData from '../assets/icons/heart.json'
 import './PropertyCard.scss'
 
 class PropertyCard extends Component {
 
   handleLike = () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    if (!user) {
+      formDisplay('LogIn')
+      return
+    }
+
     this.setState({isHeartStartStopped: false})
     this.setState({isHeartStartPaused: false})
 
-    // const user = JSON.parse(localStorage.getItem('user'))
+    const index = user.properties.findIndex(({adress}) => adress === this.props.data.adress)
+      if (index !== -1){
+        console.log('Property unliked:')
+        user.properties.splice(index, 1)
+      } else {
+        console.log('Property liked:')
+        user.properties.push(this.props.data)
+      }
 
-    // user.properties = []
-    // user.properties.push(this.props.data)
+    fetch('http://localhost:5000/likes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
 
-    // fetch('http://localhost:5000/post', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-
-    // localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user))
+    console.log(this.props.data)
   }
 
   state = {
@@ -31,15 +44,15 @@ class PropertyCard extends Component {
     isLiked: false
   }
 
-  // componentDidMount() {
-  //   const user = JSON.parse(localStorage.getItem('user'))
-
-  //   if (user.properties) {
-  //     if (user.properties.find( ({ adress }) => adress === this.props.data.adress)) {
-  //       this.setState({'isLiked': true})
-  //     }
-  //   }
-  // }
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (!user) return
+    if (user.properties) {
+      if (user.properties.find( ({ adress }) => adress === this.props.data.adress)) {
+        this.setState({'isHeartStartStopped': false})
+      }
+    }
+  }
 
   render () {
     const defaultOptions = (data, loop = false) => {

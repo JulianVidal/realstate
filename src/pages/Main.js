@@ -10,8 +10,10 @@ import SearchBox from '../components/SearchBox'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
 import './Main.scss'
+import { TimelineLite, Power3 } from 'gsap'
 //<div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div> bath
 //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> area
+import { Fragment } from 'react'
 
 function Main ({history}) {
 
@@ -29,16 +31,32 @@ function Main ({history}) {
   
   const dropDown = 
     <DropDown>
-      <DropDownItem text='Log Out' type='logout'/>
+      <DropDownItem text='Log Out' type='logout' handleClick={logOut}/>
     </DropDown>
+
+  let loggedIn
+
+    if (localStorage.getItem('user')) {
+      loggedIn = 
+      <Fragment>
+          <NavItem text="Log In" id="NavLogIn" type="hidden"/>
+          <NavItem text="Sign Up" id="NavSignUp" type="fill hidden"/>
+          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} icon={<ArrowIcon/>}/>
+      </Fragment>
+    } else {
+      loggedIn = 
+      <Fragment>
+        <NavItem text="Log In" id="NavLogIn" />
+        <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
+        <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} type="hidden" icon={<ArrowIcon/>}/>
+      </Fragment>
+    }
 
   return (
     <div id="Main">
       <NavBar>
         <NavItem text="Rentify" id="NavRentify" type="logo"/>
-        <NavItem text="Log In" id="NavLogIn" />
-        <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
-        <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} type="hidden" icon={<ArrowIcon/>}/>
+        {loggedIn}
       </NavBar>
 
       <div id="MainText">
@@ -56,6 +74,17 @@ function Main ({history}) {
       <div id="Overlay" onClick={handleClick}></div>
     </div>
   )
+}
+
+const logOut = () => {
+  localStorage.clear()
+
+  const tl = new TimelineLite()
+
+  tl.to('#NavMyAccount', 0.23, {opacity: 0, ease: Power3.easeOut})
+  .set('#NavLogIn, #NavSignUp', {display: 'flex'})
+  .set('#NavMyAccount', {display: 'none'})
+  .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 1, ease: Power3.easeOut})
 }
 
 export default Main

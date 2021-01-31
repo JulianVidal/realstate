@@ -67,7 +67,7 @@ class FormButtonInput extends Component {
       .to(this.submitButton, 1, {borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
       .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
       .to(iconLoading, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => { this.setState({loadingIsStopped: false}) }}, 0.23) // Opacity 1 for Loading Icon
-      .call(async () => {tl.pause(); error = await submitFunc(); console.log(error); tl.resume()}) // Waits until function is done
+      .call(async () => {tl.pause(); error = await submitFunc(); tl.resume()}) // Waits until function is done
       .to(iconLoading, 0.23, {opacity: 0, ease:Power3.easeOut}) // Opacity 0 for Loading Icon
 
       if (error === 'empty') {
@@ -93,12 +93,11 @@ class FormButtonInput extends Component {
           iconLoading.style.display = 'none'  
           iconCheckMark.style.display = 'none'
           iconAlert.style.display = 'none'}})
-          console.log('empty signup')
           return
       }
 
       if (error) {
-        tl.call(() =>{console.log('1', error)})
+        tl.call(() =>{console.log('Unsuccesful request for sign up or log into server')})
         tl.to(iconAlert, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
         .to(this.submitButton, 0.23, {backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
 
@@ -113,7 +112,7 @@ class FormButtonInput extends Component {
         .to(this.submitButton, 0.4, {borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
         .to(this.submitButton, 0.23, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
       } else {
-        tl.call(() =>{console.log('2', error)})
+        tl.call(() =>{console.log('Succesful request for sign up or log into server')})
         tl.to(iconCheckMark, 0.23, {opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
         .to(this.submitButton, 0.23, {backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
         .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})

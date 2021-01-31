@@ -4,6 +4,7 @@ import { ReactComponent as PasswordIcon } from '../assets/icons/lock.svg'
 import Form, { switchForm } from './Form'
 import FormTextInput from './FormTextInput'
 import FormButtonInput from './FormButtonInput'
+import { GoogleLogin } from 'react-google-login'
 import './Form.scss'
 
 class LogIn extends Component {
@@ -12,7 +13,18 @@ class LogIn extends Component {
     Password: '',
   }
 
+  onSuccess = res => {
+    console.log('Google log in succesful from user:', res.profileObj)
+  }
+
+  onFailure = res => {
+    console.log('Google log in unsuccessful, error:', res)
+  }
+
   render() {
+
+    const clientId = '692802073731-cemhatu867drko0sr61h77700g780jbv.apps.googleusercontent.com'
+
     const footer = (
       <Fragment>
         <p>Don't have an account?</p>
@@ -37,6 +49,15 @@ class LogIn extends Component {
           onChange={this.handleChange}
         />
         <FormButtonInput text="Log In" submit={this.handleSubmit}/>
+        <GoogleLogin 
+        clientId = {clientId}
+        buttonText = 'Login'
+        onSuccess = {this.onSuccess}
+        onFailure = {this.onFailure}
+        cookiePolicy = {'single_host_origin'}
+        style={{}}
+        isSignedIn={true}
+        />
       </Form>
     )
   }
@@ -44,7 +65,7 @@ class LogIn extends Component {
   handleSubmit = async () => {
     // if (!this.state.Email || !this.state.Password) return 'empty'
 
-    console.log('submit Log In')
+    console.log('Submitting following log in for user:')
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
 
@@ -62,7 +83,8 @@ class LogIn extends Component {
     })
       .then(async (res) => {
         if (!res.ok) throw await res.json()
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(await res.json()))
+        this.props.reload()
         return false
       })
       .catch((error) => {

@@ -11,6 +11,7 @@
     "query-string": "^6.13.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.2.2",
     "react-lottie": "^1.2.3",
     "react-lottie-segments": "^1.4.9",
     "react-lottie-wrapper": "^1.1.6",

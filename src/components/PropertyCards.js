@@ -48,7 +48,7 @@ class PropertyCards extends Component {
 
     const properties = []
     for (let i = 0; i < (16 * this.state.page < this.state.data.length ? 16 * this.state.page : this.state.data.length); i++) {
-      properties.push(<PropertyCard data={this.state.data[i]} />)
+      properties.push(<PropertyCard data={this.state.data[i]} key={i} />)
     }
     return (
       <div id='PropertyCards'>
