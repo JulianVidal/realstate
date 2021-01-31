@@ -10,6 +10,7 @@ import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import './Properties.scss'
+import { Fragment } from 'react'
 
 class Properties extends Component {
 
@@ -29,15 +30,31 @@ class Properties extends Component {
     <DropDown>
       <DropDownItem text='Log Out' type='logout'/>
     </DropDown>
+
+    let loggedIn
+
+    if (localStorage.getItem('user')) {
+      loggedIn = 
+      <Fragment>
+          <NavItem text="Log In" id="NavLogIn" type="hidden" color="dark" />
+          <NavItem text="Sign Up" id="NavSignUp" type="fill hidden"/>
+          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="" icon={<ArrowIcon/>}/>
+      </Fragment>
+    } else {
+      loggedIn = 
+      <Fragment>
+        <NavItem text="Log In" id="NavLogIn" color="dark" />
+        <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
+        <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>}/>
+      </Fragment>
+    }
   
     return (
       <div id="Properties">
         <NavBar>
           {/* <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/> */}
           <NavItem id="NavSearchBox"><SearchBox /></NavItem>
-          <NavItem text="Log In" id="NavLogIn" color="dark" />
-          <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
-          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color="dark" type="hidden" icon={<ArrowIcon/>}/>
+          {loggedIn}
         </NavBar>
         <PropertyCards />
         <LogIn />

@@ -42,7 +42,7 @@ class LogIn extends Component {
   }
 
   handleSubmit = async () => {
-    if (!this.state.Email || !this.state.Password) return 'empty'
+    // if (!this.state.Email || !this.state.Password) return 'empty'
 
     console.log('submit Log In')
     console.log('Email: ' + this.state.Email)
@@ -62,6 +62,7 @@ class LogIn extends Component {
     })
       .then(async (res) => {
         if (!res.ok) throw await res.json()
+        localStorage.setItem('user', JSON.stringify(user))
         return false
       })
       .catch((error) => {

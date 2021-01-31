@@ -47,10 +47,10 @@ class SignUp extends Component {
   }
 
   handleSubmit = async () => {
+    // if (this.state.Password !== this.state["Confirm Password"]) return 'empty'
+    // if (!this.state.Email.includes('@')) return 'empty'
+    // if (!this.state.Username || !this.state.Email || !this.state.Password || !this.state["Confirm Password"]) return 'empty'
 
-    if (this.state.Password !== this.state["Confirm Password"]) return 'empty'
-    if (!this.state.Email.includes('@')) return 'empty'
-    if (!this.state.Username || !this.state.Email || !this.state.Password || !this.state["Confirm Password"]) return 'empty'
 
     console.log('submit Sign Up')
     console.log('Username: ' + this.state.Username)
@@ -64,6 +64,7 @@ class SignUp extends Component {
       password: this.state.Password,
       "confirm password": this.state["Confirm Password"],
     }
+
 console.log('fetch')
     return await fetch('http://localhost:5000/signup', {
     method: 'POST',

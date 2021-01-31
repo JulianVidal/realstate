@@ -48,13 +48,17 @@ class SearchBox extends Component {
     }
 
     if (this.state.doSearch) {
-      return  (<Redirect
-        to={{
-          pathname: "/properties",
-          search: `location=${this.getSearch()}`
-        }}
-      />)
-    }
+      this.props.history.push({
+        pathname: '/properties',
+        search: `?location=${this.getSearch()}`
+      })
+      // return  (<Redirect
+      //   to={{
+      //     pathname: "/properties",
+      //     search: `location=${this.getSearch()}`
+      //   }}
+      // />)
+  }
 
     return (
         <form id='SearchBox' onSubmit={this.handleSubmit}>
