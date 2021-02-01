@@ -1,11 +1,24 @@
 import React from 'react'
+import { useGoogleLogout } from 'react-google-login'
 import './DropDownItem.scss'
+
 
 function DropDownItem ({ text, type, handleClick }) {
   const className = 'DropDownItem ' + type
 
+  const { signOut, loaded } = useGoogleLogout({
+    onFailure: res => {console.error(res)},
+    clientId: '692802073731-cemhatu867drko0sr61h77700g780jbv.apps.googleusercontent.com',
+    cookiePolicy: 'single_host_origin',
+    onLogoutSuccess: res => {console.log('sucess logout', res)}
+  })
+
+  const hc = () => {
+    handleClick()
+    signOut()
+  }
   return (
-    <p className={className} onClick={handleClick}>{text}</p>
+    <p className={className} onClick={hc}>{text}</p>
   )
 }
 

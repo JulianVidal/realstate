@@ -45,4 +45,22 @@
     left: 50%;
     transform: translate(-50%, 0);
   }
+
+  &.google {
+    display: flex;
+    justify-content: center;
+    div {
+      display: flex;
+      opacity: 1;
+      position: absolute;
+      transform: none;
+      left:0;
+      transform: translate(170%, 0);
+    }
+    span {
+      padding: 0 !important;
+      font-family: $font-main !important;
+      font-size: 14px !important;
+    }
+  }
 }

@@ -5,6 +5,8 @@ import Form, { switchForm } from './Form'
 import FormTextInput from './FormTextInput'
 import FormButtonInput from './FormButtonInput'
 import { GoogleLogin } from 'react-google-login'
+import { removeForm } from '../components/Form'
+import { TimelineLite, Power3 } from 'gsap'
 import './Form.scss'
 
 class LogIn extends Component {
@@ -13,8 +15,63 @@ class LogIn extends Component {
     Password: '',
   }
 
-  onSuccess = res => {
-    console.log('Google log in succesful from user:', res.profileObj)
+  onSuccess = async response => {
+    console.log('Google log in succesful from user:', response.profileObj, response)
+    localStorage.clear()
+    removeForm('LogIn')
+
+    const tl = new TimelineLite()
+    tl.to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
+    .set('#NavMyAccount', {display: 'flex'})
+    .set('#NavLogIn, #NavSignUp', {display: 'none'})
+    .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
+
+    const user = {
+      email: response.profileObj.email,
+    }
+
+    await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then(async (res) => {
+        if (!res.ok) throw await res.json()
+        localStorage.setItem('user', JSON.stringify(await res.json()))
+        this.props.reload()
+        return false
+      })
+      .catch(async (error) => {
+        console.error(error.message)
+        user.properties = []
+          await fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+          })
+          .then( async res => {
+            if (!res.ok) throw await res.json()
+            localStorage.setItem('user', JSON.stringify(await res.json()))
+            this.props.reload()
+            return false
+          })
+          .catch(error => {
+            console.error(error.message)
+            return true
+          })
+        return true
+      })
+
+    // remove log in and sign up
+    // add to local storage
+    // save to databse without password
+    // stop sending passwords aroudn, probably a good idea
+    // confirm that email and passwrod as the same
+    // log out
   }
 
   onFailure = res => {
@@ -48,14 +105,14 @@ class LogIn extends Component {
           after={after}
           onChange={this.handleChange}
         />
-        <FormButtonInput text="Log In" submit={this.handleSubmit}/>
+        <FormButtonInput text="Login" submit={this.handleSubmit}/>
         <GoogleLogin 
         clientId = {clientId}
         buttonText = 'Login'
         onSuccess = {this.onSuccess}
         onFailure = {this.onFailure}
         cookiePolicy = {'single_host_origin'}
-        style={{}}
+        className='FormButtonInput google'
         isSignedIn={true}
         />
       </Form>
