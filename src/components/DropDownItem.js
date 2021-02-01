@@ -10,7 +10,7 @@ function DropDownItem ({ text, type, handleClick }) {
     onFailure: res => {console.error(res)},
     clientId: '692802073731-cemhatu867drko0sr61h77700g780jbv.apps.googleusercontent.com',
     cookiePolicy: 'single_host_origin',
-    onLogoutSuccess: res => {console.log('sucess logout', res)}
+    onLogoutSuccess: () => {console.log('Logout Success')}
   })
 
   const hc = () => {
