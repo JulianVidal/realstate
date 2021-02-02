@@ -16,7 +16,7 @@ class PropertyCard extends Component {
 
     this.setState({isHeartStartStopped: false})
     this.setState({isHeartStartPaused: false})
-
+    console.log(user)
     const index = user.properties.findIndex(({adress}) => adress === this.props.data.adress)
       if (index !== -1){
         console.log('Property unliked:')
