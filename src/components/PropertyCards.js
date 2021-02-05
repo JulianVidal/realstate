@@ -29,6 +29,7 @@ class PropertyCards extends Component {
 
     tl.to(".PropertyCard", 
     {autoAlpha: 1, 
+      ease: Power3.easeOut,
       stagger: 0.1, 
       yoyo:true, 
       repeat: -1, 
