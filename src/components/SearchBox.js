@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router'
 import Lottie from 'react-lottie-wrapper'
 import queryString from 'query-string'
 import iconSearchStartData from '../assets/icons/searchStart.json'

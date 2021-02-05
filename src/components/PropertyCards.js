@@ -37,10 +37,10 @@ class PropertyCards extends Component {
 
   async loadData (search, page) {
     // const data = await fetch('/api?location=' + search).then(res => res.json())
-    const data = await fetch('/api').then(res => res.json())
-    this.setState({page: this.state.page + 1})
     this.setState({data: null})
-    this.setState({data: data[search]})
+    const data = await fetch('/api?location=' + search).then(res => res.json())
+    this.setState({page: this.state.page + 1})
+    this.setState({data: data})
   }
 
   render () {

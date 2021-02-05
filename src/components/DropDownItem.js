@@ -6,7 +6,7 @@ import './DropDownItem.scss'
 function DropDownItem ({ text, type, handleClick }) {
   const className = 'DropDownItem ' + type
 
-  const { signOut, loaded } = useGoogleLogout({
+  const { signOut } = useGoogleLogout({
     onFailure: res => {console.error(res)},
     clientId: '692802073731-cemhatu867drko0sr61h77700g780jbv.apps.googleusercontent.com',
     cookiePolicy: 'single_host_origin',
