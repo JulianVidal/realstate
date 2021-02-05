@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Lottie from 'react-lottie-wrapper'
 import { formDisplay } from './Form'
 import iconHeartStartData from '../assets/icons/heart.json'
+import emptyImage from '../assets/empty.png'
 import './PropertyCard.scss'
 
 class PropertyCard extends Component {
@@ -69,16 +70,16 @@ class PropertyCard extends Component {
     const {adress, baths, beds, image, link, price, sqft} = this.props.data
 
     return (
-      <div className="PropertyCard">
-        <img src={image}  alt="Property" className='image' onClick={() => {window.location.href = link}} />
+      <div className={"PropertyCard"}>
+        <img src={image || emptyImage}  alt="Property" className='image' onClick={() => {window.location.href = link}} />
         
         <div className="valuation">
           <p className="price">{price}</p>
-          <Lottie   options={defaultOptions(iconHeartStartData)}
+          {<Lottie   options={defaultOptions(iconHeartStartData)}
                     isStopped={this.state.isHeartStartStopped}
                     isPaused={this.state.isHeartStartPaused}
-                    height ={26}
-                    width  ={26}
+                    height ={adress ? 26 : 0}
+                    width  ={adress ? 26 : 0}
                     isClickToPauseDisabled = {true}
                     onClick = {this.handleLike}
                     eventListeners={[
@@ -94,7 +95,7 @@ class PropertyCard extends Component {
                         }
                       }
                     ]}
-                    />
+                    />}
         </div>
   
         <div className='details font'>
@@ -105,7 +106,7 @@ class PropertyCard extends Component {
   
         <div className="place">
           <p className="address">{adress}</p>
-          <p className="courtesy">Courtesy of: Zillow</p>
+          <p className="courtesy">{adress ? 'Courtesy of: Zillow' : ''}</p>
         </div>
   
       </div>

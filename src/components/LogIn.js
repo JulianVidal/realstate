@@ -65,13 +65,6 @@ class LogIn extends Component {
           })
         return true
       })
-
-    // remove log in and sign up
-    // add to local storage
-    // save to databse without password
-    // stop sending passwords aroudn, probably a good idea
-    // confirm that email and passwrod as the same
-    // log out
   }
 
   onFailure = res => {

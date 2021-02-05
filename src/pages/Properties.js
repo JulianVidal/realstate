@@ -23,6 +23,14 @@ class Properties extends Component {
     if (this.state.reload) this.setState({reload: false})
   }
 
+  componentDidMount() {
+    // window.onload = () => {
+    //   const tl = new TimelineLite()
+    //   tl.to('.PropertyCard', {opacity:1, stagger: 0.2, yoyo:true, repeat:-1})
+    // }
+    
+  }
+
   render() {
     const handleClick = () => {
       const LogIn = document.getElementById('LogIn')

@@ -5,7 +5,7 @@ import Properties from '../pages/Properties.js'
 
 function App () {
   return (
-    <div id='App'>
+    <div id='App 'style={{height: '100%'}}>
       <Router>
         <Route exact={true} path='/' component={Main}/>
         <Route path='/properties' component={Properties}/>
