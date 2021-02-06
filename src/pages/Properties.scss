@@ -4,13 +4,24 @@
   height: 100%;
 
   display: grid;
+
+
   @media screen and (max-width: 800px) {
     grid-template-columns: repeat(12, calc(70vw / 12));
   }
+
   @media screen and (min-width: 801px) {
     grid-template-columns: repeat(12, calc(50vw / 12));
   }
-  grid-template-rows: 18px 70px 40px auto;
+
+  @media screen and (max-width: 1000px) {
+    grid-template-rows: 0px 70px 0px auto;
+    // grid-template-rows: 18px 70px 40px auto;
+  }
+
+  @media screen and (min-width: 1001px) {
+    grid-template-rows: 18px 70px 40px auto;
+  }
   column-gap: calc(25vw / 11);
   justify-content: center;
 

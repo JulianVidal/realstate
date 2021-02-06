@@ -68,7 +68,11 @@ li {
     font-family: $font-main;
     font-size: calc(min(3vw, 16px));
     cursor: pointer;
-    float: right;
+    // float: right;
+    
+    position: relative;
+    top: 8px;
+    display: inline-block;
 
     svg {
       padding-left: 5px;
@@ -78,30 +82,33 @@ li {
       margin-top: 3px;
     }
 
-    .DropDownItem {
-      // height: 5vw;
-      font-size: calc(min(2.5vw, 16px));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-height: 35px;
-    }
-
     .DropDown {
+      margin-top: 17px;
       // height: 5vw;
-      max-height: 35px;
+      max-height: 90px;
       width: calc(19vw + calc(min(3vw, 18px)) + 5px);
-      max-width: 120px;
+      max-width: 140px;
       position: absolute;
-      top: 75px;
+      right: -10px;
+      // top: 75px;
+
+      .DropDownItem {
+        // height: 5vw;
+        font-size: calc(min(2.5vw, 16px));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // height: 7vw;
+        max-height: 45px;
+      }
     }
 
     &:hover {
       .DropDown {
-        height: 7vw;
+        height: 14vw;
 
         .DropDownItem {
-          height: 7vw;
+          height: 8vw;
           opacity: 1;
         }
       }

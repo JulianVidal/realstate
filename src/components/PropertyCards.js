@@ -18,33 +18,40 @@ class PropertyCards extends Component {
     data: null,
     search: null,
     error: null,
-    loadedAnim: false
+    loadedAnim: false,
   }
 
   async componentDidMount () {
-    // ScrollTrigger.batch(".PropertyCard", {
-    //   onEnter: batch => gsap.to(batch, {autoAlpha: 1, stagger: 0.1, yoyo:true, repeat: -1}),
-    // });
+    const animation = anim => {
+      tl.to(".PropertyCard", 
+      {autoAlpha: 1, 
+        ease: Power3.easeOut,
+        stagger: 0.1, 
+        yoyo:true, 
+        repeat: 1, 
+        repeatDelay: 0.5,
+        scaleX: 0.8,
+        scaleY: 0.9,
+        onComplete: () => {
+
+          if (this.state.data) {
+            tl.kill()
+            this.setState({loadedAnim: true})
+            ScrollTrigger.batch(".PropertyCard", {
+              onEnter: batch =>{ 
+                gsap.to(batch, {autoAlpha: 1, stagger: 0.1})
+                gsap.from(batch, {scaleX: 0.88,scaleY: 0.94, stagger: 0.1})
+            },
+            });
+          } else {
+            anim(anim)
+          }
+        }})
+    }
+
     const tl = gsap.timeline()
 
-    tl.to(".PropertyCard", 
-    {autoAlpha: 1, 
-      ease: Power3.easeOut,
-      stagger: 0.1, 
-      yoyo:true, 
-      repeat: -1, 
-      repeatDelay: 0.5,
-      scaleY:0.9,
-      scaleX: 0.8,
-      onStart: () => {
-        if (this.state.data) {
-          tl.kill()
-          this.setState({loadedAnim: true})
-          ScrollTrigger.batch(".PropertyCard", {
-            onEnter: batch => gsap.to(batch, {autoAlpha: 1, stagger: 0.1}),
-          });
-        }
-      }})
+    animation(animation)
 
       let error
       const search = QueryString.parse(this.props.location.search).location
@@ -113,6 +120,7 @@ class PropertyCards extends Component {
     for (let i = 0; i < this.state.data.length; i++) {
       properties.push(<PropertyCard data={this.state.data[i]} key={i} />)
     }
+
     return (
       <div id='PropertyCards'>
         {properties}

@@ -1,9 +1,10 @@
 import React from 'react'
 import { useGoogleLogout } from 'react-google-login'
 import './DropDownItem.scss'
+import { TimelineLite, Power3 } from 'gsap'
 
 
-function DropDownItem ({ text, type, handleClick }) {
+function DropDownItem ({ text, type, reload }) {
   const className = 'DropDownItem ' + type
 
   const { signOut } = useGoogleLogout({
@@ -14,7 +15,15 @@ function DropDownItem ({ text, type, handleClick }) {
   })
 
   const hc = () => {
-    handleClick()
+    localStorage.clear()
+    reload()
+    const tl = new TimelineLite()
+
+    tl.to('#NavMyAccount', {duration: 0.23,opacity: 0, ease: Power3.easeOut})
+    .set('#NavLogIn, #NavSignUp', {display: 'flex'})
+    .set('#NavMyAccount', {display: 'none'})
+    .to('#NavLogIn, #NavSignUp', {duration: 0.23, opacity: 1, ease: Power3.easeOut})
+    
     signOut()
   }
   return (

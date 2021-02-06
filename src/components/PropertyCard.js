@@ -55,6 +55,19 @@ class PropertyCard extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (!user) {
+      if (this.state.isHeartStartPaused) this.setState({'isHeartStartPaused': false})
+      return
+    }
+    if (user.properties) {
+      if (user.properties.find( ({ adress }) => adress === this.props.data.adress) && this.state.isHeartStartStopped) {
+        this.setState({'isHeartStartStopped': false})
+      }
+    }
+  }
+
   render () {
     const defaultOptions = (data, loop = false) => {
       return {
