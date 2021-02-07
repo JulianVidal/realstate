@@ -32,7 +32,7 @@ render() {
 
   const dropDown = 
   <DropDown>
-    <DropDownItem text='Favorites' type='' />
+    <DropDownItem text='Favorites' type='favorites' />
     <DropDownItem text='Log Out' type='logout' reload={this.reload} />
   </DropDown>
 

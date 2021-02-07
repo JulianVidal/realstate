@@ -19,6 +19,7 @@ class PropertyCards extends Component {
     search: null,
     error: null,
     loadedAnim: false,
+    rel: false
   }
 
   async componentDidMount () {
@@ -34,7 +35,7 @@ class PropertyCards extends Component {
         scaleY: 0.9,
         onComplete: () => {
 
-          if (this.state.data) {
+          if (this.state.data || this.props.data) {
             tl.kill()
             this.setState({loadedAnim: true})
             ScrollTrigger.batch(".PropertyCard", {
@@ -52,7 +53,8 @@ class PropertyCards extends Component {
     const tl = gsap.timeline()
 
     animation(animation)
-
+    this.setState({data: this.props.data})
+    if (this.props.data) return
       let error
       const search = QueryString.parse(this.props.location.search).location
       const data = await fetch('/api?location=' + search).then(res => res.json()).catch(err => {error = err} )
@@ -62,6 +64,7 @@ class PropertyCards extends Component {
   }
 
   async componentDidUpdate () {
+    if (this.props.data) return
     const search = QueryString.parse(this.props.location.search).location
     if (this.state.search !==  search) {
       let error
@@ -81,7 +84,11 @@ class PropertyCards extends Component {
       </div>
         )
   }
+
+
+  window.onresize = () => {}
   if (!this.state.data || !this.state.loadedAnim) {
+    window.onresize = () => {console.log('res', this.state.rel);this.setState({rel: !this.state.rel})}
     const width = window.innerWidth
     const rows = Math.ceil((window.innerHeight - 126) / 238)
 
@@ -116,9 +123,10 @@ class PropertyCards extends Component {
       )
     }
 
+    const data = this.props.data || this.state.data
     const properties = []
-    for (let i = 0; i < this.state.data.length; i++) {
-      properties.push(<PropertyCard data={this.state.data[i]} key={i} />)
+    for (let i = 0; i < data.length; i++) {
+      properties.push(<PropertyCard data={data[i]} key={i} />)
     }
 
     return (
