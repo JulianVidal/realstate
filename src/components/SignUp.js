@@ -6,6 +6,7 @@ import { ReactComponent as CheckPasswordIcon } from '../assets/icons/checkLock.s
 import Form, { switchForm } from './Form'
 import FormTextInput from './FormTextInput'
 import FormButtonInput from './FormButtonInput'
+import firebase from '../firebase.js'
 import './Form.scss'
 
 
@@ -57,31 +58,42 @@ class SignUp extends Component {
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
 
-    const user = {
-      username: this.state.Username,
-      email: this.state.Email,
-      password: this.state.Password,
-      properties: []
-    }
+    
 
-console.log('Posting data')
-    return await fetch('http://localhost:5000/signup', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
-  .then( async res => {
-    if (!res.ok) throw await res.json()
-    return false
-  })
-  .catch(error => {
-    console.error(error.message)
-    return true
-  })
+  console.log('Posting data')
+  return await firebase.auth().createUserWithEmailAndPassword(this.state.Email, this.state.Password)
+    .then((userCredential) => {
+      // Signed in 
+      var user = userCredential.user;
+      console.log(user)
+      localStorage.setItem('user', user)
+      return false
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log('hey')
+      console.error(errorCode, errorMessage)
+      return true
+    });
+
+  //   return await fetch('http://localhost:5000/signup', {
+  //   method: 'POST',
+  //   headers: {
+  //       'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(user)
+  // })
+  // .then( async res => {
+  //   if (!res.ok) throw await res.json()
+  //   return false
+  // })
+  // .catch(error => {
+  //   console.error(error.message)
+  //   return true
+  // })
   }
-
   handleChange = ({target}) => {
     const name = target.placeholder
     this.setState({[name]: target.value})

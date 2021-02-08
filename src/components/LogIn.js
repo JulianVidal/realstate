@@ -7,6 +7,7 @@ import FormButtonInput from './FormButtonInput'
 import { GoogleLogin } from 'react-google-login'
 import { removeForm } from '../components/Form'
 import { TimelineLite, Power3 } from 'gsap'
+import firebase from '../firebase.js'
 import './Form.scss'
 
 class LogIn extends Component {
@@ -119,28 +120,39 @@ class LogIn extends Component {
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
 
-    const user = {
-      email: this.state.Email,
-      password: this.state.Password,
-    }
-
-    return await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
+  return await firebase.auth().signInWithEmailAndPassword(this.state.Email, this.state.Password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.log(user)
+      localStorage.setItem(user)
+      return false
     })
-      .then(async (res) => {
-        if (!res.ok) throw await res.json()
-        localStorage.setItem('user', JSON.stringify(await res.json()))
-        this.props.reload()
-        return false
-      })
-      .catch((error) => {
-        console.error(error.message)
-        return true
-      })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log('hey')
+      console.error(errorCode, errorMessage)
+      return true
+    });
+
+    // return await fetch('http://localhost:5000/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then(async (res) => {
+    //     if (!res.ok) throw await res.json()
+    //     localStorage.setItem('user', JSON.stringify(await res.json()))
+    //     this.props.reload()
+    //     return false
+    //   })
+    //   .catch((error) => {
+    //     console.error(error.message)
+    //     return true
+    //   })
   }
 
   handleChange = ({ target }) => {
