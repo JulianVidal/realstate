@@ -114,45 +114,23 @@ class LogIn extends Component {
   }
 
   handleSubmit = async () => {
-    // if (!this.state.Email || !this.state.Password) return 'empty'
-
     console.log('Submitting following log in for user:')
     console.log('Email: ' + this.state.Email)
     console.log('Password: ' + this.state.Password)
 
   return await firebase.auth().signInWithEmailAndPassword(this.state.Email, this.state.Password)
     .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      console.log(user)
-      localStorage.setItem(user)
+      const userId = userCredential.user.uid;
+      console.log('User ID', userId)
+      localStorage.setItem('user', true)
       return false
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log('hey')
+      const errorCode = error.code;
+      const errorMessage = error.message;
       console.error(errorCode, errorMessage)
       return true
     });
-
-    // return await fetch('http://localhost:5000/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then(async (res) => {
-    //     if (!res.ok) throw await res.json()
-    //     localStorage.setItem('user', JSON.stringify(await res.json()))
-    //     this.props.reload()
-    //     return false
-    //   })
-    //   .catch((error) => {
-    //     console.error(error.message)
-    //     return true
-    //   })
   }
 
   handleChange = ({ target }) => {

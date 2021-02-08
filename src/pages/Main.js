@@ -16,7 +16,6 @@ import { TimelineLite, Power3 } from 'gsap'
 import { Fragment } from 'react'
 
 function Main ({history}) {
-
   const handleClick = () => {
     const LogIn = document.getElementById('LogIn')
     const SignUp = document.getElementById('SignUp')

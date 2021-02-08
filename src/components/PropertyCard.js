@@ -3,11 +3,17 @@ import Lottie from 'react-lottie-wrapper'
 import { formDisplay } from './Form'
 import iconHeartStartData from '../assets/icons/heart.json'
 import emptyImage from '../assets/empty.png'
+// import firebase from '../firebase'
 import './PropertyCard.scss'
 
 class PropertyCard extends Component {
 
   handleLike = () => {
+
+    // const itemsRef = firebase.database().ref(userId);
+    // const property = {"adress":"4447 Skookumchuck Rd SE, Tenino, WA 98589","link":"https://www.zillow.com/homedetails/4447-Skookumchuck-Rd-SE-Tenino-WA-98589/49352019_zpid/","price":"$490,000","beds":"3 bds,","baths":"2 ba,","sqft":"1,912 sqft","image":"https://photos.zillowstatic.com/fp/6631fa4637aeea0746aac3f9507621d3-zillow_web_48_23.jpg"}
+    // itemsRef.push(property);
+
     const user = JSON.parse(localStorage.getItem('user'))
 
     if (!user) {
@@ -27,13 +33,13 @@ class PropertyCard extends Component {
         user.properties.push(this.props.data)
       }
 
-    fetch('http://localhost:5000/likes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    })
+    // fetch('http://localhost:5000/likes', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(user),
+    // })
 
     localStorage.setItem('user', JSON.stringify(user))
     console.log(this.props.data)
