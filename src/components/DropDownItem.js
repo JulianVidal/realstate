@@ -3,6 +3,7 @@ import { useGoogleLogout } from 'react-google-login'
 import './DropDownItem.scss'
 import { TimelineLite, Power3 } from 'gsap'
 import { withRouter } from 'react-router-dom'
+import firebase from '../firebase.js'
 
 function DropDownItem ({ text, type, reload, history }) {
   const className = 'DropDownItem ' + type
@@ -17,7 +18,11 @@ function DropDownItem ({ text, type, reload, history }) {
   const handleClick = () => {
     if (type === 'logout') {
       localStorage.clear()
-      reload()
+      firebase.auth().signOut()
+      !reload || reload()
+
+      if (window.location.pathname === '/favorites') window.location.pathname = '/'
+      
       const tl = new TimelineLite()
 
       tl.to('#NavMyAccount', {duration: 0.23,opacity: 0, ease: Power3.easeOut})
@@ -27,7 +32,6 @@ function DropDownItem ({ text, type, reload, history }) {
     
       signOut()
     } else if (type === 'favorites') {    
-      console.log('Favorites')
       history.push({
       pathname: '/favorites',
       })

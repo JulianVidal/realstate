@@ -50,7 +50,7 @@ class SignUp extends Component {
     .then((userCredential) => {
       const userId = userCredential.user.uid;
       console.log('User ID', userId)
-      localStorage.setItem('user', true)
+      localStorage.setItem('user', userId)
       return false
     })
     .catch((error) => {

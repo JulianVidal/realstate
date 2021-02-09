@@ -114,7 +114,7 @@ class SearchBox extends Component {
               this.setState({search: event.target.value})
               event.preventDefault()
             }}
-            value={this.state.search}
+            value={this.state.search || ''}
             >
             </input>
         </form>

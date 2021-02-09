@@ -3,18 +3,13 @@ import Lottie from 'react-lottie-wrapper'
 import { formDisplay } from './Form'
 import iconHeartStartData from '../assets/icons/heart.json'
 import emptyImage from '../assets/empty.png'
-// import firebase from '../firebase'
+import firebase from '../firebase.js'
 import './PropertyCard.scss'
 
 class PropertyCard extends Component {
 
-  handleLike = () => {
-
-    // const itemsRef = firebase.database().ref(userId);
-    // const property = {"adress":"4447 Skookumchuck Rd SE, Tenino, WA 98589","link":"https://www.zillow.com/homedetails/4447-Skookumchuck-Rd-SE-Tenino-WA-98589/49352019_zpid/","price":"$490,000","beds":"3 bds,","baths":"2 ba,","sqft":"1,912 sqft","image":"https://photos.zillowstatic.com/fp/6631fa4637aeea0746aac3f9507621d3-zillow_web_48_23.jpg"}
-    // itemsRef.push(property);
-
-    const user = JSON.parse(localStorage.getItem('user'))
+  handleLike = async () => {
+    const user = localStorage.getItem('user')
 
     if (!user) {
       formDisplay('LogIn')
@@ -23,25 +18,30 @@ class PropertyCard extends Component {
 
     this.setState({isHeartStartStopped: false})
     this.setState({isHeartStartPaused: false})
-    console.log(user)
-    const index = user.properties.findIndex(({adress}) => adress === this.props.data.adress)
-      if (index !== -1){
-        console.log('Property unliked:')
-        user.properties.splice(index, 1)
-      } else {
+
+    const userId = localStorage.getItem('user')
+    const propertiesRef = firebase.database().ref(userId)
+
+    const properties = await firebase.database().ref(userId).once('value').then(snapshot => snapshot.val())
+
+    console.log(properties)
+    let repeatID
+
+    for (const property in properties) {
+      const adress = properties[property].adress
+      if (adress === this.props.data.adress) {
+        repeatID = property
+      }
+    }
+
+      if (!repeatID){
         console.log('Property liked:')
-        user.properties.push(this.props.data)
+        propertiesRef.push(this.props.data);
+      } else { 
+        console.log('Property unliked:')
+        firebase.database().ref(userId + '/' + repeatID).remove()
       }
 
-    // fetch('http://localhost:5000/likes', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(user),
-    // })
-
-    localStorage.setItem('user', JSON.stringify(user))
     console.log(this.props.data)
   }
 
@@ -51,26 +51,44 @@ class PropertyCard extends Component {
     isLiked: false
   }
 
-  componentDidMount() {
-    const user = JSON.parse(localStorage.getItem('user'))
+  async componentDidMount() {
+    const user =localStorage.getItem('user')
     if (!user) return
-    if (user.properties) {
-      if (user.properties.find( ({ adress }) => adress === this.props.data.adress)) {
-        this.setState({'isHeartStartStopped': false})
+
+    const properties = await firebase.database().ref(user).once('value').then(snapshot => snapshot.val())
+
+    let repeatID
+
+    for (const property in properties) {
+      const adress = properties[property].adress
+      if (adress === this.props.data.adress) {
+        repeatID = property
       }
+    }
+    if (repeatID) {
+      this.setState({'isHeartStartStopped': false})
     }
   }
 
-  componentDidUpdate() {
-    const user = JSON.parse(localStorage.getItem('user'))
+  async componentDidUpdate() {
+    const user = localStorage.getItem('user')
     if (!user) {
       if (this.state.isHeartStartPaused) this.setState({'isHeartStartPaused': false})
       return
     }
-    if (user.properties) {
-      if (user.properties.find( ({ adress }) => adress === this.props.data.adress) && this.state.isHeartStartStopped) {
-        this.setState({'isHeartStartStopped': false})
+
+    const properties = await firebase.database().ref(user).once('value').then(snapshot => snapshot.val())
+
+    let repeatID
+
+    for (const property in properties) {
+      const adress = properties[property].adress
+      if (adress === this.props.data.adress) {
+        repeatID = property
       }
+    }
+    if (repeatID) {
+      this.setState({'isHeartStartStopped': false})
     }
   }
 

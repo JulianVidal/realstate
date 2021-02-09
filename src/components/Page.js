@@ -8,12 +8,28 @@ import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
 import { Fragment } from 'react'
+import firebase from '../firebase'
+import { withRouter } from 'react-router-dom'
 
-class Properties extends Component {
+class Page extends Component {
 
-  state = {
+  state= {
     reload: false
   }
+
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(userAuth => {
+      if (userAuth) {
+        localStorage.setItem('user', userAuth.uid)
+        this.setState({reload: !this.state.reload})
+      } else {
+        if (this.props.location.pathname === '/favorites') this.props.history.replace('/')
+
+        localStorage.clear()
+        this.setState({reload: !this.state.reload})
+      }
+    })
+}
 
   render() {
     const handleClick = () => {
@@ -30,7 +46,7 @@ class Properties extends Component {
     const dropDown = 
     <DropDown>
       <DropDownItem text='Favorites' type='favorites' />
-      <DropDownItem text='Log Out' type='logout' reload={this.reload} />
+      <DropDownItem text='Log Out' type='logout' reload={this.props.reload} />
     </DropDown>
 
     let loggedIn
@@ -60,16 +76,12 @@ class Properties extends Component {
 
         {this.props.children}
 
-        <LogIn reload={this.reload}/>
+        <LogIn reload={this.props.reload} />
         <SignUp />
         <div id="Overlay" onClick={handleClick}></div>
       </div>
     )
   }
-
-  reload = () => {
-    this.setState({reload: !this.state.reload})
-  }
 }
 
-export default Properties
+export default withRouter(Page)

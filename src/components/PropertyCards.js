@@ -59,8 +59,6 @@ class PropertyCards extends Component {
       const search = QueryString.parse(this.props.location.search).location
       const data = await fetch('/api?location=' + search).then(res => res.json()).catch(err => {error = err} )
       this.setState({search, data, error})
-
-      
   }
 
   async componentDidUpdate () {
@@ -88,7 +86,7 @@ class PropertyCards extends Component {
 
   window.onresize = () => {}
   if (!this.state.data || !this.state.loadedAnim) {
-    window.onresize = () => {console.log('res', this.state.rel);this.setState({rel: !this.state.rel})}
+    window.onresize = () => {this.setState({rel: !this.state.rel})}
     const width = window.innerWidth
     const rows = Math.ceil((window.innerHeight - 126) / 238)
 

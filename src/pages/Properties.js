@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import NavItem from '../components/NavItem'
 import PropertyCards from '../components/PropertyCards'
 import SearchBox from '../components/SearchBox'
@@ -6,14 +6,27 @@ import Page from '../components/Page'
 import './Properties.scss'
 
 
-function Properties() {
-  const navItems = <NavItem id="NavSearchBox"><SearchBox /></NavItem>
+class Properties extends Component {
+  state = {
+    reload: false
+  }
 
-  return (
-    <Page navItems={navItems} color="dark" id="Properties">
-      <PropertyCards />
-    </Page>
-  )
+  render() {
+    const navItems = <Fragment>
+      <NavItem text="Rentify" id="NavRentify" type="logo" color="dark"/>
+      <NavItem id="NavSearchBox"><SearchBox /></NavItem>
+    </Fragment>    
+    const reload = () => {
+      this.setState({reload: !this.state.reload})
+    }
+  
+    return (
+      <Page navItems={navItems} color="dark" id="Properties" reload={reload}>
+        <PropertyCards />
+      </Page>
+    )
+  }
+  
 }
 
 export default Properties
