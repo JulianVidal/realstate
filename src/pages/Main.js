@@ -30,7 +30,8 @@ function Main ({history}) {
   
   const dropDown = 
     <DropDown>
-      <DropDownItem text='Log Out' type='logout' handleClick={logOut}/>
+     <DropDownItem text='Favorites' type='favorites' />
+    <DropDownItem text='Log Out' type='logout' reload={this.reload} />
     </DropDown>
 
   let loggedIn
@@ -73,17 +74,11 @@ function Main ({history}) {
       <div id="Overlay" onClick={handleClick}></div>
     </div>
   )
+  
 }
 
-const logOut = () => {
-  localStorage.clear()
-
-  const tl = new TimelineLite()
-
-  tl.to('#NavMyAccount', 0.23, {opacity: 0, ease: Power3.easeOut})
-  .set('#NavLogIn, #NavSignUp', {display: 'flex'})
-  .set('#NavMyAccount', {display: 'none'})
-  .to('#NavLogIn, #NavSignUp', 0.23, {opacity: 1, ease: Power3.easeOut})
+const reload = () => {
+  this.setState({reload: !this.state.reload})
 }
 
 export default Main
