@@ -5,7 +5,7 @@ import PropertyCard from './PropertyCard'
 import { withRouter } from 'react-router-dom'
 import { gsap, Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import firebase from '../firebase.js'
+
 
 
 class PropertyCards extends Component {
@@ -57,22 +57,7 @@ class PropertyCards extends Component {
     if (this.props.data) return
       let error
       const search = QueryString.parse(this.props.location.search).location
-      const data = await firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const userId = user.uid;
-
-          firebase.on(userId, snapshot  => {
-            console.log(snapshot.val)
-            this.setState({search, data: snapshot.val, error})
-          })
-        } else {
-          error = 'Error'
-          // User is signed out
-          // ...
-        }
-      });
+      const data = await fetch('/api?location=' + search).then(res => res.json()).catch(err => {error = err} )
       this.setState({search, data, error})
 
       
