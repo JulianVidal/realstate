@@ -22,10 +22,10 @@ class LogIn extends Component {
     removeForm('LogIn')
 
     const tl = new TimelineLite()
-    tl.to('#NavLogIn, #NavSignUp', 0.23, {opacity: 0, ease: Power3.easeOut})
+    tl.to('#NavLogIn, #NavSignUp', { duration: 0.23, opacity: 0, ease: Power3.easeOut})
     .set('#NavMyAccount', {display: 'flex'})
     .set('#NavLogIn, #NavSignUp', {display: 'none'})
-    .to('#NavMyAccount', 0.23, {opacity: 1, ease: Power3.easeOut})
+      .to('#NavMyAccount', {duration: 0.23, opacity: 1, ease: Power3.easeOut})
 
     const user = {
       email: response.profileObj.email,
@@ -92,13 +92,15 @@ class LogIn extends Component {
     return (
       <Form title="Login" id="LogIn" footer={footer}>
         <FormTextInput text="Email" type="email" icon={<EmailIcon />} onChange={this.handleChange}/>
+        <div className="error-message email"> This is an error message for the email </div>
         <FormTextInput
           text="Password"
           type="password"
-          icon={<PasswordIcon />}
+          icon={<PasswordIcon className='test'/>}
           after={after}
           onChange={this.handleChange}
         />
+        <div className="error-message password"> This is an error message for the password </div>
         <FormButtonInput text="Login" submit={this.handleSubmit}/>
         <GoogleLogin 
         clientId = {clientId}
@@ -130,7 +132,8 @@ class LogIn extends Component {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage)
-      return true
+      console.log(error)
+      return error
     });
   }
 

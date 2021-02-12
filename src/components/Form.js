@@ -36,9 +36,10 @@ export function formDisplay (formId) {
   Overlay.style.display = 'block'
 
   const tl = new TimelineLite()
-  tl.from(Form, 0.5, { width: '0', height: '10px', ease: Power3.easeOut})
-    .to(Form, 0.5, {opacity: 1, ease:Power3.easeOut}, 0)
-    .to(Overlay, 0.5, { opacity:1, ease: Power3.easeOut }, 0)
+	tl.from(Form, {duration: 0.5, width: '0', height: '10px', ease: Power3.easeOut})
+    .to(Form,{duration: 0.5,opacity: 1, ease:Power3.easeOut}, 0)
+    .to(Overlay,{duration: 0.5, opacity:1, ease: Power3.easeOut }, 0)
+    .set(Form, {height:'auto'})
 }
 
 export function removeForm (formId, otherFormId) {
@@ -64,9 +65,9 @@ export function removeForm (formId, otherFormId) {
   Overlay.style.pointerEvents = 'none'
   Form.style.pointerEvents = 'none'
 
-  tl.to(Form, 0.5, { width: '0', height: '0', ease: Power3.easeOut})
-    .to(Form, 0.5, {opacity: 0, ease:Power3.easeOut}, 0)
-    .to(Overlay, 0.5, { opacity: 0, ease: Power3.easeOut, onComplete: finishtl }, 0)
+  tl.to(Form, { duration: 0.5, width: '0', height: '0', ease: Power3.easeOut})
+    .to(Form, { duration: 0.5, opacity: 0, ease:Power3.easeOut}, 0)
+    .to(Overlay, { duration: 0.5, opacity: 0, ease: Power3.easeOut, onComplete: finishtl }, 0)
   
   if (otherFormId) {
     tl.set({}, {onComplete: () => formDisplay(otherFormId)})
