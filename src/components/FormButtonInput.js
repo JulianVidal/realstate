@@ -96,33 +96,32 @@ class FormButtonInput extends Component {
 //          return
 //     }
 
-    const type = error.code.includes('email') ? '.email' : error.code.includes('password') ? '.password' : '.general'
-    
-      const elements = document.querySelectorAll('div' + type)
-    
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i]
-      let message
-
-      switch (error.code) {
-        case 'auth/invalid-email':
-        message = 'Email is poorly formatted'
-        break;
-        case 'auth/user-not-found':
-        message = 'No record of user'
-        break;
-        case 'auth/wrong-password':
-        message = 'Password or email are wrong'
-        break;
-        default:
-          message = 'Invalid input'
-      }
-
-      element.innerHTML = message
-    }
-
-
     if (error) {
+
+    const type = error.code.includes('email') ? '.email' : error.code.includes('password') ? '.password' : '.general'
+    const elements = document.querySelectorAll('div' + type)
+      
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i]
+        let message
+        switch (error.code) {
+          case 'auth/invalid-email':
+          message = 'Email is poorly formatted'
+          break;
+          case 'auth/user-not-found':
+          message = 'No record of user'
+          break;
+          case 'auth/wrong-password':
+          message = 'Password or email are wrong'
+          break;
+          case 'auth/weak-password':
+            message = 'Password too short < 6'
+            break;
+          default:
+            message = 'Invalid input'
+        }
+        element.innerHTML = message
+      }
         tl.call(() =>{console.log('Unsuccesful request for sign up or log into server')})
         tl.to(iconAlert, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
           .to('.error-message', {duration: 0.23, height:'0', ease:Power3.easeOut}, '-=0.23')

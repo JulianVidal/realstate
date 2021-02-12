@@ -27,12 +27,14 @@ class SignUp extends Component {
     return (
       <Form title="Create Account" id="SignUp" footer={footer}>
         <FormTextInput text="Email" type="email" icon={<EmailIcon />} onChange={this.handleChange} />
+        <div className="error-message email"> This is an error message for the email </div>
         <FormTextInput
           text="Password"
           type="password"
           icon={<PasswordIcon />}
           onChange={this.handleChange}
         />
+        <div className="error-message password"> This is an error message for the password </div>
         <FormButtonInput text="Sign Up" submit={this.handleSubmit} />
       </Form>
     )
@@ -57,7 +59,8 @@ class SignUp extends Component {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage)
-      return true
+      console.log(error)
+      return error
     });
   }
 
