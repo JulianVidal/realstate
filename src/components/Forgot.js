@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react'
+import React, { Component } from 'react'
 import { ReactComponent as EmailIcon } from '../assets/icons/mail.svg'
 import Form from './Form'
 import FormTextInput from './FormTextInput'
