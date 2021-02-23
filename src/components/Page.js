@@ -4,6 +4,7 @@ import NavItem from '../components/NavItem'
 import { removeForm } from '../components/Form'
 import LogIn from '../components/LogIn'
 import SignUp from '../components/SignUp'
+import Forgot from '../components/Forgot'
 import DropDown from '../components/DropDown'
 import DropDownItem from '../components/DropDownItem'
 import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
@@ -35,12 +36,22 @@ class Page extends Component {
     const handleClick = () => {
       const LogIn = document.getElementById('LogIn')
       const SignUp = document.getElementById('SignUp')
+      const Forgot = document.getElementById('Forgot')
 
       if (LogIn.style.display === 'flex') {
         removeForm('LogIn')
       } else if (SignUp.style.display === 'flex') {
         removeForm('SignUp')
+      } else if (Forgot.style.display === 'flex') {
+        removeForm('Forgot')
       }
+
+      const messages = document.querySelectorAll('.error-message')
+      for (let i = 0; i < messages.length; i++) {
+        const message = messages[i]
+        message.style.height = 0
+        message.innerHTML = ''
+      } 
     }
 
     const dropDown = 
@@ -78,6 +89,7 @@ class Page extends Component {
 
         <LogIn reload={this.props.reload} />
         <SignUp />
+        <Forgot />
         <div id="Overlay" onClick={handleClick}></div>
       </div>
     )

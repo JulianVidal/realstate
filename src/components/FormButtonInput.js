@@ -18,7 +18,10 @@ class FormButtonInput extends Component {
 
   render () {
     return (
-      <div className="FormButtonInput" onClick={ () => this.handleSubmit(this.props.submit)} >
+      <div className={"FormButtonInput" + (this.props.text.includes('Google') ? ' google' : '')} onClick={ () => this.handleSubmit(this.props.submit)} >
+
+        {this.props.icon}
+
         <input type='submit' value={this.props.text} ref={ button => this.submitButton = button}></input>
 
         <Lottie options={IconData('loading')}
@@ -49,10 +52,18 @@ class FormButtonInput extends Component {
   handleSubmit = async submitFunc => {
     const formId = this.submitButton.parentNode.parentNode.parentNode.id
     const container = this.submitButton.parentNode
-    const iconLoading = container.childNodes[1]
-    const iconCheckMark = container.childNodes[2]
-    const iconAlert = container.childNodes[3]
-  
+    const iconLoading = container.querySelectorAll('div')[0]
+    const iconCheckMark = container.querySelectorAll('div')[1]
+    const iconAlert = container.querySelectorAll('div')[2]
+
+    console.log(iconLoading.querySelector('path'))
+
+      iconLoading.querySelector('path').style.stroke = this.props.text.includes('Google') ? '#212121' : '#FAFAFA'
+
+    const isGoogle = this.props.text.includes('Google')
+    const bgColor = isGoogle ? '#FAFAFA' : '#00B8D4'
+    const fgColor = isGoogle ? '#212121' : '#F0F0F0'
+
     if (iconCheckMark.style.opacity === '1' || iconAlert.style.opacity === '1' || iconLoading.style.opacity === '1') return
     if (iconCheckMark.style.display === 'block' || iconAlert.style.display === 'block' || iconLoading.style.display === 'block') return
 
@@ -63,38 +74,18 @@ class FormButtonInput extends Component {
     let error
     const tl = new TimelineLite()
 
-    await tl.to(container, { duration: 0.4, width:'45px', ease:Power3.easeOut}) // Width of input to 45px
+    tl.to(container, { duration: 0.4, width:'45px', ease:Power3.easeOut}) // Width of input to 45px
       .to(this.submitButton, { duration: 0.1, borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
-      .to(this.submitButton, { duration: 0.23, color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
-      .to(iconLoading, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => { this.setState({loadingIsStopped: false}) }}, 0.23) // Opacity 1 for Loading Icon
-      .call(async () => {tl.pause(); error = await submitFunc(); tl.resume()}) // Waits until function is done
-      .to(iconLoading, { duration: 0.23, opacity: 0, ease:Power3.easeOut}) // Opacity 0 for Loading Icon
 
-//      if (error === 'empty') {
-//       console.error('empty field')
-//        tl.to(container, { duration: 0.35, width:'45px', ease:Power3.easeOut}) // Width of input to 45px
-//          .to(this.submitButton, { duration: 0.15, borderRadius: '45px', ease:Power3.easeOut}, 0.1) // Turns input into a circle
-//          .to(this.submitButton, { duration: 0.23, color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text
-//        
-//         .to(iconAlert, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
-//          .to(this.submitButton, { duration: 0.23, backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
-//        
-//        // .to([this.submitButton, iconAlert], 0.05, {x:'-=2'}, '-=0.06')
-//        // .to([this.submitButton, iconAlert], 0.05, {x:'+=4', yoyo:true, repeat: 5}, '-=0.06')
-//        // .to([this.submitButton, iconAlert], 0.05, {x:'+=2'}, '-=0.06')
-//  
-//          .to({}, { duration: 0.7 }) // Waits one second
-//          .to(iconAlert, { duration: 0.23, opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
-//          .to(this.submitButton, { duration: 0.23, backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
-//        .to(container, { duration: 0.4, width:'100%', ease:Power3.easeOut})
-//          .to(this.submitButton, { duration: 0.4, borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
-//          .to(this.submitButton, { duration: 0.23, color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
-//        tl.set({}, {onComplete: () => {
-//          iconLoading.style.display = 'none'  
-//          iconCheckMark.style.display = 'none'
-//          iconAlert.style.display = 'none'}})
-//          return
-//     }
+     
+     .to(this.submitButton, { duration: 0.23, color:'rgba(240, 240, 240, 0)', ease:Power3.easeOut}, 0) // Alpha 0 for Log In text 
+
+    if (!isGoogle) {
+      tl.to(iconLoading, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => { this.setState({loadingIsStopped: false}) }}, 0.23) // Opacity 1 for Loading Icon
+}
+
+      await tl.call(async () => {tl.pause(); error = await submitFunc(); tl.resume()}) // Waits until function is done
+      .to(iconLoading, { duration: 0.23, opacity: 0, ease:Power3.easeOut}) // Opacity 0 for Loading Icon
 
     if (error) {
 
@@ -123,8 +114,11 @@ class FormButtonInput extends Component {
         element.innerHTML = message
       }
         tl.call(() =>{console.log('Unsuccesful request for sign up or log into server')})
+      if (!isGoogle) {
         tl.to(iconAlert, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({alertIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}})
-          .to('.error-message', {duration: 0.23, height:'0', ease:Power3.easeOut}, '-=0.23')
+      }
+        
+          tl.to('.error-message', {duration: 0.23, height:'0', ease:Power3.easeOut}, '-=0.23')
           .to(this.submitButton, { duration: 0.23, backgroundColor: '#D8000C', ease:Power3.easeOut}, '-=0.23')
           .to('.error-block' + type, {duration: 0.23, height: '100%', ease:Power3.easeOut, color:'#F0F0F0'}, '-=0.23')
           .to('.icon' + type, {duration: 0.1, fill: '#FAFAFA'}, '-=0.23')
@@ -134,17 +128,20 @@ class FormButtonInput extends Component {
 
           .to({}, { duration: 0.7 }) // Waits one second
           .to(iconAlert, { duration: 0.23, opacity: 0, ease:Power3.easeOut, onComplete: () => {this.setState({alertIsStopped: true}); iconAlert.style.display = 'none';}})
-          .to(this.submitButton, { duration: 0.23, backgroundColor: '#00B8D4', ease:Power3.easeOut}, '-=0.23')
+          .to(this.submitButton, { duration: 0.23, backgroundColor: bgColor, ease:Power3.easeOut}, '-=0.23')
           .to(container, { duration: 0.4, width:'100%', ease:Power3.easeOut})
           .to(this.submitButton, { duration: 0.4, borderRadius: '8px', ease:Power3.easeOut}, '-=0.4')
-          .to(this.submitButton, { duration: 0.23, color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut}, '-=0.4')
+          .to(this.submitButton, { duration: 0.23, color: fgColor, ease:Power3.easeOut}, '-=0.4')
           .to('.error-block', {duration: 0.23, height: '0%', ease:Power3.easeOut, color:'#D8000C'})
           .to('.icon', {duration: 0.1, fill: '#2D2D2D'}, '-=0.23')
           .to('.error-message' + type, {duration: 0.23, height:'13px', ease:Power3.easeOut}, '-=0.22')
       } else {
         tl.call(() =>{console.log('Succesful request for sign up or login into server')})
+      if (!isGoogle) { 
         tl.to(iconCheckMark, { duration: 0.23, opacity: 1, ease:Power3.easeOut, onEnterFrame: () => {this.setState({checkmarkIsStopped: false}); iconLoading.style.display = 'none'; this.setState({loadingIsStopped: true})}}) // opacity 1 for check mark and removes loading icon
-        .to(this.submitButton, { duration: 0.23, backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
+      }
+      
+        tl.to(this.submitButton, { duration: 0.23, backgroundColor: '#00C853', ease:Power3.easeOut}, '-=0.23') // Changes background color to green
         .to('#NavLogIn, #NavSignUp', { duration: 0.23, opacity: 0, ease: Power3.easeOut})
         .set('#NavMyAccount', {display: 'inline-block'})
         .set('#NavLogIn, #NavSignUp', {display: 'none'})
@@ -152,10 +149,10 @@ class FormButtonInput extends Component {
         .to({}, { duration: 0.7, onComplete: () => removeForm(formId)}) // Waits 0.7 seconds
         .to({}, { duration: 0.7 })
         .set(iconCheckMark, {opacity: 0, onComplete: () => {this.setState({checkmarkIsStopped: true}); iconCheckMark.style.display = 'none';}})
-        .set(this.submitButton, {backgroundColor: '#00B8D4', ease:Power3.easeOut})
+        .set(this.submitButton, {backgroundColor: bgColor,ease:Power3.easeOut})
         .set(container, {width:'100%', ease:Power3.easeOut})
         .set(this.submitButton, {borderRadius: '8px', ease:Power3.easeOut})
-        .set(this.submitButton, {color:'rgba(240, 240, 240, 1)', ease:Power3.easeOut})
+        .set(this.submitButton, {color: fgColor, ease:Power3.easeOut})
       }
 
 

@@ -13,16 +13,18 @@ class Form extends Component {
           { children }
         </form>
 
-        <div className='footer'>
+        {footer ? 
+         <div className='footer'>
           { footer }
         </div>
+        : <div style={{height: '10px'}} /> }      
       </div>
     )
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.formRef.querySelector('input[type=submit]').click()
+    //this.formRef.querySelector('input[type=submit]').click()
   }
 }
 
