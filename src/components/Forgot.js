@@ -14,13 +14,13 @@ class Forgot extends Component {
   }
 
   render() {
-   return (
-      <Form title="Reset password" id="Forgot" >
-        <FormTextInput text="Email" type="email" icon={<EmailIcon />} onChange={this.handleChange} />
-        <div className="error-message email"> This is an error message for the email </div>
-        <FormButtonInput text="Send email" submit={this.handleSubmit} />
-      </Form>
-    )
+    return (
+        <Form title="Reset password" id="Forgot" >
+          <FormTextInput text="Email" type="email" icon={<EmailIcon />} onChange={this.handleChange} />
+          <div className="error-message email"> This is an error message for the email </div>
+          <FormButtonInput text="Send email" submit={this.handleSubmit} />
+        </Form>
+      )
   }
 
   handleSubmit = async () => {

@@ -8,6 +8,9 @@
 
   @media screen and (max-width: 800px) {
     grid-template-columns: repeat(12, calc(70vw / 12));
+    #NavRentify {
+      display: none;
+    }
   }
 
   @media screen and (min-width: 801px) {

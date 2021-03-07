@@ -1,81 +1,103 @@
-import React, { Component } from 'react'
-import NavBar from '../components/NavBar'
-import NavItem from '../components/NavItem'
-import { removeForm } from '../components/Form'
-import LogIn from '../components/LogIn'
-import SignUp from '../components/SignUp'
-import Forgot from '../components/Forgot'
-import DropDown from '../components/DropDown'
-import DropDownItem from '../components/DropDownItem'
-import {  ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg'
-import { Fragment } from 'react'
-import firebase from '../firebase'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from "react";
+import NavBar from "../components/NavBar";
+import NavItem from "../components/NavItem";
+import { removeForm } from "../components/Form";
+import LogIn from "../components/LogIn";
+import SignUp from "../components/SignUp";
+import Forgot from "../components/Forgot";
+import DropDown from "../components/DropDown";
+import DropDownItem from "../components/DropDownItem";
+import { ReactComponent as ArrowIcon } from "../assets/icons/arrow.svg";
+import { Fragment } from "react";
+import firebase from "../firebase";
+import { withRouter } from "react-router-dom";
 
 class Page extends Component {
-
-  state= {
-    reload: false
-  }
+  state = {
+    reload: false,
+  };
 
   componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(userAuth => {
+    firebase.auth().onAuthStateChanged((userAuth) => {
       if (userAuth) {
-        localStorage.setItem('user', userAuth.uid)
-        this.setState({reload: !this.state.reload})
+        localStorage.setItem("user", userAuth.uid);
+        this.setState({ reload: !this.state.reload });
       } else {
-        if (this.props.location.pathname === '/favorites') this.props.history.replace('/')
+        if (this.props.location.pathname === "/favorites")
+          this.props.history.replace("/");
 
-        localStorage.clear()
-        this.setState({reload: !this.state.reload})
+        localStorage.clear();
+        this.setState({ reload: !this.state.reload });
       }
-    })
-}
+    });
+  };
 
   render() {
     const handleClick = () => {
-      const LogIn = document.getElementById('LogIn')
-      const SignUp = document.getElementById('SignUp')
-      const Forgot = document.getElementById('Forgot')
+      const LogIn = document.getElementById("LogIn");
+      const SignUp = document.getElementById("SignUp");
+      const Forgot = document.getElementById("Forgot");
 
-      if (LogIn.style.display === 'flex') {
-        removeForm('LogIn')
-      } else if (SignUp.style.display === 'flex') {
-        removeForm('SignUp')
-      } else if (Forgot.style.display === 'flex') {
-        removeForm('Forgot')
+      if (LogIn.style.display === "flex") {
+        removeForm("LogIn");
+      } else if (SignUp.style.display === "flex") {
+        removeForm("SignUp");
+      } else if (Forgot.style.display === "flex") {
+        removeForm("Forgot");
       }
 
-      const messages = document.querySelectorAll('.error-message')
+      const messages = document.querySelectorAll(".error-message");
       for (let i = 0; i < messages.length; i++) {
-        const message = messages[i]
-        message.style.height = 0
-        message.innerHTML = ''
-      } 
-    }
+        const message = messages[i];
+        message.style.height = 0;
+        message.innerHTML = "";
+      }
+    };
 
-    const dropDown = 
-    <DropDown>
-      <DropDownItem text='Favorites' type='favorites' />
-      <DropDownItem text='Log Out' type='logout' reload={this.props.reload} />
-    </DropDown>
+    const dropDown = (
+      <DropDown>
+        <DropDownItem text="Favorites" type="favorites" />
+        <DropDownItem text="Log Out" type="logout" reload={this.props.reload} />
+      </DropDown>
+    );
 
-    let loggedIn
+    let loggedIn;
 
-    if (localStorage.getItem('user')) {
-      loggedIn = 
-      <Fragment>
-          <NavItem text="Log In" id="NavLogIn" type="hidden" color={this.props.color} />
-          <NavItem text="Sign Up" id="NavSignUp" type="fill hidden"/>
-          <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color={this.props.color} type="" icon={<ArrowIcon/>}/>
-      </Fragment>
+    if (localStorage.getItem("user")) {
+      loggedIn = (
+        <Fragment>
+          <NavItem
+            text="Log In"
+            id="NavLogIn"
+            type="hidden"
+            color={this.props.color}
+          />
+          <NavItem text="Sign Up" id="NavSignUp" type="fill hidden" />
+          <NavItem
+            text="My Account"
+            id="NavMyAccount"
+            DropDown={dropDown}
+            color={this.props.color}
+            type=""
+            icon={<ArrowIcon />}
+          />
+        </Fragment>
+      );
     } else {
-      loggedIn = 
-      <Fragment>
-        <NavItem text="Log In" id="NavLogIn" color={this.props.color} />
-        <NavItem text="Sign Up" id="NavSignUp" type="fill"/>
-        <NavItem text="My Account" id="NavMyAccount" DropDown={dropDown} color={this.props.color} type="hidden" icon={<ArrowIcon/>}/>
-      </Fragment>
+      loggedIn = (
+        <Fragment>
+          <NavItem text="Log In" id="NavLogIn" color={this.props.color} />
+          <NavItem text="Sign Up" id="NavSignUp" type="fill" />
+          <NavItem
+            text="My Account"
+            id="NavMyAccount"
+            DropDown={dropDown}
+            color={this.props.color}
+            type="hidden"
+            icon={<ArrowIcon />}
+          />
+        </Fragment>
+      );
     }
 
     return (
@@ -92,8 +114,8 @@ class Page extends Component {
         <Forgot />
         <div id="Overlay" onClick={handleClick}></div>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(Page)
+export default withRouter(Page);
