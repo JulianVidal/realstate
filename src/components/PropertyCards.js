@@ -5,10 +5,12 @@ import PropertyCard from "./PropertyCard";
 import { withRouter } from "react-router-dom";
 import { gsap, Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 class PropertyCards extends Component {
   constructor(props) {
     super(props);
+    gsap.registerPlugin(ScrollToPlugin);
     gsap.registerPlugin(ScrollTrigger);
   }
 
@@ -17,10 +19,29 @@ class PropertyCards extends Component {
     search: null,
     error: null,
     loadedAnim: false,
+    page: 0,
     rel: false,
   };
 
+  handleScroll() {
+    if (document.body.scrollHeight - window.innerHeight === window.scrollY) {
+      console.log("load more");
+      this.setState({ page: this.state.page + 1 });
+      //window.scrollTo(0, 0);
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      console.log("refresh");
+      window.scrollTo(0, 10);
+      //gsap.to(window, {
+      //scrollTo: 0,
+      //onComplete: () => ScrollTrigger.refresh(),
+      //});
+    }
+  }
   async componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll.bind(this));
     const animation = (anim) => {
       tl.to(".PropertyCard", {
         autoAlpha: 1,
@@ -41,8 +62,18 @@ class PropertyCards extends Component {
             this.setState({ loadedAnim: true });
             ScrollTrigger.batch(".PropertyCard", {
               onEnter: (batch) => {
-                gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
+                //gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
                 gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
+              },
+              onEnterBack: (batch) => {
+                //gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
+                gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
+              },
+              onLeave: (batch) => {
+                //gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
+              },
+              onLeaveBack: (batch) => {
+                //gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
               },
             });
           } else {
@@ -58,9 +89,9 @@ class PropertyCards extends Component {
     this.getData();
   }
 
-  async componentDidUpdate() {
-    this.getData();
-  }
+  //async componentDidUpdate() {
+  //this.getData();
+  //}
 
   getData = async () => {
     if (this.props.data) return;
@@ -142,9 +173,12 @@ class PropertyCards extends Component {
     }
 
     const data = this.props.data || this.state.data.properties;
-    console.log(data);
     const properties = [];
-    for (let i = 0; i < 2 /*data.length*/; i++) {
+    for (
+      let i = Math.min(this.state.page * 6, 190);
+      i < Math.min(12 + this.state.page * 6, 200);
+      i++
+    ) {
       if (this.state.data) {
         const property = data[i];
         const propertyID = property.property_id;
@@ -156,11 +190,22 @@ class PropertyCards extends Component {
           property.address.state_code +
           ", " +
           property.address.postal_code;
-        const price = property.price;
-        const beds = property.beds;
-        const baths = property.baths;
-        const sqft = property.building_size;
-        const image = property.photos[0];
+
+        let price, beds, baths, sqft;
+
+        if (property.community) {
+          price = `$ ${property.community.price_min}-${property.community.price_max} `;
+          beds = `${property.community.beds_min}-${property.community.beds_max} bds`;
+          baths = `${property.community.baths_min}-${property.community.baths_max} bths`;
+          sqft = `${property.community.sqft_min}-${property.community.sqft_max} sqft`;
+        } else {
+          price = "$" + property.price;
+          beds = property.beds + " bds";
+          baths = property.baths + " ba";
+          sqft = property.building_size.size + " sqft";
+        }
+
+        const image = property.photos[0].href;
         const propertyData = {
           propertyID,
           adress,
@@ -170,9 +215,7 @@ class PropertyCards extends Component {
           sqft,
           image,
         };
-
-        console.log(propertyData);
-        properties.push(<PropertyCard data={{ propertyData }} key={i} />);
+        properties.push(<PropertyCard data={propertyData} key={i} />);
       } else if (this.props.data) {
         properties.push(<PropertyCard data={data[i]} key={i} />);
       }

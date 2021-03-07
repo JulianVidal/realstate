@@ -1,6 +1,11 @@
 @import '../index.scss';
 
 nav{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background-color: $color-background-light;
+  height: 70px;
   ul {
     list-style-type: none;
     padding: 0;

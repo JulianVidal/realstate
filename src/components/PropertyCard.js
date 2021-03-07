@@ -7,6 +7,8 @@ import firebase from "../firebase.js";
 import "./PropertyCard.scss";
 
 class PropertyCard extends Component {
+  ref = React.createRef();
+
   handleLike = async () => {
     const user = localStorage.getItem("user");
 
@@ -57,10 +59,17 @@ class PropertyCard extends Component {
     isLiked: false,
   };
 
+  //shouldComponentUpdate(nextProps, nextState, nextContext) {
+  //if (this.ref.current.className.includes("visibleProperty")) {
+  //return true;
+  //} else {
+  //return false;
+  //}
+  //}
+
   async componentDidMount() {
     const user = localStorage.getItem("user");
     if (!user) return;
-
     const properties = await firebase
       .database()
       .ref(user)
@@ -122,7 +131,7 @@ class PropertyCard extends Component {
     const { adress, baths, beds, image, link, price, sqft } = this.props.data;
 
     return (
-      <div className={"PropertyCard"}>
+      <div className={"PropertyCard"} ref={this.ref}>
         <img
           src={image || emptyImage}
           alt="Property"
