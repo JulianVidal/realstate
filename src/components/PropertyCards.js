@@ -122,8 +122,7 @@ class PropertyCards extends Component {
         {
           method: "GET",
           headers: {
-            "x-rapidapi-key":
-              "faace970c9mshb9a6dc176f9b095p1b3796jsn1ac808ba8436",
+            "x-rapidapi-key": process.env.REACT_APP_REALSTATE_API_KEY,
             "x-rapidapi-host": "realtor.p.rapidapi.com",
           },
         }
