@@ -6,14 +6,10 @@
   display: grid;
 nav {
   background-color: $color-background-light;
-  //width: calc(70vw + 25vw);
-//margin: auto;
+  //width: 100%;
+margin: auto;
   position: fixed;
-  margin-right: auto;
-  margin-left: auto;
-left: 0;
-right: 0;
-z-index: 1;
+  z-index: 1;
   height: 70px;
 ul {
   //justify-content: center;
@@ -25,16 +21,10 @@ ul {
     #NavRentify {
       display: none;
     }
-    nav {
-      width: calc(70vw + 25vw);
-    }
   }
 
   @media screen and (min-width: 801px) {
     grid-template-columns: repeat(12, calc(50vw / 12));
-    nav {
-      width: calc(50vw + 25vw);
-    }
   }
 
   @media screen and (max-width: 1000px) {

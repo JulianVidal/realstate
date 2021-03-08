@@ -24,20 +24,37 @@ class PropertyCards extends Component {
   };
 
   handleScroll() {
-    if (document.body.scrollHeight - window.innerHeight === window.scrollY) {
-      console.log("load more");
+    const width = window.innerWidth;
+    const rows = Math.ceil((window.innerHeight - 126) / 238);
+
+    let cols = 4;
+
+    if (width <= 400) {
+      cols = 1;
+    } else if (width <= 1000) {
+      cols = 2;
+    } else if (width <= 1500) {
+      cols = 3;
+    }
+    if (
+      document.body.scrollHeight - window.innerHeight === window.scrollY &&
+      (this.state.page + 3) * cols * rows < 100
+    ) {
       this.setState({ page: this.state.page + 1 });
-      //window.scrollTo(0, 0);
+    } else if (window.scrollY === 0 && this.state.page - 1 > 0) {
+      this.setState({ page: this.state.page - 1 });
     }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.page !== this.state.page) {
-      console.log("refresh");
-      window.scrollTo(0, 10);
-      //gsap.to(window, {
-      //scrollTo: 0,
-      //onComplete: () => ScrollTrigger.refresh(),
-      //});
+      const cardHeight = 238 + Math.ceil(0.35 * window.innerHeight * (1 / 11));
+      const cardLeft =
+        cardHeight * (((window.innerHeight - 70) / cardHeight) % 1);
+      const scrollBy =
+        prevState.page < this.state.page
+          ? cardLeft
+          : document.body.scrollHeight - window.innerHeight - cardLeft;
+      window.scrollTo(0, scrollBy);
     }
   }
   async componentDidMount() {
@@ -60,22 +77,22 @@ class PropertyCards extends Component {
           ) {
             tl.kill();
             this.setState({ loadedAnim: true });
-            ScrollTrigger.batch(".PropertyCard", {
-              onEnter: (batch) => {
-                //gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
-                gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
-              },
-              onEnterBack: (batch) => {
-                //gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
-                gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
-              },
-              onLeave: (batch) => {
-                //gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
-              },
-              onLeaveBack: (batch) => {
-                //gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
-              },
-            });
+            //ScrollTrigger.batch(".PropertyCard", {
+            //onEnter: (batch) => {
+            ////gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
+            //gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
+            //},
+            //onEnterBack: (batch) => {
+            ////gsap.to(batch, { autoAlpha: 1, stagger: 0.1 });
+            //gsap.from(batch, { scaleX: 0.88, scaleY: 0.94, stagger: 0.1 });
+            //},
+            //onLeave: (batch) => {
+            ////gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
+            //},
+            //onLeaveBack: (batch) => {
+            ////gsap.to(batch, { autoAlpha: 0, stagger: 0.1 });
+            //},
+            //});
           } else {
             anim(anim);
           }
@@ -101,7 +118,7 @@ class PropertyCards extends Component {
       const data = await fetch(
         "https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=" +
           search +
-          "&limit=200&offset=0&sort=relevance",
+          "&limit=100&offset=0&sort=relevance",
         {
           method: "GET",
           headers: {
@@ -172,11 +189,23 @@ class PropertyCards extends Component {
       );
     }
 
+    const width = window.innerWidth;
+    const rows = Math.ceil((window.innerHeight - 126) / 238);
+
+    let cols = 4;
+
+    if (width <= 400) {
+      cols = 1;
+    } else if (width <= 1000) {
+      cols = 2;
+    } else if (width <= 1500) {
+      cols = 3;
+    }
     const data = this.props.data || this.state.data.properties;
     const properties = [];
     for (
-      let i = Math.min(this.state.page * 6, 190);
-      i < Math.min(12 + this.state.page * 6, 200);
+      let i = this.state.page * rows * cols;
+      i < (this.state.page + 2) * rows * cols;
       i++
     ) {
       if (this.state.data) {
