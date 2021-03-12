@@ -1,20 +1,21 @@
-import firebase from 'firebase'
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 const config = {
-    apiKey: "AIzaSyD-wpEWOcBwr7MK706PFMeLFBKB-h2ilV8",
-    authDomain: "realestate-303416.firebaseapp.com",
-    databaseURL: "https://realestate-303416-default-rtdb.firebaseio.com",
-    projectId: "realestate-303416",
-    storageBucket: "realestate-303416.appspot.com",
-    messagingSenderId: "692802073731",
-    appId: "1:692802073731:web:1a34c57dfcfe073173d7b6"
-}
+  apiKey: "AIzaSyD-wpEWOcBwr7MK706PFMeLFBKB-h2ilV8",
+  authDomain: "realestate-303416.firebaseapp.com",
+  databaseURL: "https://realestate-303416-default-rtdb.firebaseio.com",
+  projectId: "realestate-303416",
+  storageBucket: "realestate-303416.appspot.com",
+  messagingSenderId: "692802073731",
+  appId: "1:692802073731:web:1a34c57dfcfe073173d7b6",
+};
 
 firebase.initializeApp(config);
 
-export default firebase
+export default firebase;
 
-const googleProvider = new firebase.auth.GoogleAuthProvider()
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export {googleProvider}
-
+export { googleProvider };
