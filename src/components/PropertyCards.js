@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LocalData from "../assets/data2.json";
 import QueryString from "query-string";
 import "./PropertyCards.scss";
 import PropertyCard from "./PropertyCard";
@@ -47,7 +48,7 @@ class PropertyCards extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.page !== this.state.page) {
-      const cardHeight = 238 + Math.ceil(0.35 * window.innerHeight * (1 / 11));
+      const cardHeight = 238; // + Math.ceil(0.35 * window.innerHeight * (1 / 11));
       const cardLeft =
         cardHeight * (((window.innerHeight - 70) / cardHeight) % 1);
       const scrollBy =
@@ -106,33 +107,30 @@ class PropertyCards extends Component {
     this.getData();
   }
 
-  //async componentDidUpdate() {
-  //this.getData();
-  //}
-
   getData = async () => {
     if (this.props.data) return;
     const search = QueryString.parse(this.props.location.search).location;
     if (this.state.search !== search) {
       let error;
-      const data = await fetch(
-        "https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=" +
-          search +
-          "&limit=100&offset=0&sort=relevance",
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-key": process.env.REACT_APP_REALSTATE_API_KEY,
-            "x-rapidapi-host": "realtor.p.rapidapi.com",
-          },
-        }
-      )
-        .then(async (response) => {
-          return response.json();
-        })
-        .catch((err) => {
-          error = err;
-        });
+      const data = LocalData;
+      //const data = await fetch(
+      //"https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=" +
+      //search +
+      //"&limit=100&offset=0&sort=relevance",
+      //{
+      //method: "GET",
+      //headers: {
+      //"x-rapidapi-key": process.env.REACT_APP_REALSTATE_API_KEY,
+      //"x-rapidapi-host": "realtor.p.rapidapi.com",
+      //},
+      //}
+      //)
+      //.then(async (response) => {
+      //return response.json();
+      //})
+      //.catch((err) => {
+      //error = err;
+      //});
       console.log("Got the data");
       this.setState({ search, data, error });
     }

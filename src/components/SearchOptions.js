@@ -2,19 +2,39 @@ import React from "react";
 import { TimelineLite, Power3 } from "gsap";
 import "./SearchOptions.scss";
 
-function SearchOptions({ type }) {
+function SearchOptions({ options, type }) {
   const dark = type === "dark" ? " dark" : "";
   const className = "SearchOption" + dark;
+
+  const optionsElement = options.map((option, index) => {
+    let underline;
+    if (index === 0) {
+      underline = (
+        <span className="underline active" style={{ width: "100%" }}></span>
+      );
+    } else {
+      underline = <span className="underline"> </span>;
+    }
+    return (
+      <p className={className} onClick={changeActive}>
+        {option}
+        {underline}
+      </p>
+    );
+  });
+
   return (
     <div className="SearchOptions">
-      <p className={className} onClick={changeActive}>
+      {optionsElement}
+      {/*      <p className={className} onClick={changeActive}>
         Buy
         <span className="underline active" style={{ width: "100%" }}></span>
       </p>
       <p className={className} onClick={changeActive}>
-        Rent <span className="underline"> </span>
+        Rent
+        <span className="underline"> </span>
       </p>
-      {/*<p className={className} onClick={changeActive}>Sold <span className="underline"> </span></p>*/}
+      <p className={className} onClick={changeActive}>Sold <span className="underline"> </span></p>*/}
     </div>
   );
 }

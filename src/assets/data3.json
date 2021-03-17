@@ -1,0 +1,528 @@
+{
+  "meta": {
+    "build": "3.23.136",
+    "schema": "core.3",
+    "tracking": "type|meta|data|resource_type|property_detail|query|client_id|rdc_mobile_native,13.3.0.53|schema|core.3|tag_version|v2^^^$0|1|2|$3|4|5|$6|7|8|9|A|B]]]",
+    "returned_rows": 1,
+    "matching_rows": 1,
+    "tracking_params": {
+      "ldpPropertyStatus": "ldp:for_rent",
+      "pageType": "ldp",
+      "leadDelivery": "basic",
+      "leadEnhancements": "classic",
+      "listingActivity": "active",
+      "productType": "basic",
+      "propertyStatus": "for_rent",
+      "listingId": "2924556755",
+      "rentalDataSource": "mls",
+      "communityId": "unknown",
+      "mprId": "9204997834",
+      "listingMls": "STNY",
+      "planId": "unknown",
+      "subId": "unknown",
+      "city": "Ny",
+      "neighborhood": "Fort Greene",
+      "state": "NY",
+      "zip": "11217",
+      "listingBaths": "2",
+      "listingBeds": "2",
+      "listingSqFt": "",
+      "listingEnhancements": "unknown",
+      "listingPrice": "3000",
+      "photoCount": "20",
+      "propertyType": "ldp:townhome",
+      "version": "1.0"
+    }
+  },
+  "properties": [
+    {
+      "property_id": "R9204997834",
+      "listing_id": "2924556755",
+      "prop_type": "townhome",
+      "list_date": "2020-12-26T14:22:41.000Z",
+      "last_update": "2021-01-13T18:52:39.000Z",
+      "listing_status": "active",
+      "beds": 2,
+      "description": "Spacious renovated 2 bed/ 2 bath immaculate duplex w/ large backyard (comes with patio furniture and BBQ grill) with new wood floors and onsite laundry. This Brownstone is located on a tree lined block in the HEART of FORT GREENE. Conveniently close to all shopping and transportation; 1/2 block away from Fort Greene Park and 2 Blocks away from Barclays.",
+      "branding": {
+        "listing_agent": {
+          "photo_attribution": {
+            "name": "Lynette Pilgrim",
+            "photo": null,
+            "phone": null,
+            "slogan": null,
+            "show_realtor_logo": false,
+            "link": null,
+            "accent_color": null
+          },
+          "details": {
+            "name": "Lynette Pilgrim",
+            "photo": null,
+            "phone": null,
+            "slogan": null,
+            "show_realtor_logo": false,
+            "link": null,
+            "accent_color": null
+          }
+        },
+        "listing_office": {
+          "photo_attribution": {
+            "name": "NEW FORTUNE REALTY",
+            "photo": null,
+            "phone": null,
+            "slogan": null,
+            "show_realtor_logo": false,
+            "link": null,
+            "accent_color": null
+          },
+          "details": {
+            "name": "NEW FORTUNE REALTY",
+            "photo": null,
+            "slogan": null,
+            "show_realtor_logo": false,
+            "link": null,
+            "accent_color": null
+          }
+        }
+      },
+      "baths_full": 2,
+      "price_reduced_date": "2021-01-13T19:03:37.133Z",
+      "prop_status": "for_rent",
+      "address": {
+        "city": "Ny",
+        "country": "USA",
+        "county": "Kings",
+        "lat": 40.688587,
+        "line": "42 Fort Greene Pl Unit 1A",
+        "postal_code": "11217",
+        "state_code": "NY",
+        "state": "New York",
+        "time_zone": "America/New_York",
+        "neighborhood_name": "Fort Greene",
+        "neighborhoods": [
+          {
+            "id": "aa7885f5-7933-5377-ba3b-f5011bba85f1",
+            "level": "neighborhood",
+            "name": "Fort Greene"
+          },
+          {
+            "id": "72020c4d-2ed4-5d5e-bc01-92d908264477",
+            "level": "macro_neighborhood",
+            "name": "Northwestern Brooklyn"
+          }
+        ],
+        "lon": -73.977164
+      },
+      "features": [
+        {
+          "category": "Bedrooms",
+          "text": ["Bedrooms: 2"],
+          "parent_category": "Interior"
+        },
+        {
+          "category": "Bathrooms",
+          "text": ["Total Bathrooms: 2", "Full Bathrooms: 2"],
+          "parent_category": "Interior"
+        },
+        {
+          "category": "Kitchen and Dining",
+          "text": [
+            "Dishwasher: Y",
+            "Refrigerator: Y",
+            "Oven: Y",
+            "Kitchen Type: 100",
+            "Dining Room Description: 1",
+            "Kitchen Description: 100"
+          ],
+          "parent_category": "Interior"
+        },
+        {
+          "category": "Interior Features",
+          "text": ["Flooring: 1"],
+          "parent_category": "Interior"
+        },
+        {
+          "category": "Other Rooms",
+          "text": ["Entry Foyer Description: 1", "Living Room Description: 1"],
+          "parent_category": "Interior"
+        },
+        {
+          "category": "Homeowners Association",
+          "text": ["Association Fee Amenities: Fort Greene"],
+          "parent_category": "Community"
+        },
+        {
+          "category": "Other Property Info",
+          "text": [
+            "Source Listing Status: Active",
+            "County: 36047",
+            "Source Property Type: Single Family Townhouse",
+            "Area: BROOKLYN",
+            "Property Subtype: townhouse",
+            "Source Neighborhood: BROOKLYN",
+            "Property Subtype: Townhouse",
+            "Source System Name: C2C"
+          ],
+          "parent_category": "Listing"
+        },
+        {
+          "category": "Building and Construction",
+          "text": ["BelowGradeFinishedArea: 1", "House Style: Duplex"],
+          "parent_category": "Features"
+        }
+      ],
+      "mls": {
+        "abbreviation": "STNY",
+        "disclaimer": {
+          "photo": null,
+          "href": null,
+          "text": "©2021, NYStateMLS, My State MLS. All rights reserved."
+        },
+        "id": "10961479",
+        "name": "MyStateMLS"
+      },
+      "client_display_flags": {
+        "presentation_status": "for_rent",
+        "is_showcase": false,
+        "lead_form_phone_required": true,
+        "price_change": 0,
+        "has_specials": false,
+        "is_mls_rental": true,
+        "is_rental_community": false,
+        "is_rental_unit": false,
+        "is_co_star": false,
+        "is_apartmentlist": false,
+        "suppress_map_pin": false,
+        "suppress_phone_call_lead_event": false,
+        "price_reduced": true
+      },
+      "raw": { "status": "Active" },
+      "products": [],
+      "office": {
+        "id": "2",
+        "name": "NEW FORTUNE REALTY",
+        "office_system_id_short": "10804",
+        "address": {
+          "city": "SO OZONE PARK",
+          "state_code": "NY",
+          "state": null
+        },
+        "type": "office",
+        "phones": []
+      },
+      "agents": [
+        {
+          "agent_system_id_short": "119974",
+          "email": "lynette@newfortunerealty.com",
+          "id": "1",
+          "name": "Lynette Pilgrim",
+          "type": "agent",
+          "primary": true
+        }
+      ],
+      "lead_forms": {
+        "form": {
+          "name": { "required": true, "minimum_character_count": 1 },
+          "email": { "required": true, "minimum_character_count": 5 },
+          "move_in_date": {
+            "required": false,
+            "default_date": "2021-03-01T12:00:00Z",
+            "minimum_days_from_today": 1,
+            "maximum_days_from_today": 180
+          },
+          "phone": {
+            "required": true,
+            "minimum_character_count": 10,
+            "maximum_character_count": 11
+          },
+          "message": { "required": false, "minimum_character_count": 0 },
+          "show": true
+        },
+        "show_agent": false,
+        "show_broker": true,
+        "show_provider": false,
+        "show_management": false,
+        "form_type": "classic",
+        "lead_type": "rental_basic_mls",
+        "mls_rent_flip_the_market_enabled": true,
+        "local_phones": { "comm_console": "(855)928-3308" }
+      },
+      "lot_size": { "size": 0, "units": "sqft" },
+      "building_size": { "units": "sqft" },
+      "price": 3000,
+      "rdc_web_url": "https://www.realtor.com/realestateandhomes-detail/42-Fort-Greene-Pl-1ANY_Brooklyn_NY_11217_M92049-97834",
+      "rdc_app_url": "move-rdc://www.realtor.com/realestateandhomes-detail/42-Fort-Greene-Pl-1ANY_Brooklyn_NY_11217_M92049-97834",
+      "baths": 2,
+      "photo_attribution": ["Presented by Lynette Pilgrim"],
+      "mortgage": {
+        "rates_url": "http://www.realtor.com/mortgage/rates/?from=mobile#&zip=11217&property_price=3000&mlid=2924556755"
+      },
+      "data_source_name": "mls",
+      "source": "mls",
+      "detail_tracking": "type|property|data|prop_id|9204997834|list_id|2924556755|address|city|Ny|state|NY|postal|11217|neighborhood|Fort+Greene|county|Kings|mls|id|10961479|abbr|STNY|price|detail_branding|listing_agent|listing_office|data_source|property_status|product_code|advantage_code^2BC|35T|35T|3CY|0|0^^$0|1|2|$3|4|5|6|7|$8|9|A|B|C|D|E|F|G|H]|I|$J|K|L|M]|N|V|O|$P|W|Q|X]|R|I|S|Y|T|Z|U|10]]",
+      "lease_terms": "Call",
+      "photo_count": 20,
+      "photos": [
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1506501693s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1068454619s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1886656336s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m3232785779s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m4280609443s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m493934631s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m3152317018s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m3152317018s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m3792344266s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1159159436s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1072703280s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m2859620549s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m2263800342s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m485673761s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m4169558965s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m3263641043s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m2791681655s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m393299037s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1435256473s.jpg"
+        },
+        {
+          "href": "https://ap.rdcpix.com/a773a359e2fa971d1bcfea68bf7d7eb3l-m1642196335s.jpg"
+        }
+      ],
+      "schools": [
+        {
+          "nces_id": "360009102106",
+          "id": "0751458351",
+          "greatschools_id": "3602086",
+          "name": "Ps 20 Clinton Hill",
+          "education_levels": ["elementary"],
+          "funding_type": "public",
+          "lat": 40.69115,
+          "lon": -73.97121,
+          "student_count": 447,
+          "student_teacher_ratio": 15.4,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11205",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "225 Adelphi Street"
+          },
+          "phone": "(718) 834-6744",
+          "distance_in_miles": 0.4,
+          "grades": { "range": { "low": "PK", "high": "5" } },
+          "relevance": "assigned",
+          "ratings": { "great_schools_rating": 7, "parent_rating": 5 }
+        },
+        {
+          "nces_id": "360009104523",
+          "id": "0751470241",
+          "greatschools_id": "3602918",
+          "name": "Ms 113 Ronald Edmonds Learning Center",
+          "education_levels": ["middle"],
+          "funding_type": "public",
+          "lat": 40.688504,
+          "lon": -73.971249,
+          "student_count": 305,
+          "student_teacher_ratio": 12.9,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11205",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "300 Adelphi Street"
+          },
+          "phone": "(718) 834-6734",
+          "distance_in_miles": 0.3,
+          "grades": { "range": { "low": "6", "high": "8" } },
+          "relevance": "assigned",
+          "ratings": { "great_schools_rating": 3, "parent_rating": 4 }
+        },
+        {
+          "nces_id": "360009101928",
+          "id": "0751456331",
+          "greatschools_id": "3601944",
+          "name": "Brooklyn Technical High School",
+          "education_levels": ["high"],
+          "funding_type": "public",
+          "lat": 40.688967,
+          "lon": -73.976478,
+          "student_count": 5839,
+          "student_teacher_ratio": 22.2,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11217",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "29 Fort Greene Place"
+          },
+          "phone": "(718) 804-6400",
+          "distance_in_miles": 0,
+          "grades": { "range": { "low": "9", "high": "12" } },
+          "relevance": "assigned",
+          "ratings": { "great_schools_rating": 10, "parent_rating": 5 }
+        },
+        {
+          "nces_id": "360112106516",
+          "id": "0751689121",
+          "greatschools_id": "3618239",
+          "name": "Compass Charter School",
+          "education_levels": ["elementary"],
+          "funding_type": "public",
+          "lat": 40.688475,
+          "lon": -73.971663,
+          "student_count": 273,
+          "student_teacher_ratio": 10.7,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11205",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "300 Adelphi Street"
+          },
+          "phone": "(718) 310-3588",
+          "distance_in_miles": 0.3,
+          "grades": { "range": { "low": "K", "high": "4" } },
+          "relevance": "nearby",
+          "ratings": { "great_schools_rating": 6, "parent_rating": 3 }
+        },
+        {
+          "nces_id": "360013502825",
+          "id": "0751540431",
+          "greatschools_id": "3607831",
+          "name": "Ps 369 Coy L Cox School",
+          "education_levels": ["elementary", "middle", "high"],
+          "funding_type": "public",
+          "lat": 40.68731,
+          "lon": -73.98336,
+          "student_count": 640,
+          "student_teacher_ratio": 4.4,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11217",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "383 State Street"
+          },
+          "phone": "(718) 852-1701",
+          "distance_in_miles": 0.3,
+          "grades": { "range": { "low": "K", "high": "12" } },
+          "relevance": "nearby",
+          "ratings": { "great_schools_rating": null, "parent_rating": 4 }
+        },
+        {
+          "nces_id": "360009102781",
+          "id": "0751467351",
+          "greatschools_id": "3602716",
+          "name": "Dr Susan S Mckinney Secondary School Of The Arts",
+          "education_levels": ["middle", "high"],
+          "funding_type": "public",
+          "lat": 40.696635,
+          "lon": -73.97596,
+          "student_count": 370,
+          "student_teacher_ratio": 12.7,
+          "location": {
+            "city_slug_id": "New-York_NY",
+            "postal_code": "10017",
+            "state": "NY",
+            "county": "New York",
+            "city": "New York",
+            "street": "101 Park Avenue"
+          },
+          "phone": "(718) 834-6760",
+          "distance_in_miles": 0.6,
+          "grades": { "range": { "low": "6", "high": "12" } },
+          "relevance": "nearby",
+          "ratings": { "great_schools_rating": 4, "parent_rating": 3 }
+        },
+        {
+          "nces_id": "00943919",
+          "id": "0751504101",
+          "greatschools_id": "3605287",
+          "name": "Hanson Place Elementary School",
+          "education_levels": ["elementary", "middle"],
+          "funding_type": "private",
+          "lat": 40.686741,
+          "lon": -73.977008,
+          "student_count": 99,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11217",
+            "state": "NY",
+            "county": "Kings",
+            "city": "Brooklyn",
+            "street": "38 Lafayette Avenue"
+          },
+          "phone": "(718) 625-3030",
+          "distance_in_miles": 0.1,
+          "grades": { "range": { "low": "PK", "high": "8" } },
+          "relevance": "nearby",
+          "ratings": { "great_schools_rating": null, "parent_rating": 3 }
+        },
+        {
+          "nces_id": "19477902b194e9d07bb14c2144faa6d7",
+          "id": "0751633301",
+          "greatschools_id": "3614331",
+          "name": "Science, Language & Arts International School",
+          "education_levels": ["elementary"],
+          "funding_type": "private",
+          "lat": 40.68615,
+          "lon": -73.977402,
+          "location": {
+            "city_slug_id": "Brooklyn_NY",
+            "postal_code": "11217",
+            "state": "NY",
+            "county": "Kings (Brooklyn)",
+            "city": "Brooklyn",
+            "street": "9 Hanover Place"
+          },
+          "phone": "(718) 636-3836",
+          "distance_in_miles": 0.2,
+          "grades": { "range": { "low": "PK", "high": "5" } },
+          "relevance": "nearby",
+          "ratings": { "great_schools_rating": null, "parent_rating": 5 }
+        }
+      ]
+    }
+  ]
+}

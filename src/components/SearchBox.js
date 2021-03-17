@@ -16,18 +16,10 @@ class SearchBox extends Component {
     doSearch: false,
   };
 
-  routeToProperties() {
-    this.setState({ doSearch: true });
-  }
-
   componentDidMount() {
     this.setState({
       search: queryString.parse(this.props.history.location.search).location,
     });
-    if (this.state.doSearch) this.setState({ doSearch: false });
-  }
-
-  componentDidUpdate() {
     if (this.state.doSearch) this.setState({ doSearch: false });
   }
 
@@ -46,18 +38,6 @@ class SearchBox extends Component {
         },
       };
     };
-    if (this.state.doSearch && this.getSearch()) {
-      this.props.history.push({
-        pathname: "/properties",
-        search: `?location=${this.getSearch()}`,
-      });
-      // return  (<Redirect
-      //   to={{
-      //     pathname: "/properties",
-      //     search: `location=${this.getSearch()}`
-      //   }}
-      // />)
-    }
 
     return (
       <form id="SearchBox" onSubmit={this.handleSubmit}>
@@ -172,8 +152,12 @@ class SearchBox extends Component {
     iconSearchStart.style.display = "flex";
 
     component.setState({ isSearchEndStopped: true });
-
-    this.routeToProperties();
+    if (this.searchBox.value) {
+      this.props.history.push({
+        pathname: "/properties",
+        search: `?location=${this.searchBox.value}`,
+      });
+    }
   };
 }
 

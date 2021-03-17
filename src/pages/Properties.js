@@ -5,6 +5,7 @@ import SearchBox from "../components/SearchBox";
 import Page from "../components/Page";
 import "./Properties.scss";
 import SearchOptions from "../components/SearchOptions";
+import PropertyFeatures from "../components/PropertyFeatures";
 
 class Properties extends Component {
   state = {
@@ -16,7 +17,7 @@ class Properties extends Component {
       <Fragment>
         <NavItem text="Rentify" id="NavRentify" type="logo" color="dark" />
         <NavItem id="NavSearchOptions">
-          <SearchOptions type="dark" />
+          <SearchOptions type="dark" options={["Buy", "Rent"]} />
         </NavItem>
         <NavItem id="NavSearchBox">
           <SearchBox />
@@ -30,6 +31,7 @@ class Properties extends Component {
     return (
       <Page navItems={navItems} color="dark" id="Properties" reload={reload}>
         <PropertyCards />
+        <PropertyFeatures />
       </Page>
     );
   }
