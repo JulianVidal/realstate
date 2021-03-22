@@ -7,8 +7,8 @@ class ProperyFeature extends Component {
       <div className="PropertyFeature">
         <h1 className="category"> {this.props.category} </h1>
         <div className="textContainer">
-          {this.props.text.map((text) => {
-            return <p className="text">{text}</p>;
+          {this.props.text.map((text, index) => {
+            return <p className="text" key={index}>{text}</p>;
           })}
         </div>
       </div>

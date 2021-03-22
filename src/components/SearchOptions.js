@@ -16,7 +16,7 @@ function SearchOptions({ options, type }) {
       underline = <span className="underline"> </span>;
     }
     return (
-      <p className={className} onClick={changeActive}>
+      <p className={className} onClick={changeActive} key={index}>
         {option}
         {underline}
       </p>

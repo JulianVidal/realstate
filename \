@@ -1,0 +1,11 @@
+import React, { Component } from "react";
+import "./ImageSlider.scss";
+
+class ImageSlider extends Component {
+  render() {
+    const images = this.props.images.map(({ href }, i) => {
+      return <img src={href} alt="Property" key={i} />;
+    });
+    return <div className="ImageSlider"> {images} </div>;
+  }
+}
