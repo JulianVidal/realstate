@@ -250,9 +250,17 @@ class PropertyCards extends Component {
           sqft,
           image,
         };
-        properties.push(<PropertyCard data={propertyData} key={i} />);
+        properties.push(
+          <PropertyCard
+            data={propertyData}
+            key={i}
+            setData={this.props.setData}
+          />
+        );
       } else if (this.props.fav) {
-        properties.push(<PropertyCard data={data[i]} key={i} />);
+        properties.push(
+          <PropertyCard data={data[i]} key={i} setData={this.props.setData} />
+        );
       }
     }
 

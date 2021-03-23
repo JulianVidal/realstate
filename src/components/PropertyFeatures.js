@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import LikeButton from "./LikeButton";
 //import emptyImage from "../assets/empty.png";
 import ImageSlider from "./ImageSlider";
-import data from "../assets/data3.json";
+import dataJS from "../assets/data3.json";
 import L from "leaflet";
 import ProperyFeature from "./PropertyFeature";
 import "./PropertyFeatures.scss";
 
 class PropertyFeatures extends Component {
   componentDidMount() {
-    const lon = data.properties[0].address.lon;
-    const lat = data.properties[0].address.lat;
+    const data = this.props.data || dataJS.properties[0];
+    console.log(data);
+    const lon = data.address.lon;
+    const lat = data.address.lat;
     const mymap = L.map("map").setView([lat, lon], 15);
+    this.setState({ mymap });
     L.tileLayer(
       "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
       {
@@ -26,26 +29,44 @@ class PropertyFeatures extends Component {
       }
     ).addTo(mymap);
     mymap.scrollWheelZoom.disable();
-    L.marker([lat, lon]).addTo(mymap);
+    const marker = L.marker([lat, lon]).addTo(mymap);
+    this.setState({ marker });
   }
-  render() {
-    const property = data.properties[0];
-    const propertyID = property.property_id;
-    const agent = property.agents[0];
-    const agentName = "Name: " + agent.name;
-    const agentEmail = "Email: " + agent.email;
 
+  componentDidUpdate() {
+    const data = this.props.data || dataJS.properties[0];
+    const lat = data.address.lat;
+    const lon = data.address.lon;
+    this.state.mymap.panTo([lat, lon]);
+    this.state.marker.setLatLng([lat, lon]);
+  }
+
+  render() {
+    const data = this.props.data || dataJS.properties[0];
+    const property = data;
+    console.log(data);
+    const propertyID = property.property_id;
+
+    let agent, agentName, agentEmail;
+    if (property.agents) {
+      agent = property.agents[0];
+      agentName = "Name: " + agent.name;
+      agentEmail = "Email: " + agent.email;
+    }
     const office = property.office;
     const officeName = "Name: " + office.name;
-    const officeCity =
-      "City: " + office.address.city + ", " + office.address.state_code;
-
-    const listing = property.mls;
-    const listingName = "Name: " + listing.name;
-    const listingID = "Source's Property ID: " + listing.id;
-    const listingDisclaimer =
-      "Data Source Copyright: " + listing.disclaimer.text;
-
+    let officeCity;
+    if (office.address) {
+      officeCity =
+        "City: " + office.address.city + ", " + office.address.state_code;
+    }
+    let listing, listingName, listingID, listingDisclaimer;
+    if (property.mls) {
+      listing = property.mls;
+      listingName = "Name: " + listing.name;
+      listingID = "Source's Property ID: " + listing.id;
+      listingDisclaimer = "Data Source Copyright: " + listing.disclaimer.text;
+    }
     const photos = property.photos;
     const adress =
       property.address.line +
@@ -111,19 +132,22 @@ class PropertyFeatures extends Component {
               />
             );
           })}
-          <ProperyFeature category={"Agent"} text={[agentName, agentEmail]} />
+
+          {agent ? (
+            <ProperyFeature category={"Agent"} text={[agentName, agentEmail]} />
+          ) : null}
+
           <ProperyFeature
             category={"Broker Office"}
-            text={[officeName, officeCity]}
+            text={[officeName, officeCity || ""]}
           />
-          <ProperyFeature
-            category={"Listing"}
-            text={[listingName, listingID, listingDisclaimer]}
-          />
-          <ProperyFeature
-            type="table"
-            data={property.schools}
-          />
+          {listing ? (
+            <ProperyFeature
+              category={"Listing"}
+              text={[listingName, listingID, listingDisclaimer]}
+            />
+          ) : null}
+          <ProperyFeature type="table" data={property.schools} />
         </div>
       </div>
     );

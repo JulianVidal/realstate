@@ -11,18 +11,6 @@ class Favorites extends Component {
     properties: null,
   };
 
-  async componentDidMount() {
-    //console.log("start");
-    //const user = localStorage.getItem("user");
-    //const properties = await firebase
-    //.database()
-    //.ref(user)
-    //.once("value")
-    //.then((snapshot) => Object.values(snapshot.val() || {}));
-    //this.setState({ properties });
-    //console.log("end");
-  }
-
   render() {
     const navItems = (
       <Fragment>

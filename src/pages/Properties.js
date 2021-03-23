@@ -9,7 +9,12 @@ import PropertyFeatures from "../components/PropertyFeatures";
 
 class Properties extends Component {
   state = {
+    data: null,
     reload: false,
+  };
+
+  setData = (data) => {
+    this.setState({ data });
   };
 
   render() {
@@ -30,8 +35,8 @@ class Properties extends Component {
 
     return (
       <Page navItems={navItems} color="dark" id="Properties" reload={reload}>
-        <PropertyCards />
-        <PropertyFeatures />
+        <PropertyCards setData={this.setData} />
+        <PropertyFeatures data={this.state.data} />
       </Page>
     );
   }

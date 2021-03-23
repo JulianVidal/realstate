@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import emptyImage from "../assets/empty.png";
+import { formDisplay } from "./Form";
 import "./PropertyCard.scss";
 import LikeButton from "./LikeButton";
-import { formDisplay } from "./Form";
 
 class PropertyCard extends Component {
+  state = {
+    details: null,
+  };
+
   render() {
     const { adress, baths, beds, image, price, sqft } = this.props.data;
 
@@ -31,7 +35,34 @@ class PropertyCard extends Component {
     );
   }
 
-  handleClick = () => {
+  handleClick = async () => {
+    if (this.state.data) {
+      this.props.setData(this.state.data);
+      formDisplay("PropertyFeatures");
+    }
+    let error;
+    const data = await fetch(
+      "https://realtor.p.rapidapi.com/properties/v2/detail?property_id=" +
+        this.props.data.propertyID,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "faace970c9mshb9a6dc176f9b095p1b3796jsn1ac808ba8436",
+          "x-rapidapi-host": "realtor.p.rapidapi.com",
+        },
+      }
+    )
+      .then(async (response) => {
+        return response.json();
+      })
+      .catch((err) => {
+        error = err;
+      });
+    console.log("Got the detail data", data);
+    this.setState({ error });
+    this.setState({ data: data.properties[0] });
+    this.props.setData(this.state.data);
     formDisplay("PropertyFeatures");
   };
 }
