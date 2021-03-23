@@ -19,4 +19,32 @@
     flex-wrap: wrap;
 
   }
+
+tr {
+  width: 100%;
+
+    td:first-child {
+      text-align: left;
+    }
+    th:first-child {
+      text-align: left;
+    }
+  th, td {
+    width: 11%;
+    height: 50px;
+    text-align: center;
+    font-family: $font-body;
+    font-size: $font-size-body;
+    font-weight: normal;
+
+    &.expand {
+      width: 22%;
+    }
+  }
+  }
+}
+
+table {
+width: 100%;
+
 }

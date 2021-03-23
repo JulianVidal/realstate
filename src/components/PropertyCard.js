@@ -2,21 +2,15 @@ import React, { Component } from "react";
 import emptyImage from "../assets/empty.png";
 import "./PropertyCard.scss";
 import LikeButton from "./LikeButton";
+import { formDisplay } from "./Form";
 
 class PropertyCard extends Component {
   render() {
-    const { adress, baths, beds, image, link, price, sqft } = this.props.data;
+    const { adress, baths, beds, image, price, sqft } = this.props.data;
 
     return (
-      <div className={"PropertyCard"} ref={this.ref}>
-        <img
-          src={image || emptyImage}
-          alt="Property"
-          className="image"
-          onClick={() => {
-            window.location.href = link;
-          }}
-        />
+      <div onClick={this.handleClick} className={"PropertyCard"} ref={this.ref}>
+        <img src={image || emptyImage} alt="Property" className="image" />
 
         <div className="valuation">
           <p className="price">{price}</p>
@@ -36,6 +30,10 @@ class PropertyCard extends Component {
       </div>
     );
   }
+
+  handleClick = () => {
+    formDisplay("PropertyFeatures");
+  };
 }
 
 export default PropertyCard;

@@ -120,6 +120,10 @@ class PropertyFeatures extends Component {
             category={"Listing"}
             text={[listingName, listingID, listingDisclaimer]}
           />
+          <ProperyFeature
+            type="table"
+            data={property.schools}
+          />
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { gsap, Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import firebase from "../firebase.js";
 
 class PropertyCards extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class PropertyCards extends Component {
     }
     if (
       document.body.scrollHeight - window.innerHeight === window.scrollY &&
-      (this.state.page + 3) * cols * rows < 100
+      (this.state.page + 3) * cols * rows < this.state.data.length
     ) {
       this.setState({ page: this.state.page + 1 });
     } else if (window.scrollY === 0 && this.state.page - 1 > 0) {
@@ -71,11 +72,7 @@ class PropertyCards extends Component {
         scaleX: 0.8,
         scaleY: 0.9,
         onComplete: () => {
-          if (
-            this.state.data ||
-            this.props.data ||
-            !document.querySelector(".PropertyCard")
-          ) {
+          if (this.state.data || !document.querySelector(".PropertyCard")) {
             tl.kill();
             this.setState({ loadedAnim: true });
             //ScrollTrigger.batch(".PropertyCard", {
@@ -108,7 +105,17 @@ class PropertyCards extends Component {
   }
 
   getData = async () => {
-    if (this.props.data) return;
+    if (this.props.fav) {
+      const user = localStorage.getItem("user");
+      const data = await firebase
+        .database()
+        .ref(user)
+        .once("value")
+        .then((snapshot) => Object.values(snapshot.val() || {}));
+      console.log("Got the data");
+      this.setState({ data });
+      return;
+    }
     const search = QueryString.parse(this.props.location.search).location;
     if (this.state.search !== search) {
       let error;
@@ -132,7 +139,9 @@ class PropertyCards extends Component {
       //error = err;
       //});
       console.log("Got the data");
-      this.setState({ search, data, error });
+      this.setState({ search, error });
+      this.setState({ data: data.properties });
+      return;
     }
   };
 
@@ -198,14 +207,14 @@ class PropertyCards extends Component {
     } else if (width <= 1500) {
       cols = 3;
     }
-    const data = this.props.data || this.state.data.properties;
+    const data = this.state.data;
     const properties = [];
     for (
       let i = this.state.page * rows * cols;
-      i < (this.state.page + 2) * rows * cols;
+      i < Math.min((this.state.page + 2) * rows * cols, data.length);
       i++
     ) {
-      if (this.state.data) {
+      if (!this.props.fav) {
         const property = data[i];
         const propertyID = property.property_id;
         const adress =
@@ -242,7 +251,7 @@ class PropertyCards extends Component {
           image,
         };
         properties.push(<PropertyCard data={propertyData} key={i} />);
-      } else if (this.props.data) {
+      } else if (this.props.fav) {
         properties.push(<PropertyCard data={data[i]} key={i} />);
       }
     }

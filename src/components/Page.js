@@ -37,6 +37,7 @@ class Page extends Component {
       const LogIn = document.getElementById("LogIn");
       const SignUp = document.getElementById("SignUp");
       const Forgot = document.getElementById("Forgot");
+      const PropertyFeatures = document.getElementById("PropertyFeatures");
 
       if (LogIn.style.display === "flex") {
         removeForm("LogIn");
@@ -44,6 +45,8 @@ class Page extends Component {
         removeForm("SignUp");
       } else if (Forgot.style.display === "flex") {
         removeForm("Forgot");
+      } else if (PropertyFeatures.style.display === "flex") {
+        removeForm("PropertyFeatures");
       }
 
       const messages = document.querySelectorAll(".error-message");
