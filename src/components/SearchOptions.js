@@ -8,15 +8,22 @@ function SearchOptions({ options, type, history }) {
   const dark = type === "dark" ? " dark" : "";
   const className = "SearchOption" + dark;
 
+  let active = false;
   const optionR = queryString.parse(history.location.search).type;
   const optionsElement = options.map((option, index) => {
     let underline;
     if (optionR === option) {
+      active = true;
       underline = (
         <span className="underline active" style={{ width: "100%" }}></span>
       );
     } else {
       underline = <span className="underline"> </span>;
+    }
+    if (!active && index === options.length - 1) {
+      underline = (
+        <span className="underline active" style={{ width: "100%" }}></span>
+      );
     }
     return (
       <p className={className} onClick={changeActive} key={index}>
