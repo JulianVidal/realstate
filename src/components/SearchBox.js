@@ -162,6 +162,9 @@ class SearchBox extends Component {
         search: `?location=${this.searchBox.value}&type=${option}`,
       });
       window.location.reload();
+    } else {
+      this.searchBox.placeholder = "Please enter a state or city";
+      this.searchBox.className = "error";
     }
   };
 }

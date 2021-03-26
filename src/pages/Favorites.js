@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import SearchBox from "../components/SearchBox";
 import NavItem from "../components/NavItem";
 import PropertyCards from "../components/PropertyCards";
+import SearchOptions from "../components/SearchOptions";
 import Page from "../components/Page";
 import PropertyFeatures from "../components/PropertyFeatures";
 import "./Favorites.scss";
@@ -19,6 +20,9 @@ class Favorites extends Component {
     const navItems = (
       <Fragment>
         <NavItem text="Rentify" id="NavRentify" type="logo" color="dark" />
+        <NavItem id="NavSearchOptions">
+          <SearchOptions type="dark" options={["Rent", "Sale"]} />
+        </NavItem>
         <NavItem id="NavSearchBox">
           <SearchBox />
         </NavItem>
