@@ -22,7 +22,7 @@ class Properties extends Component {
       <Fragment>
         <NavItem text="Rentify" id="NavRentify" type="logo" color="dark" />
         <NavItem id="NavSearchOptions">
-          <SearchOptions type="dark" options={["Buy", "Rent"]} />
+          <SearchOptions type="dark" options={["Rent", "Sale"]} />
         </NavItem>
         <NavItem id="NavSearchBox">
           <SearchBox />

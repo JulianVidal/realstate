@@ -1,26 +1,28 @@
-import React from 'react'
-import NavItem from '../components/NavItem'
-import SearchBox from '../components/SearchBox'
-import Page from '../components/Page'
-import './Main.scss'
+import React from "react";
+import NavItem from "../components/NavItem";
+import SearchBox from "../components/SearchBox";
+import SearchOptions from "../components/SearchOptions";
+import Page from "../components/Page";
+import "./Main.scss";
 
 function Main() {
-  const navItems = <NavItem text="Rentify" id="NavRentify" type="logo"/>
+  const navItems = <NavItem text="Rentify" id="NavRentify" type="logo" />;
 
   return (
-    <Page navItems={navItems} id='Main'>
+    <Page navItems={navItems} id="Main">
       <div id="MainText">
-        <h3>Your Dream Home is a <u>Click Away</u>.</h3>
+        <h3>
+          Your Dream Home is a <u>Click Away</u>.
+        </h3>
         <p>Using data from the most popular realstate websites</p>
       </div>
 
-      <div id='MainSearch'>
+      <div id="MainSearch">
+        <SearchOptions options={["Rent", "Sale"]} />
         <SearchBox />
-      </div>  
+      </div>
     </Page>
-  )
+  );
 }
 
-
-
-export default Main
+export default Main;

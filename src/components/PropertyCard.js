@@ -36,9 +36,12 @@ class PropertyCard extends Component {
   }
 
   handleClick = async () => {
+    this.props.setData(null);
+    formDisplay("PropertyFeatures");
     if (this.state.data) {
       this.props.setData(this.state.data);
       formDisplay("PropertyFeatures");
+      return;
     }
     let error;
     const data = await fetch(
@@ -63,7 +66,6 @@ class PropertyCard extends Component {
     this.setState({ error });
     this.setState({ data: data.properties[0] });
     this.props.setData(this.state.data);
-    formDisplay("PropertyFeatures");
   };
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import LocalData from "../assets/data2.json";
+//import emptyImage from "../assets/empty.png";
+//import LocalData from "../assets/data2.json";
 import QueryString from "query-string";
 import "./PropertyCards.scss";
 import PropertyCard from "./PropertyCard";
@@ -43,7 +44,7 @@ class PropertyCards extends Component {
       (this.state.page + 3) * cols * rows < this.state.data.length
     ) {
       this.setState({ page: this.state.page + 1 });
-    } else if (window.scrollY === 0 && this.state.page - 1 > 0) {
+    } else if (window.scrollY === 0 && this.state.page - 1 >= 0) {
       this.setState({ page: this.state.page - 1 });
     }
   }
@@ -117,28 +118,33 @@ class PropertyCards extends Component {
       return;
     }
     const search = QueryString.parse(this.props.location.search).location;
+    const option = QueryString.parse(this.props.location.search).type;
+
     if (this.state.search !== search) {
       let error;
-      const data = LocalData;
-      //const data = await fetch(
-      //"https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=" +
-      //search +
-      //"&limit=100&offset=0&sort=relevance",
-      //{
-      //method: "GET",
-      //headers: {
-      //"x-rapidapi-key": process.env.REACT_APP_REALSTATE_API_KEY,
-      //"x-rapidapi-host": "realtor.p.rapidapi.com",
-      //},
-      //}
-      //)
-      //.then(async (response) => {
-      //return response.json();
-      //})
-      //.catch((err) => {
-      //error = err;
-      //});
-      console.log("Got the data");
+      //const data = LocalData;
+      const data = await fetch(
+        "https://realtor.p.rapidapi.com/properties/v2/list-for-" +
+          option.toLowerCase() +
+          "?city=" +
+          search +
+          "&limit=100&offset=0&sort=relevance",
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-key":
+              "faace970c9mshb9a6dc176f9b095p1b3796jsn1ac808ba8436",
+            "x-rapidapi-host": "realtor.p.rapidapi.com",
+          },
+        }
+      )
+        .then(async (response) => {
+          return response.json();
+        })
+        .catch((err) => {
+          error = err;
+        });
+      console.log("Got the data", data);
       this.setState({ search, error });
       this.setState({ data: data.properties });
       return;
@@ -154,6 +160,19 @@ class PropertyCards extends Component {
           </div>
         </div>
       );
+    }
+
+    if (this.state.data) {
+      if (this.state.data.length === 0) {
+        return (
+          <div id="PropertyCards">
+            <div className="noData">
+              Sorry! There has been an error getting your search results.
+            </div>
+          </div>
+        );
+      }
+      //}
     }
 
     window.onresize = () => {};
@@ -240,7 +259,7 @@ class PropertyCards extends Component {
           sqft = property.building_size.size + " sqft";
         }
 
-        const image = property.photos[0].href;
+        const image = property.photos ? property.photos[0].href : "";
         const propertyData = {
           propertyID,
           adress,

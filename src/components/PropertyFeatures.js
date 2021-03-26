@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import LikeButton from "./LikeButton";
-//import emptyImage from "../assets/empty.png";
 import ImageSlider from "./ImageSlider";
-import dataJS from "../assets/data3.json";
+//import dataJS from "../assets/data3.json";
 import L from "leaflet";
 import ProperyFeature from "./PropertyFeature";
 import "./PropertyFeatures.scss";
 
 class PropertyFeatures extends Component {
+  state = {
+    data: null,
+  };
   componentDidMount() {
-    const data = this.props.data || dataJS.properties[0];
-    console.log(data);
+    if (!this.props.data && !this.state.data) return;
+    const data = this.props.data;
     const lon = data.address.lon;
     const lat = data.address.lat;
     const mymap = L.map("map").setView([lat, lon], 15);
-    this.setState({ mymap });
     L.tileLayer(
       "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
       {
@@ -31,20 +32,50 @@ class PropertyFeatures extends Component {
     mymap.scrollWheelZoom.disable();
     const marker = L.marker([lat, lon]).addTo(mymap);
     this.setState({ marker });
+    this.setState({ mymap });
   }
 
   componentDidUpdate() {
-    const data = this.props.data || dataJS.properties[0];
+    if (!this.props.data && !this.state.data) return;
+    const data = this.props.data;
     const lat = data.address.lat;
     const lon = data.address.lon;
-    this.state.mymap.panTo([lat, lon]);
-    this.state.marker.setLatLng([lat, lon]);
+    if (!this.state.mymap) {
+      const mymap = L.map("map").setView([lat, lon], 15);
+      this.setState({ mymap });
+      L.tileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: "mapbox/streets-v9",
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken:
+            "pk.eyJ1IjoianVsaWFudmlkYWwiLCJhIjoiY2s1a3UwcDkyMGdoazNscm1lajBjYzd2ayJ9.wvqSaGbNgozAALmdWh3G_g",
+        }
+      ).addTo(mymap);
+      mymap.scrollWheelZoom.disable();
+      const marker = L.marker([lat, lon]).addTo(mymap);
+      this.setState({ marker });
+    } else {
+      this.state.mymap.panTo([lat, lon]);
+      this.state.marker.setLatLng([lat, lon]);
+    }
   }
 
   render() {
-    const data = this.props.data || dataJS.properties[0];
+    if (!this.props.data && !this.state.data) {
+      if (this.state.mymap) this.setState({ mymap: null });
+      return (
+        <div id="PropertyFeatures">
+          <ImageSlider images={null} />
+        </div>
+      );
+    }
+    const data = this.props.data;
     const property = data;
-    console.log(data);
     const propertyID = property.property_id;
 
     let agent, agentName, agentEmail;

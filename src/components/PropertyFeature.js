@@ -10,8 +10,16 @@ class ProperyFeature extends Component {
           school.ratings.great_schools_rating
             ? school.ratings.great_schools_rating
             : "N/A"
-        } / ${school.ratings.parent_rating} `;
-        const grades = `${school.grades.range.low} - ${school.grades.range.high}`;
+        } / ${
+          school.ratings.parent_rating ? school.ratings.parent_rating : "N/A"
+        } `;
+        let grades;
+        if (school.grades) {
+          grades = `${school.grades.range.low} - ${school.grades.range.high}`;
+        } else {
+          grades = "N/A - N/A";
+        }
+
         const funding = school.funding_type;
         //const students = school.student_count ? school.student_count : 'N/A'
         //const distance = `${school.distance_in_miles}m`

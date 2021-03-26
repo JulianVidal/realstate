@@ -11,6 +11,10 @@ class Favorites extends Component {
     properties: null,
   };
 
+  setData = (data) => {
+    this.setState({ data });
+  };
+
   render() {
     const navItems = (
       <Fragment>
@@ -23,8 +27,8 @@ class Favorites extends Component {
 
     return (
       <Page navItems={navItems} color="dark" id="Favorites">
-        <PropertyCards fav={true} />
-        <PropertyFeatures />
+        <PropertyCards fav={true} setData={this.setData} />
+        <PropertyFeatures data={this.state.data} />
       </Page>
     );
   }

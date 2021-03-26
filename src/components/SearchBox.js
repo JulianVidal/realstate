@@ -14,11 +14,13 @@ class SearchBox extends Component {
     isSearchEndStopped: true,
     search: "",
     doSearch: false,
+    type: "",
   };
 
   componentDidMount() {
     this.setState({
       search: queryString.parse(this.props.history.location.search).location,
+      type: queryString.parse(this.props.history.location.search).type,
     });
     if (this.state.doSearch) this.setState({ doSearch: false });
   }
@@ -147,6 +149,8 @@ class SearchBox extends Component {
     const button = document.getElementById("SearchBox").childNodes[0];
     const iconSearchStart = button.childNodes[0];
     const iconSearchEnd = button.childNodes[2];
+    const option = document.querySelector(".SearchOptions .active").parentNode
+      .innerText;
 
     iconSearchEnd.style.display = "none";
     iconSearchStart.style.display = "flex";
@@ -155,8 +159,9 @@ class SearchBox extends Component {
     if (this.searchBox.value) {
       this.props.history.push({
         pathname: "/properties",
-        search: `?location=${this.searchBox.value}`,
+        search: `?location=${this.searchBox.value}&type=${option}`,
       });
+      window.location.reload();
     }
   };
 }

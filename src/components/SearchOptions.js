@@ -1,14 +1,17 @@
 import React from "react";
 import { TimelineLite, Power3 } from "gsap";
+import { withRouter } from "react-router-dom";
+import queryString from "query-string";
 import "./SearchOptions.scss";
 
-function SearchOptions({ options, type }) {
+function SearchOptions({ options, type, history }) {
   const dark = type === "dark" ? " dark" : "";
   const className = "SearchOption" + dark;
 
+  const optionR = queryString.parse(history.location.search).type;
   const optionsElement = options.map((option, index) => {
     let underline;
-    if (index === 0) {
+    if (optionR === option) {
       underline = (
         <span className="underline active" style={{ width: "100%" }}></span>
       );
@@ -39,7 +42,7 @@ function SearchOptions({ options, type }) {
   );
 }
 
-export default SearchOptions;
+export default withRouter(SearchOptions);
 
 function changeActive(event) {
   const active = event.target.parentNode.getElementsByClassName("active")[0];

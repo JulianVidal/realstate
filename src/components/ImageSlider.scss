@@ -4,12 +4,11 @@
   width: 100%;
   height: 445px;
   display: flex;
-  object-fit: cover;
-  cursor: pointer;
   align-items: center;
   transition: all 150ms ease-out;
 
   img {
+    object-fit: cover;
     //display: none;
     height: 0;
     //width: 100%;
@@ -21,6 +20,24 @@
       display: block;
       width: 100%;
       opacity: 1;
+    }
+  }
+
+  .pageCount {
+    position: absolute;
+    align-self: flex-start;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    font-family: $font-main;
+    font-size: 20px;
+    background: #FAFAFAA0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      width: 30px;
     }
   }
 

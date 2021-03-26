@@ -49,7 +49,7 @@ export function formDisplay(formId) {
     .to(Form, { duration: 0.5, opacity: 1, ease: Power3.easeOut }, 0)
     .to(Overlay, { duration: 0.5, opacity: 1, ease: Power3.easeOut }, 0);
   if (formId === "PropertyFeatures") {
-    tl.set(Form, { height: "90vh" });
+    tl.set(Form, { height: "90vh", width: "" });
   } else {
     tl.set(Form, { height: "auto" });
   }
