@@ -245,7 +245,7 @@ class PropertyCards extends Component {
           sqft = property.building_size ? property.building_size.size + " sqft" : null
         }
 
-        const image = property.photos ? property.photos[0].href : "";
+        const image = property.thumbnail ? property.thumbnail : (property.photos ? property.photos[0].href : "");
         const propertyData = {
           propertyID,
           adress,

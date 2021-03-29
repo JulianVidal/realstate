@@ -96,7 +96,7 @@ class PropertyFeatures extends Component {
       listing = property.mls;
       listingName = "Name: " + listing.name;
       listingID = "Source's Property ID: " + listing.id;
-      listingDisclaimer = "Data Source Copyright: " + listing.disclaimer.text;
+      listingDisclaimer =  listing.disclaimer ? "Data Source Copyright: " + listing.disclaimer.text : "";
     }
     const photos = property.photos;
     const adress =
@@ -119,7 +119,7 @@ class PropertyFeatures extends Component {
       price = "$" + property.price;
       beds = property.beds + " bds";
       baths = property.baths + " ba";
-      sqft = property.building_size.size + " sqft";
+      sqft = property.building_size ? property.building_size.size + " sqft" : ""
     }
     const image = photos[0].href;
     const propertyData = {
@@ -147,7 +147,7 @@ class PropertyFeatures extends Component {
             <p className="bed">{beds}</p>
             <p className="bath">{baths}</p>
             <p className="sqft">
-              {sqft.indexOf("undefined") > -1 ? null : sqft}
+              {sqft ? sqft : null}
             </p>
           </div>
         </div>
