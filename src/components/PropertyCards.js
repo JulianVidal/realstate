@@ -242,7 +242,7 @@ class PropertyCards extends Component {
           price = "$" + property.price;
           beds = property.beds + " bds";
           baths = property.baths + " ba";
-          sqft = property.building_size.size + " sqft";
+          sqft = property.building_size ? property.building_size.size + " sqft" : null
         }
 
         const image = property.photos ? property.photos[0].href : "";
