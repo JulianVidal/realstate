@@ -121,29 +121,15 @@ class PropertyCards extends Component {
     const option = QueryString.parse(this.props.location.search).type;
 
     if (this.state.search !== search) {
-      let error;
-      //const data = LocalData;
-      const data = await fetch(
-        "https://realtor.p.rapidapi.com/properties/v2/list-for-" +
-          option.toLowerCase() +
-          "?city=" +
+      const response = await fetch(
+        "https://real-state2003.herokuapp.com/properties?location=" +
           search +
-          "&limit=100&offset=0&sort=relevance",
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-key":
-              "faace970c9mshb9a6dc176f9b095p1b3796jsn1ac808ba8436",
-            "x-rapidapi-host": "realtor.p.rapidapi.com",
-          },
-        }
-      )
-        .then(async (response) => {
-          return response.json();
-        })
-        .catch((err) => {
-          error = err;
-        });
+          "&type=" +
+          option.toLowerCase()
+      ).then((res) => res.json());
+      const data = response.data;
+      const error = response.error;
+      if (error) console.error(error);
       console.log("Got the data", data);
       this.setState({ search, error });
       this.setState({ data: data.properties });

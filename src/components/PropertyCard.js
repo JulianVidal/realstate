@@ -43,25 +43,13 @@ class PropertyCard extends Component {
       formDisplay("PropertyFeatures");
       return;
     }
-    let error;
-    const data = await fetch(
-      "https://realtor.p.rapidapi.com/properties/v2/detail?property_id=" +
-        this.props.data.propertyID,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "faace970c9mshb9a6dc176f9b095p1b3796jsn1ac808ba8436",
-          "x-rapidapi-host": "realtor.p.rapidapi.com",
-        },
-      }
-    )
-      .then(async (response) => {
-        return response.json();
-      })
-      .catch((err) => {
-        error = err;
-      });
+    const response = await fetch(
+      "https://real-state2003.herokuapp.com/property?property_id=" +
+        this.props.data.propertyID
+    ).then((res) => res.json());
+    const data = response.data;
+    const error = response.error;
+    if (error) throw error;
     console.log("Got the detail data", data);
     this.setState({ error });
     this.setState({ data: data.properties[0] });
