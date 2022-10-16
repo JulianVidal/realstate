@@ -121,17 +121,27 @@ class PropertyCards extends Component {
     const option = QueryString.parse(this.props.location.search).type;
 
     if (this.state.search !== search) {
+      console.log("https://real-state2003.herokuapp.com/properties?location=" +
+      search +
+      "&type=" +
+      option.toLowerCase());
+      // "http://localhost:4000/properties?location="
+        
       const response = await fetch(
         "https://real-state2003.herokuapp.com/properties?location=" +
-          search +
-          "&type=" +
-          option.toLowerCase()
+        search +
+        "&type=" +
+        option.toLowerCase()
       ).then((res) => res.json());
+
       const data = response.data;
       const error = response.error;
-      if (error) console.error(error);
+      if (data === undefined) {
+        console.error(error);
+        this.setState({ search, error });
+        return;
+      }
       console.log("Got the data", data);
-      this.setState({ search, error });
       this.setState({ data: data.properties });
       return;
     }
@@ -142,7 +152,8 @@ class PropertyCards extends Component {
       return (
         <div id="PropertyCards">
           <div className="noData">
-            Sorry! There has been an error getting your search results.
+            Sorry! There has been an error getting your search results. 
+            Try searching for a city, not a state.
           </div>
         </div>
       );
