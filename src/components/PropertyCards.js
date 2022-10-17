@@ -121,10 +121,6 @@ class PropertyCards extends Component {
     const option = QueryString.parse(this.props.location.search).type;
 
     if (this.state.search !== search) {
-      console.log("https://real-state2003.herokuapp.com/properties?location=" +
-      search +
-      "&type=" +
-      option.toLowerCase());
       // "http://localhost:4000/properties?location="
         
       const response = await fetch(

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LikeButton from "./LikeButton";
 import ImageSlider from "./ImageSlider";
+import emptyImage from "../assets/empty.png";
 //import dataJS from "../assets/data3.json";
 import L from "leaflet";
 import ProperyFeature from "./PropertyFeature";
@@ -121,7 +122,10 @@ class PropertyFeatures extends Component {
       baths = property.baths + " ba";
       sqft = property.building_size ? property.building_size.size + " sqft" : ""
     }
-    const image = photos[0].href;
+
+    let image = emptyImage;
+    if (photos !== undefined && photos[0] !== undefined) image = photos[0].href;
+    
     const propertyData = {
       propertyID,
       adress,
