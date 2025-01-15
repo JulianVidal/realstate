@@ -24,6 +24,7 @@ class PropertyCards extends Component {
     loadedAnim: false,
     page: 0,
     rel: false,
+    counter: 0,
   };
 
   handleScroll() {
@@ -123,37 +124,51 @@ class PropertyCards extends Component {
     if (this.state.search !== search) {
       // "http://localhost:4000/properties?location="
         
-      const response = await fetch(
-        "https://real-state2003.herokuapp.com/properties?location=" +
-        search +
-        "&type=" +
-        option.toLowerCase()
-      ).then((res) => res.json());
+      // const response = await fetch(
+      //   "https://real-state2003.herokuapp.com/properties?location=" +
+      //   search +
+      //   "&type=" +
+      //   option.toLowerCase()
+      // ).then((res) => res.json());
 
-      const data = response.data;
-      const error = response.error;
-      if (data === undefined) {
-        console.error(error);
-        this.setState({ search, error });
-        return;
-      }
-      console.log("Got the data", data);
-      this.setState({ data: data.properties });
-      return;
+      // const data = response.data;
+      // const error = response.error;
+      // if (data === undefined) {
+      //   console.error(error);
+      //   this.setState({ search, error });
+      //   return;
+      // }
+      // console.log("Got the data", data);
+      // this.setState({ data: data.properties });
+      // return;
+
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+      sleep(3000).then(() => this.setState({ counter: 1 }))
     }
   };
 
   render() {
-    if (this.state.error) {
+    if (this.state.counter == 1) {
       return (
         <div id="PropertyCards">
           <div className="noData">
-            Sorry! There has been an error getting your search results. 
-            Try searching for a city, not a state.
+            Due to api limits and pricing issues, no data was able to be
+            gathered.
           </div>
         </div>
       );
     }
+
+    // if (this.state.error) {
+    //   return (
+    //     <div id="PropertyCards">
+    //       <div className="noData">
+    //         Sorry! There has been an error getting your search results. 
+    //         Try searching for a city, not a state.
+    //       </div>
+    //     </div>
+    //   );
+    // }
 
     if (this.state.data) {
       if (this.state.data.length === 0) {
