@@ -119,7 +119,7 @@ class PropertyCards extends Component {
       return;
     }
     const search = QueryString.parse(this.props.location.search).location;
-    const option = QueryString.parse(this.props.location.search).type;
+
 
     if (this.state.search !== search) {
       // "http://localhost:4000/properties?location="
@@ -148,7 +148,7 @@ class PropertyCards extends Component {
   };
 
   render() {
-    if (this.state.counter == 1) {
+    if (this.state.counter === 1) {
       return (
         <div id="PropertyCards">
           <div className="noData">
