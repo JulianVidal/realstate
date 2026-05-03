@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import emptyImage from "../assets/empty.png";
-//import LocalData from "../assets/data2.json";
+import LocalData from "../assets/backup.json";
 import QueryString from "query-string";
 import "./PropertyCards.scss";
 import PropertyCard from "./PropertyCard";
@@ -118,32 +118,35 @@ class PropertyCards extends Component {
       this.setState({ data });
       return;
     }
-    const search = QueryString.parse(this.props.location.search).location;
+    const qs = QueryString.parse(this.props.location.search);
+    const search = qs.location;
+    const option = qs.type;
 
 
     if (this.state.search !== search) {
       // "http://localhost:4000/properties?location="
         
-      // const response = await fetch(
-      //   "https://real-state2003.herokuapp.com/properties?location=" +
-      //   search +
-      //   "&type=" +
-      //   option.toLowerCase()
-      // ).then((res) => res.json());
+      let filteredData = LocalData;
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filteredData = LocalData.filter((prop) => {
+          const city = prop.address?.city?.toLowerCase() || "";
+          const line = prop.address?.line?.toLowerCase() || "";
+          const postal = prop.address?.postal_code?.toLowerCase() || "";
+          return city.includes(lowerSearch) || line.includes(lowerSearch) || postal.includes(lowerSearch);
+        });
+      }
 
-      // const data = response.data;
-      // const error = response.error;
-      // if (data === undefined) {
-      //   console.error(error);
-      //   this.setState({ search, error });
-      //   return;
-      // }
-      // console.log("Got the data", data);
-      // this.setState({ data: data.properties });
-      // return;
+      if (option) {
+        const lowerOption = option.toLowerCase();
+        filteredData = filteredData.filter((prop) => {
+          const propType = prop.prop_type?.toLowerCase() || "";
+          // e.g., if option is "single_family" or similar
+          return propType.includes(lowerOption) || lowerOption.includes(propType);
+        });
+      }
 
-      const sleep = ms => new Promise(r => setTimeout(r, ms));
-      sleep(3000).then(() => this.setState({ counter: 1 }))
+      this.setState({ data: filteredData, search });
     }
   };
 
