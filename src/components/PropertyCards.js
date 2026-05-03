@@ -124,29 +124,43 @@ class PropertyCards extends Component {
 
 
     if (this.state.search !== search) {
-      // "http://localhost:4000/properties?location="
-        
-      let filteredData = LocalData;
-      if (search) {
-        const lowerSearch = search.toLowerCase();
-        filteredData = LocalData.filter((prop) => {
-          const city = prop.address?.city?.toLowerCase() || "";
-          const line = prop.address?.line?.toLowerCase() || "";
-          const postal = prop.address?.postal_code?.toLowerCase() || "";
-          return city.includes(lowerSearch) || line.includes(lowerSearch) || postal.includes(lowerSearch);
-        });
-      }
+      try {
+        const response = await fetch(
+          "https://real-state2003.herokuapp.com/properties?location=" +
+          search +
+          (option ? "&type=" + option.toLowerCase() : "")
+        ).then((res) => res.json());
 
-      if (option) {
-        const lowerOption = option.toLowerCase();
-        filteredData = filteredData.filter((prop) => {
-          const propType = prop.prop_type?.toLowerCase() || "";
-          // e.g., if option is "single_family" or similar
-          return propType.includes(lowerOption) || lowerOption.includes(propType);
-        });
-      }
+        const data = response.data;
+        const error = response.error;
+        if (data === undefined) {
+          throw new Error(error || "Invalid data from API");
+        }
+        console.log("Got the data from API", data);
+        this.setState({ data: data.properties, search });
+      } catch (e) {
+        console.error("API failed, using fallback data", e);
+        let filteredData = LocalData;
+        if (search) {
+          const lowerSearch = search.toLowerCase();
+          filteredData = LocalData.filter((prop) => {
+            const city = prop.address?.city?.toLowerCase() || "";
+            const line = prop.address?.line?.toLowerCase() || "";
+            const postal = prop.address?.postal_code?.toLowerCase() || "";
+            return city.includes(lowerSearch) || line.includes(lowerSearch) || postal.includes(lowerSearch);
+          });
+        }
 
-      this.setState({ data: filteredData, search });
+        if (option) {
+          const lowerOption = option.toLowerCase();
+          filteredData = filteredData.filter((prop) => {
+            const propType = prop.prop_type?.toLowerCase() || "";
+            return propType.includes(lowerOption) || lowerOption.includes(propType);
+          });
+        }
+
+        this.setState({ data: filteredData, search });
+      }
     }
   };
 

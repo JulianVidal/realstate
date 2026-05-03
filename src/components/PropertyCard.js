@@ -45,15 +45,30 @@ class PropertyCard extends Component {
       return;
     }
 
-    const propDetails = LocalData.find((prop) => prop.property_id === this.props.data.propertyID);
-
-    if (propDetails) {
-      console.log("Got the detail data", propDetails);
+    try {
+      const response = await fetch(
+        "https://real-state2003.herokuapp.com/property?property_id=" +
+          this.props.data.propertyID
+      ).then((res) => res.json());
+      const data = response.data;
+      const error = response.error;
+      if (error) throw error;
+      console.log("Got the detail data from API", data);
       this.setState({ error: null });
-      this.setState({ data: propDetails });
-      this.props.setData(propDetails);
-    } else {
-      this.setState({ error: new Error("Property not found") });
+      this.setState({ data: data.properties[0] });
+      this.props.setData(this.state.data);
+    } catch (e) {
+      console.error("API detail fetch failed, using fallback data", e);
+      const propDetails = LocalData.find((prop) => prop.property_id === this.props.data.propertyID);
+
+      if (propDetails) {
+        console.log("Got the detail data from fallback", propDetails);
+        this.setState({ error: null });
+        this.setState({ data: propDetails });
+        this.props.setData(propDetails);
+      } else {
+        this.setState({ error: new Error("Property not found") });
+      }
     }
   };
 }
